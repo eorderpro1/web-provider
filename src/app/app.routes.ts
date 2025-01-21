@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BaseComponent } from './views/layout/base/base.component';
 import { authGuard } from './core/guards/auth.guard';
+import { OrdersOverviewComponent } from './views/pages/orders-overview/orders-overview.component';
 
 export const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./views/pages/auth/auth.routes')},
@@ -10,6 +11,8 @@ export const routes: Routes = [
     canActivateChild: [authGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
+      { path: 'orders-overview', component: OrdersOverviewComponent },
       {
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.routes')
