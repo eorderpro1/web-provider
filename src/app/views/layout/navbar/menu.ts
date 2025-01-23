@@ -5,6 +5,10 @@ export const MENU: MenuItem[] = [
     label: 'Order Overview',
     icon: 'home',
     link: '/orders-overview'
+  }, {
+    label: 'Order Management',
+    icon: 'home',
+    link: '/orders-management'
   },
   {
     label: 'Dashboard',

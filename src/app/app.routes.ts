@@ -11,8 +11,12 @@ export const routes: Routes = [
     canActivateChild: [authGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-
-      { path: 'orders-overview', component: OrdersOverviewComponent },
+      { path: 'orders-management',
+        loadChildren: () => import('./views/pages/orders-management/orders-management.routes')
+      },
+      { path: 'orders-overview',
+        loadChildren: () => import('./views/pages/orders-overview/orders-overview.routes')
+      },
       {
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.routes')

@@ -1,6 +1,7 @@
 import {
   DomSanitizer
-} from "./chunk-6CGH4WCO.js";
+} from "./chunk-VMCJXC4I.js";
+import "./chunk-NZ3NQ3LW.js";
 import {
   DOCUMENT,
   isPlatformBrowser
