@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ThemeCssVariableService } from '../../../core/services/theme-css-variable.service';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SupabaseService } from '../../../core/services/supabase.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Order } from '../../../core/model/order';
 
@@ -14,7 +14,8 @@ import { Order } from '../../../core/model/order';
       NgbDropdownModule,
       FormsModule,
       CommonModule,
-      HttpClientModule
+      HttpClientModule,
+      DecimalPipe, NgbTypeaheadModule, NgbPaginationModule
     ],
     providers: [SupabaseService, HttpClient],
   templateUrl: './orders-overview.component.html',
@@ -26,18 +27,28 @@ export class OrdersOverviewComponent implements OnInit{
   filters: any = { status: '', shop: '', orderDate: '' };
   sort: any = { field: '', order: '' };
   page: number = 1;
-  limit: number = 10;
-  totalPages: number = 1;
+  limit: number = 2;
+  totalPages: number = 2;
+  totalElements:number = 2
   themeCssVariables = inject(ThemeCssVariableService).getThemeCssVariables();
   orderService = inject(SupabaseService);
   ngOnInit(): void {
     this.fetchOrders();
   }
   fetchOrders() {
+
     this.orderService.getOrders(this.filters, this.page, this.limit, this.sort).subscribe((response: any) => {
-      this.orders = response;
-      console.log(response);
-      this.totalPages = Math.ceil(response.length / this.limit);
+
+
+      this.orders.push(response.body);
+      let contentRange= response.headers.get('content-range');
+      const parts = contentRange.split(/[/]/); // Split by both `-` and `/`
+      this.totalElements = parseInt(parts[1], 10);
+      console.log(this.orders)
+
+      this.totalPages = Math.ceil(this.totalElements / this.limit);
+
+
     });
   }
   applyFilters(): void {
@@ -55,17 +66,10 @@ export class OrdersOverviewComponent implements OnInit{
     this.fetchOrders();
   }
 
-  prevPage(): void {
-    if (this.page > 1) {
-      this.page--;
-      this.fetchOrders();
-    }
+  refreshOrders(): void {
+    this.fetchOrders();
   }
-
-  nextPage(): void {
-    if (this.page < this.totalPages) {
-      this.page++;
-      this.fetchOrders();
-    }
+  getBadgeClass(status: boolean): string {
+    return status  ? 'success' : 'danger';
   }
 }
