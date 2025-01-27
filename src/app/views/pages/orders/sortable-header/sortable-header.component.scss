@@ -1,0 +1,30 @@
+th{
+    text-align: center;
+}
+th.sortable {
+  cursor: pointer; 
+  position: relative; 
+}
+
+th.sortable:hover {
+  background-color: #f0f0f0; 
+}
+
+th.sortable .arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px; 
+}
+
+th.sortable .arrow.up {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black; 
+}
+
+th.sortable .arrow.down {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black; 
+}

@@ -1,0 +1,127 @@
+<div class="row">
+  <div class="col-lg-7 col-xl-8 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-baseline mb-2">
+          <h6 class="card-title mb-0">Today's Orders</h6>
+          <!-- <div ngbDropdown class="mb-2">
+                <a class="no-dropdown-toggle-icon" ngbDropdownToggle id="dropdownMenuButton7">
+                  <i class="icon-lg text-secondary pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton7">
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm me-2"></i> <span class="">View</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm me-2"></i> <span class="">Edit</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm me-2"></i> <span class="">Delete</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm me-2"></i> <span class="">Print</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm me-2"></i> <span class="">Download</span></a>
+                </div>
+              </div> -->
+        </div>
+        <div class="row d-flex justify-content-between">
+          <div class="col-auto">
+            <input type="text" class="form-control form-control-sm" placeholder="Find by shop name..."
+              (keyup)="searchByShopName($event)" />
+          </div>
+          <div class="col-auto">
+            <div class="card">
+              <div class="card-body">
+                Σύνολο: {{ totalAmount }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <!-- <th (click)="sortData('order_id')" [class.sortable]="true" [ngClass]="{ 'asc': sort.field === 'order_id' && sort.order === 'asc', 
+                                                     'desc': sort.field === 'order_id' && sort.order === 'desc' }">order id
+                      <span *ngIf="sort.field === 'order_id'">
+                        <i *ngIf="sort.order === 'asc'" class="arrow up"></i>
+                        <i *ngIf="sort.order === 'desc'" class="arrow down"></i>
+                      </span>
+                    </th> -->
+                <th>
+                  <app-sortable-header field="order_id" [sort]="sort" label="Order ID" (click)="sortData('order_id')">
+                  </app-sortable-header>
+                </th>
+                <th>
+
+                  <app-sortable-header field="shop_name" [sort]="sort" label="Shop Name"
+                    (click)="sortData('shop_name')">
+                  </app-sortable-header>
+
+
+                </th>
+                <th>
+                  <app-sortable-header field="order_created_at" [sort]="sort" label="Order Date"
+                    (click)="sortData('order_created_at')">
+                  </app-sortable-header>
+
+                </th>
+                <th>
+                  <app-sortable-header field="day_of_week" [sort]="sort" label="Delivery Day"
+                    (click)="sortData('day_of_week')">
+                  </app-sortable-header>
+                </th>
+                <th>
+                  <app-sortable-header field="start_time" [sort]="sort" label="Timeslot"
+                    (click)="sortData('start_time')">
+                  </app-sortable-header>
+                </th>
+                <th>
+                  <app-sortable-header field="is_delivered" [sort]="sort" label="Status"
+                    (click)="sortData('is_delivered')">
+                  </app-sortable-header>
+                </th>
+                <th>
+                  <app-sortable-header field="total_cost" [sort]="sort" label="Cost" (click)="sortData('total_cost')">
+                  </app-sortable-header>
+                </th>
+
+
+
+
+
+              </tr>
+            </thead>
+            <tbody>
+
+              @for (order of orders(); track order.order_id)
+              {<tr>
+                <td style="font-size: 10px;">{{ order.order_id }}</td>
+                <td>
+                  <div style="text-align: center;">
+                    <img [src]="order.shop_image" class="auto-resize" />
+                    <div>{{ order.shop_name }}</div>
+                  </div>
+                </td>
+                <td>{{ order.order_created_at| date }}</td>
+                <td>{{ order.day_of_week }}</td>
+                <td>{{order.start_time.slice(0,5)}}-{{order.end_time.slice(0,5)}}</td>
+                <td><span [class]="'badge bg-' + getBadgeClass(order.is_delivered)">{{ order.is_delivered
+                    ?'Paid':'Unpaid' }}</span></td>
+                <td>{{ order.total_cost }}</td>
+              </tr>
+              }
+
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
+            (pageChange)="refreshOrders()">
+          </ngb-pagination>
+
+          <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
+            <option selected [ngValue]="10">10 items per page</option>
+            <option [ngValue]="25">25 items per page</option>
+            <option [ngValue]="50">50 items per page</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

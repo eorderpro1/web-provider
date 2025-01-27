@@ -4,11 +4,11 @@ export const MENU: MenuItem[] = [
   {
     label: 'Order Overview',
     icon: 'home',
-    link: '/orders-overview'
+    link: '/orders/todays-orders'
   }, {
     label: 'Order Management',
     icon: 'home',
-    link: '/orders-management'
+    link: '/orders/orders-management'
   },
   {
     label: 'Dashboard',
