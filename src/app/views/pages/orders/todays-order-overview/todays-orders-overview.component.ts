@@ -10,7 +10,7 @@ import { Order } from '../../../../core/model/order';
 import { SortableHeaderComponent } from '../sortable-header/sortable-header.component';
 
 @Component({
-  selector: 'app-orders-overview',
+  selector: 'app-todays-orders-overview',
   standalone: true,
   imports: [
     NgbDropdownModule,
@@ -34,7 +34,7 @@ export class TodaysOrdersOverviewComponent implements OnInit {
   totalElements = signal<number>(2)
   themeCssVariables = inject(ThemeCssVariableService).getThemeCssVariables();
   orderService = inject(OrderSupabaseService);
-  totalAmount: number;
+  totalAmount: string;
   ngOnInit(): void {
     this.fetchOrders('', '');
   }
@@ -45,7 +45,7 @@ export class TodaysOrdersOverviewComponent implements OnInit {
       this.orders.set(data.content);
       this.totalElements.set(data.totalElements);
       this.totalPages.set(Math.ceil(this.totalElements() / this.limit));
-      this.totalAmount = this.orders().reduce((acc, order) => acc + order.total_cost, 0);
+      this.totalAmount = this.orders().reduce((acc, order) => acc + order.total_cost, 0).toFixed(2);
     });
   
 

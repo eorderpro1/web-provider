@@ -9,7 +9,7 @@ export const routes: Routes = [
     component: BaseComponent,
     canActivateChild: [authGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'orders', pathMatch: 'full' },
       { path: 'orders',
         loadChildren: () => import('./views/pages/orders/orders.routes')
       },

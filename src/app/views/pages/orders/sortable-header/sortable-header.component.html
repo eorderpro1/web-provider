@@ -1,7 +1,15 @@
-<th (click)="onSort()" [class.sortable]="true" [ngClass]="{ 'asc': isAscending(), 'desc': isDescending() }">
+<th 
+    (click)="onSort()" 
+    [class.sortable]="true" 
+    [ngClass]="{ 'asc': isAscending(), 'desc': isDescending() }">
+    
+    <!-- Display the label -->
     {{ label() }}
+
+    <!-- Sorting indicators -->
     <span *ngIf="isSorted()">
         <i *ngIf="isAscending()" class="arrow up"></i>
         <i *ngIf="isDescending()" class="arrow down"></i>
     </span>
+    <ng-content></ng-content>
 </th>

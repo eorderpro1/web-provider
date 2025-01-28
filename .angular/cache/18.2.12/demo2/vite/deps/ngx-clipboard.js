@@ -1,7 +1,7 @@
 import {
   CommonModule,
   DOCUMENT
-} from "./chunk-XBZITPZX.js";
+} from "./chunk-RIUIC27P.js";
 import {
   Directive,
   ElementRef,
@@ -24,11 +24,10 @@ import {
   ɵɵdefineNgModule,
   ɵɵdirectiveInject,
   ɵɵinject
-} from "./chunk-UDMJXPI6.js";
+} from "./chunk-LD5UPVJM.js";
 import {
   Subject
-} from "./chunk-TC6VXW6P.js";
-import "./chunk-HM5YLMWO.js";
+} from "./chunk-BBXAVYNX.js";
 import "./chunk-4MWRP73S.js";
 
 // node_modules/ngx-window-token/fesm2020/ngx-window-token.mjs

@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 
 export default [
+    { path: '', redirectTo: 'orders', pathMatch: 'full' },
     {
-        path: 'todays-orders',
-        loadComponent: () => import('./todays-order-overview/todays-orders-overview.component').then(c => c.TodaysOrdersOverviewComponent),
+        path: 'orders',
+        loadComponent: () => import('./orders.component').then(c => c.OrdersComponent),
     },
     {
         path: 'orders-management',

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input, output, signal } from '@angular/core';
 
 @Component({
-  selector: 'app-sortable-header',
+  selector: '[app-sortable-header]',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './sortable-header.component.html',
