@@ -1,6 +1,8 @@
+@if (trigger()) {
+
 <div class="row">
-  <div class="col-lg-7 col-xl-8 stretch-card">
-    <div class="card">
+  <div class="col-lg-7 col-xl-8 stretch-card d-flex flex-wrap">
+    <div class="card flex-grow-1">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h6 class="card-title mb-0">Today's Orders</h6>
@@ -27,8 +29,8 @@
                 <th app-sortable-header [field]="'order_id'" [sort]="sort" [label]="'Order ID'"
                   (sortChange)="sortData('order_id')">
                 </th>
-                <th style="padding-left: 9%;"  app-sortable-header [field]="'shop_name'" [sort]="sort" [label]="'Shop Name'"
-                  (sortChange)="sortData('shop_name')">
+                <th style="padding-left: 9%;" app-sortable-header [field]="'shop_name'" [sort]="sort"
+                  [label]="'Shop Name'" (sortChange)="sortData('shop_name')">
                 </th>
                 <th app-sortable-header [field]="'order_created_at'" [sort]="sort" [label]="'Order Date'"
                   (sortChange)="sortData('order_created_at')">
@@ -50,7 +52,7 @@
             <tbody>
 
               @for (order of orders(); track order.order_id)
-              {<tr>
+              {<tr (click)="openScrollableModal(scrollableModal, order)">
                 <td style="font-size: 10px;">{{ order.order_id }}</td>
                 <td>
                   <div style="text-align: center;">
@@ -61,7 +63,7 @@
                 <td>{{ order.order_created_at| date }}</td>
                 <td>{{ order.day_of_week }}</td>
                 <td>{{order.start_time.slice(0,5)}}-{{order.end_time.slice(0,5)}}</td>
-                <td><span [class]="'badge bg-' + getBadgeClass(order.is_delivered)">{{ order.is_delivered
+                <td><span [class]="'badge bg-' + getBadgeClass(order.payment_method != 'cash on delivery')">{{ order.payment_method != 'cash on delivery'
                     ?'Paid':'Unpaid' }}</span></td>
                 <td>{{ order.total_cost }}</td>
               </tr>
@@ -83,5 +85,22 @@
         </div>
       </div>
     </div>
+    </div>
+    <div class="col-lg-6 col-xl-4">
+      <app-received-new-order></app-received-new-order>
+    </div>
+   
   </div>
-</div>
+<ng-template #scrollableModal let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
+      <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+      <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems" [deliveryDate]="this.deliveryDate"></app-order-modal>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
+  </div>
+</ng-template>
+}

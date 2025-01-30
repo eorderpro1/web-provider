@@ -1,13 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TodaysOrdersOverviewComponent } from './todays-order-overview/todays-orders-overview.component';
+import { CardChoiceOrderComponent } from "./card-choice-order/card-choice-order.component";
+import { OrdersManagementComponent } from "./orders-management/orders-management.component";
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [TodaysOrdersOverviewComponent],
+  imports: [TodaysOrdersOverviewComponent, CardChoiceOrderComponent, CardChoiceOrderComponent, OrdersManagementComponent],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })
 export class OrdersComponent {
+  todaysOrderComponent = signal(true);
+  orderManagementComponent = signal(false);
+
+  triggerTodaysOrderComponent() {
+    this.todaysOrderComponent.set(true);
+    this.orderManagementComponent.set(false);
+  }
+
+  triggerOrderManagementComponent() {
+    this.orderManagementComponent.set(true);
+    this.todaysOrderComponent.set(false);
+  }
+
+onSelectOrders($event: string) {
+  console.log($event);
+  if ($event === 'Today\'s Orders') {
+    this.triggerTodaysOrderComponent();
+  }
+  else if ($event === 'Order Management') {
+    this.triggerOrderManagementComponent();
+  }
+}
 
 }

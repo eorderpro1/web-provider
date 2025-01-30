@@ -29,7 +29,7 @@ import {
   startOfDay,
   y
 } from "./chunk-T7OPNOCE.js";
-import "./chunk-4MWRP73S.js";
+import "./chunk-S35DAJRX.js";
 
 // node_modules/@fullcalendar/list/internal.js
 var ListViewHeaderRow = class extends BaseComponent {

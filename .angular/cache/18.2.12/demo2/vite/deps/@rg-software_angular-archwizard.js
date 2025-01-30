@@ -5,7 +5,7 @@ import {
   NgIf,
   NgStyle,
   NgTemplateOutlet
-} from "./chunk-RIUIC27P.js";
+} from "./chunk-TMK4ESDX.js";
 import {
   Component,
   ContentChild,
@@ -59,9 +59,9 @@ import {
   ɵɵtemplate,
   ɵɵtext,
   ɵɵtextInterpolate
-} from "./chunk-LD5UPVJM.js";
+} from "./chunk-ZIDZ6C7S.js";
 import "./chunk-BBXAVYNX.js";
-import "./chunk-4MWRP73S.js";
+import "./chunk-S35DAJRX.js";
 
 // node_modules/@rg-software/angular-archwizard/fesm2022/rg-software-angular-archwizard.mjs
 var _c0 = ["*"];

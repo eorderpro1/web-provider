@@ -1,15 +1,11 @@
 import {
-  Calendar,
-  CustomRenderingStore
-} from "./chunk-T7OPNOCE.js";
-import {
   CommonModule,
   NgClass,
   NgForOf,
   NgIf,
   NgStyle,
   NgTemplateOutlet
-} from "./chunk-RIUIC27P.js";
+} from "./chunk-TMK4ESDX.js";
 import {
   ChangeDetectorRef,
   Component,
@@ -40,11 +36,15 @@ import {
   ɵɵqueryRefresh,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-LD5UPVJM.js";
+} from "./chunk-ZIDZ6C7S.js";
 import "./chunk-BBXAVYNX.js";
 import {
+  Calendar,
+  CustomRenderingStore
+} from "./chunk-T7OPNOCE.js";
+import {
   __spreadValues
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-S35DAJRX.js";
 
 // node_modules/@fullcalendar/angular/fesm2020/fullcalendar-angular.mjs
 var _c0 = ["*"];

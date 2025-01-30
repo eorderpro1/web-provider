@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 
 export default [
-    { path: '', redirectTo: 'orders', pathMatch: 'full' },
+    { path: '', redirectTo: '', pathMatch: 'full' },
     {
-        path: 'orders',
+        path: '',
         loadComponent: () => import('./orders.component').then(c => c.OrdersComponent),
     },
     {

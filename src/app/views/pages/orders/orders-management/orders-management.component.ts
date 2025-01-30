@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { ThemeCssVariableService } from '../../../../core/services/theme-css-variable.service';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,7 +12,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './orders-management.component.scss'
 })
 export class OrdersManagementComponent {
-
+  trigger = input.required<boolean>();
   themeCssVariables = inject(ThemeCssVariableService).getThemeCssVariables();
 
 }

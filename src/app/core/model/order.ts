@@ -12,7 +12,9 @@ export interface Order {
   end_time: string; 
   postal_code: string; 
   supplier_id: number; 
+  is_draft: boolean;
   id: number;
+  payment_method: string;
   
     
   }

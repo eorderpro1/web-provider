@@ -1,0 +1,77 @@
+<ng-content>
+<div class="row">
+    <div class="col-lg-7 col-xl-6 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                    <img [src]="selectedOrder().shop_image" [alt]="selectedOrder().shop_name" width="40" height="40"
+                        style="border-radius: 50%; margin-right: 8px;" />
+                    <h6 class="card-title mb-0">{{selectedOrder().shop_name}}</h6>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead></thead>
+                        <tbody class="modal-table">
+                            <tr>
+                                <td>Ημερομηνία Παραγγελίας</td>
+                                <td>{{selectedOrder().order_created_at | date:'dd/MM/yyyy' }}</td>                                      
+                            </tr>
+                            <tr>
+                                <td>Ημέρα Παράδοσης</td>
+                                <td>{{deliveryDate() | date:'dd/MM/yyyy' }}</td>
+                                </tr>
+                            <tr>
+                                <td>Ώρα Παράδοσης</td>
+                                <td>{{selectedOrder().start_time.slice(0,5)}}-{{selectedOrder().end_time.slice(0,5)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Διεύθυνση</td>
+                                <td class="address-cell">{{selectedOrder().shop_address}}</td>
+                            </tr>
+                            <tr>
+                                <td>Τρόπος Πληρωμής</td>
+                                <td>{{selectedOrder().payment_method }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-baseline mb-2 product-header">
+                    <h6 class="card-title mb-0">Προϊόντα</h6>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead></thead>
+                        <tbody class="modal-table">
+                            <tr>
+                                <th>Προϊόν</th>
+                                <th>Ποσότητα</th>
+                                <th>Σύνολο</th>
+                            </tr>
+                            @for (product of orderItems(); track product.id)
+                            {
+                            <tr>
+                                <td>{{product.name}}</td>
+                                <td>x{{product.quantity}}</td>
+                                <td>{{product.subtotal |currency:'EUR':'symbol' }}</td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between align-items-baseline mb-2 total-row">
+                        <span>Σύνολο</span> 
+                        <span>{{selectedOrder().total_cost | currency:'EUR':'symbol' }}</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</ng-content>

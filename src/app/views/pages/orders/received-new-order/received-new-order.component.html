@@ -1,0 +1,41 @@
+    <div  class="card">
+        <div class="card-body">
+            <h6 class="card-title"> New Orders </h6>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead></thead>
+                    <tbody>
+                        @for (order of orders(); track order.order_id)
+                        {
+                        <tr>
+                            <td><img [src]='order.shop_image' alt="yoooo" width="40" height="40"
+                                    style="border-radius: 50%; margin-right: 8px;" /></td>
+                                    <td>{{order.shop_name}}</td>
+                            <td><button type="button" class="btn btn-icon-text btn-danger"
+                                    style="border-radius: 8px; padding: 8px 12px; font-weight: bold;"
+                                    (click)="openScrollableModal(scrollableModal, order)">
+                                    Αποδοχή
+                                </button></td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+
+<ng-template #scrollableModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems"
+            [deliveryDate]="this.deliveryDate"></app-order-modal>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="modal.close('by: accept')">Αποδοχή</button>
+    </div>
+</ng-template>

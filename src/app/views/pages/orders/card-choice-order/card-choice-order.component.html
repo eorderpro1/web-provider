@@ -1,0 +1,8 @@
+<div>
+    <button [class.active]="selectedActiveOrderComponent" (click)="onSelectUser()">
+        <img [src]="imagePath()" [alt]="title()" />
+        <div>
+            <span>{{title()}}</span>
+        </div>
+    </button>
+</div>
