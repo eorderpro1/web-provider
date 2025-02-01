@@ -9,14 +9,15 @@ import { Component, computed, input, output } from '@angular/core';
 })
 export class CardChoiceOrderComponent {
 
-  selectedActiveOrderComponent :boolean = false;
-   title = input.required<string>();
-   image = input.required<string>();
+  title = input.required<string>();
+  image = input.required<string>();
+  selected = input.required<boolean>(); // Receives selection state from parent
+
   select = output<string>();
-  imagePath = computed(()=>'/images/photos/'+this.image());
-onSelectUser() {
+  imagePath = computed(() => '/images/photos/' + this.image());
+  onSelectOrderComponent() {
     this.select.emit(this.title());
-    this.selectedActiveOrderComponent = true;
-}
+
+  }
 
 }

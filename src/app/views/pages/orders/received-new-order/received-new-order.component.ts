@@ -3,7 +3,7 @@ import { SupabaseWebsocketService } from '../../../../core/services/supabase-web
 import { Order } from '../../../../core/model/order';
 import { OrderSupabaseService } from '../../../../core/services/orders-supabase.service';
 import { HttpParams } from '@angular/common/http';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderItem } from '../../../../core/model/orderItems';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,18 +14,20 @@ import { OrderModalComponent } from "../order-modal/order-modal.component";
 @Component({
   selector: 'app-received-new-order',
   standalone: true,
-  imports: [CommonModule, OrderModalComponent],
-  providers:[SupabaseWebsocketService,BrowserModule],
+  imports: [CommonModule, OrderModalComponent, NgbPaginationModule, FormsModule],
+  providers: [SupabaseWebsocketService, BrowserModule],
   templateUrl: './received-new-order.component.html',
   styleUrl: './received-new-order.component.scss'
 })
 export class ReceivedNewOrderComponent implements OnInit {
+
   private webSocketService = inject(SupabaseWebsocketService);
   orders = signal<Order[]>([]);
-  private modalService=  inject(NgbModal);
-  utils=inject (UtilsService)
+  private modalService = inject(NgbModal);
+  orderService = inject(OrderSupabaseService);
+  utils = inject(UtilsService)
   selectedOrder: Order;
-  orderItems: OrderItem[]=[];
+  orderItems: OrderItem[] = [];
   private destroy = inject(DestroyRef);
   filters: any = { status: '', shop: '', orderDate: '' };
   sort: any = { field: '', order: '' };
@@ -35,14 +37,16 @@ export class ReceivedNewOrderComponent implements OnInit {
   totalElements = signal<number>(2)
   deliveryDate: Date;
   totalAmount: string;
-  orderService = inject(OrderSupabaseService);
   ngOnInit(): void {
     // this.webSocketService.subscribeToOrders((order) => {
     //   if (order.is_draft === 'true') {
     //     this.orders().push(order);
     //   }
     // });
-    this.fetchOrders('','');
+    this.fetchOrders('', '');
+  }
+  refreshOrders() {
+    this.fetchOrders('', '');
   }
   acceptOrder(order: any): void {
     // Remove the order from the current list
@@ -51,7 +55,7 @@ export class ReceivedNewOrderComponent implements OnInit {
     this.webSocketService.acceptOrder(order.id);
   }
   fetchOrders(filterByShopName: string, filterByOrderId: string) {
-    let params = {filterByShopName, filterByOrderId, page: this.page, limit: this.limit, supplier_id: 23, is_draft: 'true'};
+    let params = { filterByShopName, filterByOrderId, page: this.page, limit: this.limit, supplier_id: 23, is_draft: 'true', todays: true };
 
     const sub = this.orderService.getOrders(this.filters, this.sort, params).subscribe((data) => {
       this.orders.set(data.content);
@@ -61,16 +65,16 @@ export class ReceivedNewOrderComponent implements OnInit {
     });
     this.destroy.onDestroy(() => sub.unsubscribe());
   }
-  openScrollableModal(content: TemplateRef<any>, order : Order) {
+  openScrollableModal(content: TemplateRef<any>, order: Order) {
     this.selectedOrder = order;
-    this.deliveryDate= this.utils.getNextDateForDay(order.day_of_week);
-    const sub =this.orderService.getOrderItems(order.id.toFixed()).subscribe((data) => {
+    this.deliveryDate = this.utils.getNextDateForDay(order.day_of_week);
+    const sub = this.orderService.getOrderItems(order.id.toFixed()).subscribe((data) => {
       this.orderItems = data;
     });
     this.destroy.onDestroy(() => sub.unsubscribe());
-    this.modalService.open(content, {scrollable: true, size:'lg'}).result.then((result) => {
+    this.modalService.open(content, { scrollable: true, size: 'lg' }).result.then((result) => {
       console.log("Modal closed" + result);
-    }).catch((res) => {});
+    }).catch((res) => { });
   }
-  
+
 }

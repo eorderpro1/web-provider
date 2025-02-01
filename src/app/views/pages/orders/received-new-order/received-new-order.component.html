@@ -9,10 +9,10 @@
                         {
                         <tr>
                             <td><img [src]='order.shop_image' alt="yoooo" width="40" height="40"
-                                    style="border-radius: 50%; margin-right: 8px;" /></td>
+                                    style="border-radius: 50%;" /></td>
                                     <td>{{order.shop_name}}</td>
                             <td><button type="button" class="btn btn-icon-text btn-danger"
-                                    style="border-radius: 8px; padding: 8px 12px; font-weight: bold;"
+                                    style="border-radius: 8px;font-weight: bold;"
                                     (click)="openScrollableModal(scrollableModal, order)">
                                     Αποδοχή
                                 </button></td>
@@ -22,6 +22,17 @@
                     </tbody>
                 </table>
             </div>
+            <div class="d-flex justify-content-between align-items-center p-2 flex-wrap">
+                <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
+                  (pageChange)="refreshOrders()">
+                </ngb-pagination>
+      
+                <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
+                  <option selected [ngValue]="10">10 items per page</option>
+                  <option [ngValue]="25">25 items per page</option>
+                  <option [ngValue]="50">50 items per page</option>
+                </select>
+              </div>
         </div>
     
 

@@ -1,5 +1,5 @@
 <div>
-    <button [class.active]="selectedActiveOrderComponent" (click)="onSelectUser()">
+    <button [class.active]="selected()" (click)="onSelectOrderComponent()">
         <img [src]="imagePath()" [alt]="title()" />
         <div>
             <span>{{title()}}</span>

@@ -46,12 +46,14 @@ export class TodaysOrdersOverviewComponent implements OnInit {
   totalElements = signal<number>(2)
   orderService = inject(OrderSupabaseService);
   totalAmount: string;
+  searchValueByName= signal<string>(''); 
+  searchValueByOrderId= signal<string>(''); 
   ngOnInit(): void {
     this.fetchOrders('', '');
   }
 
   fetchOrders(filterByShopName: string, filterByOrderId: string) {
-    let params = { filterByShopName, filterByOrderId, page: this.page, limit: this.limit, supplier_id: 23, is_draft: 'false' };
+    let params = { filterByShopName, filterByOrderId, page: this.page, limit: this.limit, supplier_id: 23, is_draft: 'false', todays: true };
 
     const sub = this.orderService.getOrders(this.filters, this.sort, params).subscribe((data) => {
       this.orders.set(data.content.filter((order) => order.is_draft === false));
@@ -66,9 +68,15 @@ export class TodaysOrdersOverviewComponent implements OnInit {
   }
 
   searchByShopName(event: KeyboardEvent): void {
-    const val = (event.target as HTMLInputElement).value;
+    this.searchValueByName.set((event.target as HTMLInputElement).value);
     this.page = 1;
-    this.fetchOrders(val, '');
+    console.log(this.searchValueByName());
+    this.fetchOrders(this.searchValueByName(), this.searchValueByOrderId());
+  }
+  searchByOrderId(event: KeyboardEvent): void {
+    this.searchValueByOrderId.set((event.target as HTMLInputElement).value);
+    this.page = 1;
+    this.fetchOrders(this.searchValueByName(), this.searchValueByOrderId());
   }
 
   sortData(field: string): void {
@@ -78,11 +86,11 @@ export class TodaysOrdersOverviewComponent implements OnInit {
       this.sort.field = field;
       this.sort.order = 'asc';
     }
-    this.fetchOrders('', '');
+    this.fetchOrders(this.searchValueByName(), this.searchValueByOrderId());
   }
 
   refreshOrders(): void {
-    this.fetchOrders('', '');
+    this.fetchOrders(this.searchValueByName(), this.searchValueByOrderId());
   }
   getBadgeClass(status: boolean): string {
     return status ? 'success' : 'danger';

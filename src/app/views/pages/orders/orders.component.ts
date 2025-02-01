@@ -13,7 +13,7 @@ import { OrdersManagementComponent } from "./orders-management/orders-management
 export class OrdersComponent {
   todaysOrderComponent = signal(true);
   orderManagementComponent = signal(false);
-
+  selectedTitle: string | null = 'Today\'s Orders'; 
   triggerTodaysOrderComponent() {
     this.todaysOrderComponent.set(true);
     this.orderManagementComponent.set(false);
@@ -25,7 +25,7 @@ export class OrdersComponent {
   }
 
 onSelectOrders($event: string) {
-  console.log($event);
+  this.selectedTitle = $event; 
   if ($event === 'Today\'s Orders') {
     this.triggerTodaysOrderComponent();
   }

@@ -15,7 +15,7 @@ export class OrderSupabaseService {
       map((response: HttpResponse<OrderItem[]>) => response.body || [])
     );
   }
-  getOrders(filters: any, sort: any, data: { filterByShopName: string, filterByOrderId: string, page: number, limit: number, supplier_id: number }): Observable<PaginatedOrder> {
+  getOrders(filters: any, sort: any, data: { filterByShopName: string, filterByOrderId: string, page: number, limit: number, supplier_id: number , todays: boolean}): Observable<PaginatedOrder> {
     let params = this.generateParams(data);
     params = this.settingFilters(filters, params, sort);
 
@@ -47,17 +47,21 @@ export class OrderSupabaseService {
     return params;
   }
 
-  private generateParams(data: { filterByShopName: string, filterByOrderId: string, page: number, limit: number, supplier_id: number, is_draft?: string }): HttpParams {
+  private generateParams(data: { filterByShopName: string, filterByOrderId: string, page: number, limit: number, supplier_id: number, is_draft?: string, todays: boolean }): HttpParams {
     const days = this.calculateTomorrowDate();
     let params = new HttpParams()
       .set('offset', (data.page - 1) * data.limit)
       .set('limit', data.limit)
-      .set('is_draft', 'eq.' + data.is_draft)
       .set('supplier_id', 'eq.' + data.supplier_id)
       .set('shop_name', 'like.*' + data.filterByShopName + '*')
-      .set('order_id', 'like.*' + data.filterByOrderId + '*')
-      .append('order_created_at', 'gte.' + days.today)
-      .append('order_created_at', 'lt.' + days.tomorrow);
+      .set('order_id', 'like.*' + data.filterByOrderId + '*');
+      if (data.is_draft != undefined) {
+        params = params.set('is_draft', 'eq.' + data.is_draft);
+      }
+      if (data.todays==true) {
+        params = params.append('order_created_at', 'gte.' + days.today);
+        params = params.append('order_created_at', 'lt.' + days.tomorrow);
+      }
     return params;
   }
   private calculateTomorrowDate(): any {

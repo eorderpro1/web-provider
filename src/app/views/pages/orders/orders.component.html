@@ -2,8 +2,8 @@
     <div class="stretch-card">
         <div class="card">
             <div class="d-flex align-items-baseline">
-                <app-card-choice-order  [title]="'Today\'s Orders'" [image]="'cart.png'" (select)="onSelectOrders($event)"></app-card-choice-order>
-                <app-card-choice-order  [title]="'Order Management'" [image]="'order-management.png'" (select)="onSelectOrders($event)"></app-card-choice-order>
+                <app-card-choice-order [selected]="selectedTitle === 'Today\'s Orders'" [title]="'Today\'s Orders'" [image]="'cart.png'" (select)="onSelectOrders($event)"></app-card-choice-order>
+                <app-card-choice-order  [selected]="selectedTitle === 'Order Management'"    [title]="'Order Management'" [image]="'order-management.png'" (select)="onSelectOrders($event)"></app-card-choice-order>
               </div>
         </div>
     </div>
