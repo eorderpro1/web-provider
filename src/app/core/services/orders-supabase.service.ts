@@ -15,11 +15,57 @@ export class OrderSupabaseService {
       map((response: HttpResponse<OrderItem[]>) => response.body || [])
     );
   }
-  getOrders(filters: any, sort: any, data: { filterByShopName: string, filterByOrderId: string, page: number, limit: number, supplier_id: number , todays: boolean}): Observable<PaginatedOrder> {
-    let params = this.generateParams(data);
-    params = this.settingFilters(filters, params, sort);
+  fetchAllOrders(filters: any, sort: any, data: {
+    page: number, limit: number, supplier_id: number, is_draft?: string
+  }): Observable<PaginatedOrder> {
+    let params = this.generateAllOrdersParams(data);
+    params = this.settingAllOrdersFilters(filters, params, sort);
+    return this.fetchOrdersWithDetails(params);
+  }
+  fetchPaginatedTodaysOrders(filters: any, sort: any, data: { filterByShopName: string, filterByOrderId: string, page: number, limit: number, supplier_id: number, todays: boolean }): Observable<PaginatedOrder> {
+    let params = this.generateTodaysParams(data);
+    if (sort.field) params = params.set('order', sort.field + "." + sort.order);
 
+    return this.fetchOrdersWithDetails(params);
+  }
+  private generateTodaysParams(data: { filterByShopName: string, filterByOrderId: string, page: number, limit: number, supplier_id: number, is_draft?: string, todays: boolean }): HttpParams {
+    const days = this.calculateTomorrowDate();
+    let params = new HttpParams()
+      .set('offset', (data.page - 1) * data.limit)
+      .set('limit', data.limit)
+      .set('supplier_id', 'eq.' + data.supplier_id)
+      .set('shop_name', 'like.*' + data.filterByShopName + '*')
+      .set('order_id', 'like.*' + data.filterByOrderId + '*')
+      .append('order_created_at', 'gte.' + days.today)
+      .append('order_created_at', 'lt.' + days.tomorrow)
+      ;
+    if (data.is_draft != undefined) {
+      params = params.set('is_draft', 'eq.' + data.is_draft);
+    }
+    
+    return params;
+  }
+  generateAllOrdersParams(data: {
+    page: number, limit: number, supplier_id: number
+  }): HttpParams {
+    let params = new HttpParams()
+      .set('offset', (data?.page - 1) * data.limit)
+      .set('limit', data.limit)
+      .set('supplier_id', 'eq.' + data.supplier_id);
+    return params;
+  }
+  settingAllOrdersFilters(filters: any, params: any, sort: any) {
+    if (filters.orderStatus) params = params.set('status', 'eq.'+filters.orderStatus);
+    if (filters.filterByOrderId) params = params.set('order_id', 'like.*' +filters.filterByOrderId+"*");
+    if (filters.filterByShopName) params = params.set('shop_name', 'like.*' +filters.filterByShopName+"*");
+    if (filters.paymentStatus) params = params.set('is_paid', 'eq.'+filters.paymentStatus);
+    if (filters.fromDate) params = params.append('order_created_at', 'gte.'+filters.fromDate);
+    if (filters.toDate) params = params.set('order_created_at', 'lt.' +filters.toDate);
+    if (sort.field) params = params.set('order', sort.field + "." + sort.order);
+    return params;
+  }
 
+  private fetchOrdersWithDetails(params: HttpParams): Observable<PaginatedOrder> {
     return this.supabaseService.getRequest("orders_with_details", params).pipe(
       map((response: HttpResponse<any[]>) => {
         const contentRange = response.headers.get('Content-Range');
@@ -34,36 +80,10 @@ export class OrderSupabaseService {
       })
     );
   }
-  private settingFilters(filters: any, params: HttpParams, sort: any) {
-    if (filters.order_id) params = params.set('order_id', filters.order_id);
-    if (filters.shop_name) params = params.set('shop_name', filters.shop_name);
-    if (filters.order_created_at) params = params.set('order_created_at', filters.order_created_at);
-    if (filters.orderDate) params = params.set('date_to_be_delivered', filters.deliveryDate);
-    if (filters.day_of_week) params = params.set('day_of_week', filters.day_of_week);
-    if (filters.start_time) params = params.set('start_time', filters.start_time);
-    if (filters.is_delivered) params = params.set('is_delivered', filters.is_delivered);
-    if (filters.total_cost) params = params.set('total_cost', filters.total_cost);
-    if (sort.field) params = params.set('order', sort.field + "." + sort.order);
-    return params;
-  }
 
-  private generateParams(data: { filterByShopName: string, filterByOrderId: string, page: number, limit: number, supplier_id: number, is_draft?: string, todays: boolean }): HttpParams {
-    const days = this.calculateTomorrowDate();
-    let params = new HttpParams()
-      .set('offset', (data.page - 1) * data.limit)
-      .set('limit', data.limit)
-      .set('supplier_id', 'eq.' + data.supplier_id)
-      .set('shop_name', 'like.*' + data.filterByShopName + '*')
-      .set('order_id', 'like.*' + data.filterByOrderId + '*');
-      if (data.is_draft != undefined) {
-        params = params.set('is_draft', 'eq.' + data.is_draft);
-      }
-      if (data.todays==true) {
-        params = params.append('order_created_at', 'gte.' + days.today);
-        params = params.append('order_created_at', 'lt.' + days.tomorrow);
-      }
-    return params;
-  }
+
+
+
   private calculateTomorrowDate(): any {
     const today = new Date();
     const yyyy = today.getFullYear();

@@ -57,7 +57,7 @@ export class ReceivedNewOrderComponent implements OnInit {
   fetchOrders(filterByShopName: string, filterByOrderId: string) {
     let params = { filterByShopName, filterByOrderId, page: this.page, limit: this.limit, supplier_id: 23, is_draft: 'true', todays: true };
 
-    const sub = this.orderService.getOrders(this.filters, this.sort, params).subscribe((data) => {
+    const sub = this.orderService.fetchPaginatedTodaysOrders(this.filters, this.sort, params).subscribe((data) => {
       this.orders.set(data.content);
       this.totalElements.set(data.totalElements);
       this.totalPages.set(Math.ceil(this.totalElements() / this.limit));

@@ -14,6 +14,7 @@ export class OrdersComponent {
   todaysOrderComponent = signal(true);
   orderManagementComponent = signal(false);
   selectedTitle: string | null = 'Today\'s Orders'; 
+  
   triggerTodaysOrderComponent() {
     this.todaysOrderComponent.set(true);
     this.orderManagementComponent.set(false);

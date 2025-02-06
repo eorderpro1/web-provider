@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, input, OnInit, signal, TemplateRef } from '@angular/core';
+import { Component, DestroyRef, inject, input, OnChanges, OnInit, signal, SimpleChanges, TemplateRef } from '@angular/core';
 import { NgbDropdownModule, NgbModal, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderSupabaseService } from '../../../../core/services/orders-supabase.service';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +28,7 @@ import { OrderModalComponent } from "../order-modal/order-modal.component";
   templateUrl: './todays-orders-overview.component.html',
   styleUrl: './todays-orders-overview.component.scss'
 })
-export class TodaysOrdersOverviewComponent implements OnInit {
+export class TodaysOrdersOverviewComponent implements OnInit, OnChanges {
 
   orders = signal<Order[]>([]);
   private modalService = inject(NgbModal);
@@ -49,13 +49,22 @@ export class TodaysOrdersOverviewComponent implements OnInit {
   searchValueByName= signal<string>(''); 
   searchValueByOrderId= signal<string>(''); 
   ngOnInit(): void {
-    this.fetchOrders('', '');
+    if(this.trigger()) {
+      this.fetchOrders('', '');
+
+    }
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.trigger()) {
+      this.fetchOrders('', '');
+
+    }
   }
 
   fetchOrders(filterByShopName: string, filterByOrderId: string) {
     let params = { filterByShopName, filterByOrderId, page: this.page, limit: this.limit, supplier_id: 23, is_draft: 'false', todays: true };
 
-    const sub = this.orderService.getOrders(this.filters, this.sort, params).subscribe((data) => {
+    const sub = this.orderService.fetchPaginatedTodaysOrders(this.filters, this.sort, params).subscribe((data) => {
       this.orders.set(data.content.filter((order) => order.is_draft === false));
       this.totalElements.set(data.totalElements);
       this.totalPages.set(Math.ceil(this.totalElements() / this.limit));
@@ -73,8 +82,8 @@ export class TodaysOrdersOverviewComponent implements OnInit {
     console.log(this.searchValueByName());
     this.fetchOrders(this.searchValueByName(), this.searchValueByOrderId());
   }
-  searchByOrderId(event: KeyboardEvent): void {
-    this.searchValueByOrderId.set((event.target as HTMLInputElement).value);
+  searchByOrderId(value :string): void {
+    this.searchValueByOrderId.set(value);
     this.page = 1;
     this.fetchOrders(this.searchValueByName(), this.searchValueByOrderId());
   }
@@ -98,7 +107,7 @@ export class TodaysOrdersOverviewComponent implements OnInit {
   openScrollableModal(content: TemplateRef<any>, order: Order) {
     this.selectedOrder = order;
     this.deliveryDate = this.utils.getNextDateForDay(order.day_of_week);
-    console.log(order.id);
+
     this.orderService.getOrderItems(order.id.toFixed()).subscribe((data) => {
       console.log(data);
       this.orderItems = data;

@@ -1,103 +1,204 @@
 @if (trigger()) {
 
-  <div class="row g-0">
-    <div class="col-lg-7 col-xl-8 stretch-card d-flex flex-wrap">
-      <div class="card flex-grow-1">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-baseline mb-2">
-            <h6 class="card-title mb-0">Today's Orders</h6>
+<div class="row g-0">
+  <div class="stretch-card">
+    <div class="card flex-grow-1">
+      <div class="card-body">
+        <div class="d-flex align-items-baseline">
+          <h6 class="card-title mb-0">Today's Orders</h6>
+        </div>
+        <div class="row d-flex justify-content-between flex-wrap align-items-center">
+          <div class="row">
+            <div class="col-auto">
+              <div class="card">
+                <div class="card-body">
+                  Σύνολο: {{ totalAmount |currency:'EUR':'symbol' }}
+                </div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="card">
+                <div class="card-body">
+                  Αριθμος παραγγελιών : {{ totalElements() }}
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="row d-flex justify-content-between">
+          <div class="row">
             <div class="col-auto">
               <input type="text" class="form-control form-control-sm" placeholder="Find by shop name..."
                 (keyup)="searchByShopName($event)" />
             </div>
             <div class="col-auto">
-              <div class="card">
-                <div class="card-body">
-                  Σύνολο: {{ totalAmount }}
+              <input type="text" #searchByOrderIdInput class="form-control form-control-sm"
+                placeholder="Find by order id..." (keydown.enter)="searchByOrderId(searchByOrderIdInput.value)" />
+            </div>
+            <div class="col-auto">
+              <form class="d-flex range-selection">
+                <div class="form-group hidden">
+                  <div class="input-group">
+                    <input name="datepicker"
+                          class="form-control"
+                          ngbDatepicker
+                          #datepicker="ngbDatepicker"
+                          [autoClose]="'outside'"
+                          (dateSelect)="onDateSelection($event)"
+                          [displayMonths]="2"
+                          [dayTemplate]="t"
+                          outsideDays="hidden"
+                          [startDate]="fromDate!">
+                    <ng-template #t let-date let-focused="focused">
+                      <span class="custom-day"
+                            [class.focused]="focused"
+                            [class.range]="isRange(date)"
+                            [class.faded]="isHovered(date) || isInside(date)"
+                            (mouseenter)="hoveredDate = date"
+                            (mouseleave)="hoveredDate = null">
+                        {{ date.day }}
+                      </span>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="input-group" (click)="datepicker.toggle()">
+                    <input #dpFromDate
+                          class="form-control" placeholder="Ημ/νία από"
+                          name="dpFromDate"
+                          [value]="formatter.format(fromDate)"
+                          (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                    <button class="input-group-text" type="button">
+                      <i class="feather icon-calendar icon-md text-secondary"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="ms-2">
+                  <div class="input-group" (click)="datepicker.toggle()">
+                    <input #dpToDate
+                          class="form-control" placeholder="Ημ/νία εώς"
+                          name="dpToDate"
+                          [value]="formatter.format(toDate)"
+                          (input)="toDate = validateInput(toDate, dpToDate.value)">
+                    <button class="input-group-text" type="button">
+                      <i class="feather icon-calendar icon-md text-secondary"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-auto">
+              <div ngbDropdown class="dropdown-container">
+                <button class="btn select" id="paymentStatus" ngbDropdownToggle>{{ selectedPaymentStatus }}</button>
+                <div ngbDropdownMenu aria-labelledby="paymentStatus" class="dropdown-menu-fixed">
+                  <button ngbDropdownItem (click)="selectPaymentStatus('Ολες')">Ολες</button>
+                  <button ngbDropdownItem (click)="selectPaymentStatus('Πληρωμένες')">Πληρωμένες</button>
+                  <button ngbDropdownItem (click)="selectPaymentStatus('Απλήρωτες')">Απλήρωτες</button>
                 </div>
               </div>
             </div>
-  
-          </div>
-  
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th app-sortable-header [field]="'order_id'" [sort]="sort" [label]="'Order ID'"
-                    (sortChange)="sortData('order_id')">
-                  </th>
-                  <th style="padding-left: 9%;" app-sortable-header [field]="'shop_name'" [sort]="sort"
-                    [label]="'Shop Name'" (sortChange)="sortData('shop_name')">
-                  </th>
-                  <th app-sortable-header [field]="'order_created_at'" [sort]="sort" [label]="'Order Date'"
-                    (sortChange)="sortData('order_created_at')">
-                  </th>
-                  <th app-sortable-header [field]="'day_of_week'" [sort]="sort" [label]="'Delivery Day'"
-                    (sortChange)="sortData('day_of_week')">
-                  </th>
-                  <th app-sortable-header [field]="'start_time'" [sort]="sort" [label]="'Timeslot'"
-                    (sortChange)="sortData('start_time')">
-                  </th>
-                  <th app-sortable-header [field]="'is_delivered'" [sort]="sort" [label]="'Status'"
-                    (sortChange)="sortData('is_delivered')">
-                  </th>
-                  <th app-sortable-header [field]="'total_cost'" [sort]="sort" [label]="'Cost'"
-                    (sortChange)="sortData('total_cost')">
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-  
-                @for (order of orders(); track order.order_id)
-                {<tr (click)="openScrollableModal(scrollableModal, order)">
-                  <td style="font-size: 10px;">{{ order.order_id }}</td>
-                  <td>
-                    <div style="text-align: center;">
-                      <img [src]="order.shop_image" class="auto-resize" />
-                      <div>{{ order.shop_name }}</div>
-                    </div>
-                  </td>
-                  <td>{{ order.order_created_at| date }}</td>
-                  <td>{{ order.day_of_week }}</td>
-                  <td>{{order.start_time.slice(0,5)}}-{{order.end_time.slice(0,5)}}</td>
-                  <td><span [class]="'badge bg-' + getBadgeClass(order.payment_method != 'cash on delivery')">{{ order.payment_method != 'cash on delivery'
-                      ?'Paid':'Unpaid' }}</span></td>
-                  <td>{{ order.total_cost }}</td>
-                </tr>
-                }
-  
-              </tbody>
-            </table>
-          </div>
-          <div class="d-flex justify-content-between p-2">
-            <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
-              (pageChange)="refreshOrders()">
-            </ngb-pagination>
-  
-            <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
-              <option selected [ngValue]="10">10 items per page</option>
-              <option [ngValue]="25">25 items per page</option>
-              <option [ngValue]="50">50 items per page</option>
-            </select>
+            <div class="col-auto">
+              <div ngbDropdown>
+                <button class="btn select" id="orderStatus" ngbDropdownToggle>{{ selectedOrderStatus }}</button>
+                <div ngbDropdownMenu aria-labelledby="orderStatus">
+                  <button ngbDropdownItem (click)="setSelectedOrderStatus('Ολες')">Ολες</button>
+                  <button ngbDropdownItem (click)="setSelectedOrderStatus('Κλειστές')">Κλειστές</button>
+                  <button ngbDropdownItem (click)="setSelectedOrderStatus('Προς Παράδοση')">Προς Παράδοση</button>
+                  <button ngbDropdownItem (click)="setSelectedOrderStatus('Σε επεξεργασία')">Σε επεξεργασία</button>
+                  <button ngbDropdownItem (click)="setSelectedOrderStatus('Ακυρωμένες')">Ακυρωμένες</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th app-sortable-header [field]="'order_id'" [sort]="sort" [label]="'Order ID'"
+                  (sortChange)="sortData('order_id')">
+                </th>
+                <th style="padding-left: 4%;" app-sortable-header [field]="'shop_name'" [sort]="sort"
+                  [label]="'Shop Name'" (sortChange)="sortData('shop_name')">
+                </th>
+                <th app-sortable-header [field]="'status'" [sort]="sort" [label]="'Order Status'"
+                  (sortChange)="sortData('status')">
+                </th>
+                <th app-sortable-header [field]="'order_created_at'" [sort]="sort" [label]="'Order Date'"
+                  (sortChange)="sortData('order_created_at')">
+                </th>
+                <th app-sortable-header [field]="'day_of_week'" [sort]="sort" [label]="'Delivery Day'"
+                  (sortChange)="sortData('day_of_week')">
+                </th>
+                <th app-sortable-header [field]="'start_time'" [sort]="sort" [label]="'Timeslot'"
+                  (sortChange)="sortData('start_time')">
+                </th>
+                <th app-sortable-header [field]="'is_paid'" [sort]="sort" [label]="'Payment Status'"
+                  (sortChange)="sortData('is_paid')">
+                </th>
+                <th app-sortable-header [field]="'total_cost'" [sort]="sort" [label]="'Cost'"
+                  (sortChange)="sortData('total_cost')">
+                </th>
+                <th app-sortable-header [field]="'postal_code'" [sort]="sort" [label]="'Postal Code'"
+                  (sortChange)="sortData('postal_code')">
+                </th>
+                <th>Export</th>
+
+              </tr>
+            </thead>
+            <tbody>
+
+              @for (order of orders(); track order.order_id)
+              {<tr (click)="openScrollableModal(scrollableModal, order)">
+                <td style="font-size: 10px;">{{ order.order_id }}</td>
+                <td>
+                  <div style="text-align: center;">
+                    <img [src]="order.shop_image" class="auto-resize" />
+                    <div>{{ order.shop_name }}</div>
+                  </div>
+                </td>
+
+                <td><span [class]="'badge bg-' + getBadgeDeliveredClass(order.status)">{{ order.status }}</span></td>
+                <td>{{ order.order_created_at| date }}</td>
+                <td>{{ order.day_of_week }}</td>
+                <td>{{order.start_time.slice(0,5)}}-{{order.end_time.slice(0,5)}}</td>
+                <td><span [class]="'badge bg-' + getBadgePaidClass(order.is_paid)">{{ order.is_paid ?'Paid':'Unpaid'
+                    }}</span></td>
+                <td>{{ order.total_cost |currency:'EUR':'symbol' }}</td>
+                <td>{{order.postal_code}}</td>
+                <td>
+                  <button class="btn btn-primary"><i class="feather icon-download"></i></button>
+              </tr>
+              }
+
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
+            (pageChange)="refreshOrders()">
+          </ngb-pagination>
+
+          <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
+            <option selected [ngValue]="10">10 items per page</option>
+            <option [ngValue]="25">25 items per page</option>
+            <option [ngValue]="50">50 items per page</option>
+          </select>
+        </div>
       </div>
-      </div>
-     
     </div>
-  <ng-template #scrollableModal let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
-        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-        <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems" [deliveryDate]="this.deliveryDate"></app-order-modal>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
-    </div>
-  </ng-template>
-  }
+  </div>
+
+</div>
+<ng-template #scrollableModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems"
+      [deliveryDate]="this.deliveryDate"></app-order-modal>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
+  </div>
+</ng-template>
+}

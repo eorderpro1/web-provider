@@ -8,14 +8,24 @@
           <h6 class="card-title mb-0">Today's Orders</h6>
         </div>
         <div class="row d-flex justify-content-between">
-          <div class="col-auto">
-            <input type="text" class="form-control form-control-sm" placeholder="Find by shop name..."
-              (keyup)="searchByShopName($event)" />
+
+          <div class="row col-auto">
+            <div class="col-auto">
+              <input type="text" class="form-control form-control-sm" placeholder="Find by shop name..."
+                (keyup)="searchByShopName($event)" />
+            </div>
+            <div class="col-auto">
+              <input type="text" #searchByOrderIdInput class="form-control form-control-sm" placeholder="Find by order id..."
+                (keydown.enter)="searchByOrderId(searchByOrderIdInput.value)" />
+            </div>
           </div>
+
+
+
           <div class="col-auto">
             <div class="card">
               <div class="card-body">
-                Σύνολο: {{ totalAmount }}
+                Σύνολο: {{ totalAmount |currency:'EUR':'symbol'  }}
               </div>
             </div>
           </div>
@@ -29,7 +39,7 @@
                 <th app-sortable-header [field]="'order_id'" [sort]="sort" [label]="'Order ID'"
                   (sortChange)="sortData('order_id')">
                 </th>
-                <th style="padding-left: 9%;" app-sortable-header [field]="'shop_name'" [sort]="sort"
+                <th style="padding-left: 7%;" app-sortable-header [field]="'shop_name'" [sort]="sort"
                   [label]="'Shop Name'" (sortChange)="sortData('shop_name')">
                 </th>
                 <th app-sortable-header [field]="'order_created_at'" [sort]="sort" [label]="'Order Date'"
@@ -41,8 +51,8 @@
                 <th app-sortable-header [field]="'start_time'" [sort]="sort" [label]="'Timeslot'"
                   (sortChange)="sortData('start_time')">
                 </th>
-                <th app-sortable-header [field]="'is_delivered'" [sort]="sort" [label]="'Status'"
-                  (sortChange)="sortData('is_delivered')">
+                <th app-sortable-header [field]="'is_paid'" [sort]="sort" [label]="'Payment Status'"
+                  (sortChange)="sortData('is_paid')">
                 </th>
                 <th app-sortable-header [field]="'total_cost'" [sort]="sort" [label]="'Cost'"
                   (sortChange)="sortData('total_cost')">
@@ -63,9 +73,9 @@
                 <td>{{ order.order_created_at| date }}</td>
                 <td>{{ order.day_of_week }}</td>
                 <td>{{order.start_time.slice(0,5)}}-{{order.end_time.slice(0,5)}}</td>
-                <td><span [class]="'badge bg-' + getBadgeClass(order.payment_method != 'cash on delivery')">{{ order.payment_method != 'cash on delivery'
-                    ?'Paid':'Unpaid' }}</span></td>
-                <td>{{ order.total_cost }}</td>
+                <td><span [class]="'badge bg-' + getBadgeClass(order.is_paid)">{{ order.is_paid ?'Paid':'Unpaid'
+                    }}</span></td>
+                <td>{{ order.total_cost |currency:'EUR':'symbol'  }}</td>
               </tr>
               }
 
@@ -85,22 +95,23 @@
         </div>
       </div>
     </div>
-    </div>
-    <div class="col-lg-6 col-xl-4">
-      <app-received-new-order></app-received-new-order>
-    </div>
-   
   </div>
+  <div class="col-lg-6 col-xl-4">
+    <app-received-new-order></app-received-new-order>
+  </div>
+
+</div>
 <ng-template #scrollableModal let-modal>
   <div class="modal-header">
-      <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
-      <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-      <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems" [deliveryDate]="this.deliveryDate"></app-order-modal>
+    <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems"
+      [deliveryDate]="this.deliveryDate"></app-order-modal>
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
   </div>
 </ng-template>
 }

@@ -7,3 +7,30 @@
 th{
   text-align: center;
 }
+.select{
+  font-size: 12px;
+  border: 1px solid #3c3f42;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  white-space: nowrap; 
+  min-width: 150px;
+  max-width: 160px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dropdown-menu-fixed {
+  min-width: 150px; 
+}
+
+.dropdown-menu-fixed button {
+  width: 100%; 
+  text-align: left; 
+}
+.date-title{
+  padding-top: 2%;
+}
+.btn.select {
+  min-width: 150px; /* Adjust based on longest text */
+  text-align: center;
+}
