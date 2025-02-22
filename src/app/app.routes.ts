@@ -13,6 +13,9 @@ export const routes: Routes = [
       { path: 'orders',
         loadChildren: () => import('./views/pages/orders/orders.routes')
       },
+      { path: 'statistics',
+        loadChildren: () => import('./views/pages/statistics/statistics.routes')
+      },
       {
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.routes')

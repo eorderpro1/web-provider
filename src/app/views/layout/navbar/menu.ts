@@ -5,7 +5,37 @@ export const MENU: MenuItem[] = [
     label: 'Orders',
     icon: 'home',
     link: '/orders'
-  }, 
+  },
+  {
+    label: 'Statistics',
+    icon: 'pie-chart',
+    subMenus: [
+      {
+        subMenuItems: [
+          {
+            label: 'Πωλήσεις και Έσοδα',
+            link: '/statistics/sales-and-revenue',
+          },
+          {
+            label: 'Παραγγελίες και Δρομολόγια',
+            link: '/statistics/orders-and-routes',
+          },
+          {
+            label: 'Αποθέματος και Προβλέψεις',
+            link: '/statistics/inventory-and-forecasts',
+          },
+          {
+            label: 'Προσφορών και Διαφημίσεων',
+            link: '/statistics/offers-and-ads',
+          },
+          {
+            label: 'Συγκριτικά και Custom Reports',
+            link: '/statistics/comparative-and-custom-reports',
+          }
+        ]
+      }
+    ]
+  },
   {
     label: 'Dashboard',
     icon: 'home',

@@ -1,0 +1,597 @@
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgbDropdownModule, NgbDatepickerModule, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
+import { FeatherIconDirective } from '../../../../core/feather-icon/feather-icon.directive';
+import { ThemeCssVariableService, ThemeCssVariablesType } from '../../../../core/services/theme-css-variable.service';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+
+@Component({
+  selector: 'app-orders-and-routes',
+  standalone: true,
+    imports: [
+      NgbDropdownModule,
+      FormsModule,
+      NgbDatepickerModule,
+      NgApexchartsModule,
+      FeatherIconDirective,
+      BaseChartDirective
+    ],
+     providers: [
+        provideCharts(withDefaultRegisterables())
+      ],
+  templateUrl: './orders-and-routes.component.html',
+  styleUrl: './orders-and-routes.component.scss'
+})
+
+export class OrdersAndRoutesComponent {
+    currentDate: NgbDateStruct = inject(NgbCalendar).getToday();
+  
+    themeCssVariables = inject(ThemeCssVariableService).getThemeCssVariables();
+    public monthlySalesChartOptions: ApexOptions | any;
+    public revenueChartOptions: ApexOptions | any;
+
+    constructor() { }
+  
+    ngOnInit(): void {
+      this.monthlySalesChartOptions = this.getOrdersPerCustomer(this.themeCssVariables);
+      this.revenueChartOptions = this.getAverageCartPerOrder(this.themeCssVariables);
+
+    }
+    
+    //παραγγελίες ανα πελάτη
+    getOrdersPerCustomer(themeVariables: ThemeCssVariablesType) {
+      return {
+        series: [{
+          name: 'Sales',
+          data: [152, 109, 93, 113, 126, 161, 188, 143, 102, 113, 116, 124]
+        }],
+        chart: {
+          type: 'bar', // Ensures bar chart
+          height: '500',
+          parentHeightOffset: 0,
+          foreColor: themeVariables.secondary,
+          toolbar: {
+            show: false
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        colors: [themeVariables.primary],
+        fill: {
+          opacity: .9
+        },
+        grid: {
+          padding: {
+            bottom: -4
+          },
+          borderColor: themeVariables.gridBorder,
+          xaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
+        xaxis: {
+          title: {
+            text: 'Παραγγελίες',
+            style: {
+              size: 9,
+              color: themeVariables.secondary
+            }
+          },
+          categories: ['2Can Bowl', 'Kioskis', 'Pop Up', 'College', 'Picolo', 'Il Toto', 'Kafetzis', 'Kafenio', 'Cazanova', 'La Pasteria', 'Moliz', 'Astra'],
+          labels: {
+            show: true
+          },
+          axisBorder: {
+            color: themeVariables.gridBorder,
+          },
+          axisTicks: {
+            color: themeVariables.gridBorder,
+          },
+        },
+        yaxis: {
+          title: {
+            text: 'Customers',
+            style: {
+              size: 9,
+              color: themeVariables.secondary
+            }
+          },
+          labels: {
+            offsetX: 0,
+          },
+        },
+        legend: {
+          show: true,
+          position: "top",
+          horizontalAlign: 'center',
+          fontFamily: themeVariables.fontFamily,
+          itemMargin: {
+            horizontal: 8,
+            vertical: 0
+          },
+        },
+        stroke: {
+          width: 0
+        },
+        dataLabels: {
+          enabled: true,
+          style: {
+            fontSize: '10px',
+            fontFamily: themeVariables.fontFamily,
+          },
+          offsetX: -5, // Adjust label positioning
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            barHeight: "60%", // Adjust bar thickness
+            borderRadius: 0,
+            dataLabels: {
+              position: 'right', // Moves labels to the right
+              orientation: 'vertical'
+          },
+        }
+      }
+    }
+  }
+//μεσο καλαθι ανα παργγελία
+getAverageCartPerOrder(themeVariables: ThemeCssVariablesType) {
+  return {
+    series: [{
+      name: "Μεσο καλαθι ανα παραγγελία",
+      data: [
+        78,
+        48.7,
+        50.6,
+        53.3,
+        54.7,
+        53.8,
+        54.6,
+        56.7,
+        56.9,
+        56.1,
+        56.5,
+        60.3,
+        58.7,
+        61.4,
+        61.1,
+        58.5,
+        54.7,
+        52.0,
+        51.0,
+        47.4,
+        48.5,
+        48.9,
+        53.5,
+        50.2,
+        46.2,
+        48.6,
+        51.7,
+        51.3,
+        50.2,
+        54.6,
+        52.4,
+        53.0,
+        57.0,
+        52.9,
+        48.7,
+        52.6,
+        53.5,
+        58.5,
+        55.1,
+        58.0,
+        61.3,
+        57.7,
+        60.2,
+        61.0,
+        57.7,
+        56.8,
+        58.9,
+        62.4,
+        58.7,
+        58.4,
+        56.7,
+        52.7,
+        52.3,
+        50.5,
+        55.4,
+        50.4,
+        52.4,
+        48.7,
+        47.4,
+        43.3,
+        38.9,
+        34.7,
+        31.0,
+        32.6,
+        36.8,
+        35.8,
+        32.7,
+        33.2,
+        30.8,
+        28.6,
+        28.4,
+        27.7,
+        27.7,
+        25.9,
+        24.3,
+        21.9,
+        22.0,
+        23.5,
+        27.3,
+        30.2,
+        27.2,
+        29.9,
+        25.1,
+        23.0,
+        23.7,
+        23.4,
+        27.9,
+        23.2,
+        23.9,
+        19.2,
+        15.1,
+        15.0,
+        11.0,
+        9.20,
+        7.47,
+        11.6,
+        15.7,
+        13.9,
+        12.5,
+        13.5,
+        15.0,
+        13.9,
+        13.2,
+        18.1,
+        20.6,
+        21.0,
+        25.3,
+        25.3,
+        20.9,
+        18.7,
+        15.3,
+        14.5,
+        17.9,
+        15.9,
+        16.3,
+        14.1,
+        12.1,
+        14.8,
+        17.2,
+        17.7,
+        14.0,
+        18.6,
+        18.4,
+        22.6,
+        25.0,
+        28.1,
+        28.0,
+        24.1,
+        24.2,
+        28.2,
+        26.2,
+        29.3,
+        26.0,
+        23.9,
+        28.8,
+        25.1,
+        21.7,
+        23.0,
+        20.7,
+        29.7,
+        30.2,
+        32.5,
+        31.4,
+        33.6,
+        30.0,
+        34.2,
+        36.9,
+        35.5,
+        34.7,
+        36.9
+      ]
+    }],
+    chart: {
+      type: "line",
+      height: '400',
+      parentHeightOffset: 0,
+      foreColor: themeVariables.secondary,
+      toolbar: {
+        show: false
+      },
+      zoom: {
+        enabled: false
+      }
+    },
+    colors: [themeVariables.primary, themeVariables.danger, themeVariables.warning],
+    grid: {
+      padding: {
+        bottom: -4,
+      },
+      borderColor: themeVariables.gridBorder,
+      xaxis: {
+        lines: {
+          show: true
+        }
+      }
+    },
+    xaxis: {
+      type: "datetime",
+      categories: [
+        "Jan 01 2024", "Jan 02 2024", "jan 03 2024", "Jan 04 2024", "Jan 05 2024", "Jan 06 2024", "Jan 07 2024", "Jan 08 2024", "Jan 09 2024", "Jan 10 2024", "Jan 11 2024", "Jan 12 2024", "Jan 13 2024", "Jan 14 2024", "Jan 15 2024", "Jan 16 2024", "Jan 17 2024", "Jan 18 2024", "Jan 19 2024", "Jan 20 2024", "Jan 21 2024", "Jan 22 2024", "Jan 23 2024", "Jan 24 2024", "Jan 25 2024", "Jan 26 2024", "Jan 27 2024", "Jan 28 2024", "Jan 29 2024", "Jan 30 2024", "Jan 31 2024",
+        "Feb 01 2024", "Feb 02 2024", "Feb 03 2024", "Feb 04 2024", "Feb 05 2024", "Feb 06 2024", "Feb 07 2024", "Feb 08 2024", "Feb 09 2024", "Feb 10 2024", "Feb 11 2024", "Feb 12 2024", "Feb 13 2024", "Feb 14 2024", "Feb 15 2024", "Feb 16 2024", "Feb 17 2024", "Feb 18 2024", "Feb 19 2024", "Feb 20 2024", "Feb 21 2024", "Feb 22 2024", "Feb 23 2024", "Feb 24 2024", "Feb 25 2024", "Feb 26 2024", "Feb 27 2024", "Feb 28 2024",
+        "Mar 01 2024", "Mar 02 2024", "Mar 03 2024", "Mar 04 2024", "Mar 05 2024", "Mar 06 2024", "Mar 07 2024", "Mar 08 2024", "Mar 09 2024", "Mar 10 2024", "Mar 11 2024", "Mar 12 2024", "Mar 13 2024", "Mar 14 2024", "Mar 15 2024", "Mar 16 2024", "Mar 17 2024", "Mar 18 2024", "Mar 19 2024", "Mar 20 2024", "Mar 21 2024", "Mar 22 2024", "Mar 23 2024", "Mar 24 2024", "Mar 25 2024", "Mar 26 2024", "Mar 27 2024", "Mar 28 2024", "Mar 29 2024", "Mar 30 2024", "Mar 31 2024",
+        "Apr 01 2024", "Apr 02 2024", "Apr 03 2024", "Apr 04 2024", "Apr 05 2024", "Apr 06 2024", "Apr 07 2024", "Apr 08 2024", "Apr 09 2024", "Apr 10 2024", "Apr 11 2024", "Apr 12 2024", "Apr 13 2024", "Apr 14 2024", "Apr 15 2024", "Apr 16 2024", "Apr 17 2024", "Apr 18 2024", "Apr 19 2024", "Apr 20 2024", "Apr 21 2024", "Apr 22 2024", "Apr 23 2024", "Apr 24 2024", "Apr 25 2024", "Apr 26 2024", "Apr 27 2024", "Apr 28 2024", "Apr 29 2024", "Apr 30 2024",
+        "May 01 2024", "May 02 2024", "May 03 2024", "May 04 2024", "May 05 2024", "May 06 2024", "May 07 2024", "May 08 2024", "May 09 2024", "May 10 2024", "May 11 2024", "May 12 2024", "May 13 2024", "May 14 2024", "May 15 2024", "May 16 2024", "May 17 2024", "May 18 2024", "May 19 2024", "May 20 2024", "May 21 2024", "May 22 2024", "May 23 2024", "May 24 2024", "May 25 2024", "May 26 2024", "May 27 2024", "May 28 2024", "May 29 2024", "May 30 2024",
+      ],
+      lines: {
+        show: true
+      },
+      axisBorder: {
+        color: themeVariables.gridBorder,
+      },
+      axisTicks: {
+        color: themeVariables.gridBorder,
+      },
+      crosshairs: {
+        stroke: {
+          color: themeVariables.secondary,
+        },
+      },
+    },
+    yaxis: {
+      title: {
+        text: 'Ευρω ανα καλαθι',
+        style: {
+          size: 9,
+          color: themeVariables.secondary
+        }
+      },
+      tickAmount: 4,
+      tooltip: {
+        enabled: true
+      },
+      crosshairs: {
+        stroke: {
+          color: themeVariables.secondary,
+        },
+      },
+      labels: {
+        offsetX: 0,
+      },
+    },
+    markers: {
+      size: 0,
+    },
+    stroke: {
+      width: 2,
+      curve: "straight",
+    },
+  }
+};
+
+  /**
+   * Παραγγελίες με το μεγαλύτερο φορτίο
+   */
+  public orderWithBiggestPackageOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      }
+    },
+    scales: {
+      x: {
+        display: true,
+        grid: {
+          display: true,
+          color: this.themeCssVariables.gridBorder,
+        },
+        ticks: {
+          color: this.themeCssVariables.secondary,
+          font: {
+            size: 12
+          }
+        }
+      },
+      y: {
+        grid: {
+          display: true,
+          color: this.themeCssVariables.gridBorder,
+        },
+        ticks: {
+          color: this.themeCssVariables.secondary,
+          font: {
+            size: 12
+          }
+        }
+      }
+    }
+  };
+  public orderWithBiggestPackageType: ChartType = 'bar';
+  public orderWithBiggestPackagePlugins = [];
+  public orderWithBiggestPackageData: ChartData<'bar'> = {
+    labels: [ "China", "America", "India", "Germany", "Oman"],
+    datasets: [
+      { 
+        label: "Population",
+        backgroundColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.warning, this.themeCssVariables.success, this.themeCssVariables.info],
+        hoverBackgroundColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.warning, this.themeCssVariables.success, this.themeCssVariables.info],
+        borderColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.warning, this.themeCssVariables.success, this.themeCssVariables.info],
+        hoverBorderColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.warning, this.themeCssVariables.success, this.themeCssVariables.info],
+        data: [2478,5267,734,2084,1433],
+      }
+    ],
+  };
+
+
+    /**
+   * Χρόνοι παράδοσης Παραγγελιών
+   */
+    public deliveryTimePerOrderData: ChartConfiguration['data'] = {
+      labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+      datasets: [{ 
+          data: [86,114,106,106,107,111,133,221,783,2478],
+          label: "Africa",
+          borderColor: this.themeCssVariables.info,
+          backgroundColor: "transparent",
+          fill: true,
+          pointBackgroundColor: this.themeCssVariables.light,
+          pointHoverBackgroundColor: this.themeCssVariables.light,
+          pointBorderColor: this.themeCssVariables.info,
+          pointHoverBorderColor: this.themeCssVariables.info,
+          pointBorderWidth: 2,
+          pointHoverBorderWidth: 3,
+          tension: .3
+        }
+      ]
+    };
+    public lineChartOptions: ChartConfiguration['options'] = {
+      responsive: true,
+      plugins: {
+        legend: { 
+          display: true,
+          labels: {
+            color: this.themeCssVariables.secondary,
+            font: {
+              size: 13,
+              family: this.themeCssVariables.fontFamily
+            }
+          }
+        },
+      },
+      scales: {
+        x: {
+          display: true,
+          grid: {
+            display: true,
+            color: this.themeCssVariables.gridBorder,
+          },
+          ticks: {
+            color: this.themeCssVariables.secondary,
+            font: {
+              size: 12
+            }
+          }
+        },
+        y: {
+          grid: {
+            display: true,
+            color: this.themeCssVariables.gridBorder,
+          },
+          ticks: {
+            color: this.themeCssVariables.secondary,
+            font: {
+              size: 12
+            }
+          }
+        }
+      }
+    };
+    public lineChartType: ChartType = 'line';
+    public lineChartPlugins = [];
+
+
+  /**
+   * Polar area chart
+   */
+  public polarChartOptions: ChartConfiguration['options'] = {
+    aspectRatio: 2,
+    scales: {
+      r: {
+        angleLines: {
+          display: true,
+          color: this.themeCssVariables.gridBorder,
+        },
+        grid: {
+          color: this.themeCssVariables.gridBorder
+        },
+        suggestedMin: 1000,
+        suggestedMax: 5500,
+        ticks: {
+          backdropColor: this.themeCssVariables.light,
+          color: this.themeCssVariables.secondary,
+          font: {
+            size: 11,
+            family: this.themeCssVariables.fontFamily
+          }
+        },
+        pointLabels: {
+          color: this.themeCssVariables.secondary,
+          font: {
+            family: this.themeCssVariables.fontFamily,
+            size: 13
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: { 
+        display: true,
+        labels: {
+          color: this.themeCssVariables.secondary,
+          font: {
+            size: 13,
+            family: this.themeCssVariables.fontFamily
+          }
+        }
+      },
+    },
+  };
+  public polarAreaChartLabels: string[] = ["Africa", "Asia", "Europe", "Latin America"];
+  public polarAreaChartData: ChartData<'polarArea'> = {
+    labels: this.polarAreaChartLabels,
+    datasets: [
+      {
+        label: "Population (millions)",
+        backgroundColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.success, this.themeCssVariables.info],
+        hoverBackgroundColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.success, this.themeCssVariables.info],
+        borderColor: this.themeCssVariables.light,
+        hoverBorderColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.success, this.themeCssVariables.info],
+        data: [3578,5000,1034,2034]
+      }
+    ]
+  };
+  public polarAreaLegend = true;
+  public polarAreaChartType: ChartType = 'polarArea';
+
+
+  /**
+   * Pie chart
+   */
+  public pieChartOptions: ChartConfiguration['options'] = {
+    aspectRatio: 2,
+    plugins: {
+      legend: { 
+        display: true,
+        labels: {
+          color: this.themeCssVariables.secondary,
+          font: {
+            size: 13,
+            family: this.themeCssVariables.fontFamily
+          }
+        }
+      },
+    },
+  };
+   public pieChartLabels: string[] = ["Africa", "Asia", "Europe"];
+   public pieChartData: ChartData<'doughnut'> = {
+     labels: this.pieChartLabels,
+     datasets: [{
+      label: "Population (millions)",
+      backgroundColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.info],
+      hoverBackgroundColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.info],
+      borderColor: this.themeCssVariables.light,
+      hoverBorderColor: [this.themeCssVariables.primary, this.themeCssVariables.danger, this.themeCssVariables.info],
+      data: [2478,4267,1334]
+     }]
+   };
+   public pieChartType: ChartType = 'pie';
+
+  }
