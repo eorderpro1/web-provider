@@ -1,1 +1,53 @@
-<p>inventory-and-forecasts works!</p>
+<div class="row">
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Stock ανα προιον</h6>
+                <apx-chart [series]="productStockOptions.series" [chart]="productStockOptions.chart"
+                    [colors]="productStockOptions.colors" [grid]="productStockOptions.grid"
+                    [xaxis]="productStockOptions.xaxis" [yaxis]="productStockOptions.yaxis"
+                    [plotOptions]="productStockOptions.plotOptions"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Stock ανα κατηγορία</h6>
+
+                <apx-chart [series]="stockPerCategoryOptions.series" [chart]="stockPerCategoryOptions.chart"
+                    [colors]="stockPerCategoryOptions.colors" [grid]="stockPerCategoryOptions.grid"
+                    [xaxis]="stockPerCategoryOptions.xaxis" [yaxis]="stockPerCategoryOptions.yaxis"
+                    [plotOptions]="stockPerCategoryOptions.plotOptions"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 grid-margin grid-margin-xl-0 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Προβλέψεις Παραγγελιών</h6>
+
+                <canvas baseChart [data]="orderForecastData" [options]="orderForecastOptions" [type]="orderForecastType"
+                    [plugins]="orderForecastPlugins">
+                </canvas>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 grid-margin grid-margin-xl-0 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Σύγκριση Παραγγελιών ανα έτος</h6>
+
+                <canvas baseChart [data]="yearlyComparisonChartData" [options]="yearlyComparisonChartOptions"
+                    [type]="yearlyComparisonChartType">
+                </canvas>
+
+            </div>
+        </div>
+    </div>
+</div>
