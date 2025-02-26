@@ -36,7 +36,6 @@ export class TodaysOrdersOverviewComponent implements OnInit, OnChanges {
   selectedOrder: Order;
   orderItems: OrderItem[] = [];
   deliveryDate: Date;
-  trigger = input.required<boolean>();
   filters: any = { status: '', shop: '', orderDate: '' };
   sort: any = { field: '', order: '' };
   page: number = 1;
@@ -49,16 +48,12 @@ export class TodaysOrdersOverviewComponent implements OnInit, OnChanges {
   searchValueByName= signal<string>(''); 
   searchValueByOrderId= signal<string>(''); 
   ngOnInit(): void {
-    if(this.trigger()) {
-      this.fetchOrders('', '');
+    this.fetchOrders('', '');
 
-    }
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.trigger()) {
-      this.fetchOrders('', '');
+    this.fetchOrders('', '');
 
-    }
   }
 
   fetchOrders(filterByShopName: string, filterByOrderId: string) {

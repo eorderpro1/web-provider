@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xl-4 grid-margin grid-margin-xl-0 stretch-card">
+    <div class="col-xl-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Κλικ και Αγορές που έκανε κάθε πελάτης</h6>
@@ -11,25 +11,13 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-4 grid-margin grid-margin-xl-0 stretch-card">
+    <div class="col-xl-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Κλικς που έγιναν αγορές </h6>
 
                 <canvas baseChart [data]="clicksConvertedToPurchaseChartData"
                     [options]="clicksConvertedToPurchaseChartOptions" [type]="clicksConvertedToPurchaseChartType">
-                </canvas>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 grid-margin grid-margin-xl-0 stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="card-title">Σύγκριση πριν και μετά απο τις διαφημίσεις</h6>
-
-                <canvas baseChart [data]="beforeAndAfterAdsChartData" [options]="beforeAndAfterAdsChartOptions"
-                    [type]="beforeAndAfterAdsChartType">
                 </canvas>
 
             </div>
@@ -63,16 +51,39 @@
     </div>
     <div class="col-xl-4 grid-margin stretch-card">
         <div class="card">
-          <div class="card-body">
-            <h6 class="card-title">Πελάτες που αγόρασαν λόγω των εκπτώσεων</h6>
-    
-            <canvas baseChart 
-              [data]="customersBoughtWithOffersChartData"
-              [options]="customersBoughtWithOffersChartOptions"
-              [type]="customersBoughtWithOffersChartType">
-            </canvas>
-    
-          </div>
+            <div class="card-body">
+                <h6 class="card-title">Πελάτες που αγόρασαν λόγω των εκπτώσεων</h6>
+
+                <canvas baseChart [data]="customersBoughtWithOffersChartData"
+                    [options]="customersBoughtWithOffersChartOptions" [type]="customersBoughtWithOffersChartType">
+                </canvas>
+
+            </div>
         </div>
-      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Σύγκριση προωθημένων και μη προωθημένων προιόντων</h6>
+                <canvas baseChart [data]="comparisonPromotedProductsChartData" [options]="comparisonPromotedProductsChartOptions"
+                    [type]="comparisonPromotedProductsChartType">
+                </canvas>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Εισόδημα πριν, κατα την διέρκεια και μετα τις διαφημίσεις</h6>
+                <canvas baseChart [data]="beforeAndAfterAdsChartData" [options]="beforeAndAfterAdsChartOptions"
+                    [type]="beforeAndAfterAdsChartType">
+                </canvas>
+
+            </div>
+        </div>
+    </div>
+   
 </div>

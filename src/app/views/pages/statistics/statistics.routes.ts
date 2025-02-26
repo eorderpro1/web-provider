@@ -1,14 +1,9 @@
 import { Routes } from '@angular/router';
-import { SalesAndRevenueComponent } from './sales-and-revenue/sales-and-revenue.component';
 
 export default [
     {
         path: 'sales-and-revenue',
         loadComponent: () => import('./sales-and-revenue/sales-and-revenue.component').then(c => c.SalesAndRevenueComponent),
-    },
-    {
-        path: 'comparative-and-custom-reports',
-        loadComponent: () => import('./comparative-and-custom-reports/comparative-and-custom-reports.component').then(c => c.ComparativeAndCustomReportsComponent),
     },
     {
         path: 'inventory-and-forecasts',

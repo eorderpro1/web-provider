@@ -2,11 +2,21 @@
     <div class="stretch-card">
         <div class="card">
             <div class="d-flex align-items-baseline">
-                <app-card-choice-order [selected]="selectedTitle === 'Today\'s Orders'" [title]="'Today\'s Orders'" [image]="'cart.png'" (select)="onSelectOrders($event)"></app-card-choice-order>
-                <app-card-choice-order  [selected]="selectedTitle === 'Order Management'"    [title]="'Order Management'" [image]="'order-management.png'" (select)="onSelectOrders($event)"></app-card-choice-order>
-              </div>
+                <app-card-choice-order 
+                    [title]="'Today\'s Orders'" 
+                    [image]="'cart.png'" 
+                    [routerLinkValue]="'/orders/todays-orders'">
+                </app-card-choice-order>
+
+                <app-card-choice-order  
+                    [title]="'Order Management'" 
+                    [image]="'order-management.png'" 
+                    [routerLinkValue]="'/orders/orders-management'">
+                </app-card-choice-order>
+            </div>
         </div>
     </div>
-    <app-todays-orders-overview [trigger]="todaysOrderComponent()"></app-todays-orders-overview>
-    <app-orders-management [trigger]="orderManagementComponent()"></app-orders-management>
+    
+    <!-- Loads the component dynamically -->
+    <router-outlet></router-outlet>
 </div>

@@ -1,9 +1,11 @@
 import { Component, computed, input, output } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-card-choice-order',
   standalone: true,
-  imports: [],
+  imports: [    RouterLink,RouterModule
+    ],
   templateUrl: './card-choice-order.component.html',
   styleUrl: './card-choice-order.component.scss'
 })
@@ -11,13 +13,9 @@ export class CardChoiceOrderComponent {
 
   title = input.required<string>();
   image = input.required<string>();
-  selected = input.required<boolean>(); // Receives selection state from parent
+  routerLinkValue = input.required<string>();
 
-  select = output<string>();
   imagePath = computed(() => '/images/photos/' + this.image());
-  onSelectOrderComponent() {
-    this.select.emit(this.title());
-
-  }
+ 
 
 }

@@ -27,14 +27,15 @@ export const MENU: MenuItem[] = [
           {
             label: 'Προσφορών και Διαφημίσεων',
             link: '/statistics/offers-and-ads',
-          },
-          {
-            label: 'Συγκριτικά και Custom Reports',
-            link: '/statistics/comparative-and-custom-reports',
           }
         ]
       }
     ]
+  },
+  {
+    label: 'Products',
+    icon: 'box',
+    link: '/products'
   },
   {
     label: 'Dashboard',

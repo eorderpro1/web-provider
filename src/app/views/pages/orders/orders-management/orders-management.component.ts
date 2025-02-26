@@ -1,6 +1,7 @@
 import { 
   Component, inject, OnChanges, SimpleChanges, TemplateRef, signal, input,
-  DestroyRef
+  DestroyRef,
+  OnInit
 } from '@angular/core';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +32,15 @@ import { SortableHeaderComponent } from '../sortable-header/sortable-header.comp
   templateUrl: './orders-management.component.html',
   styleUrl: './orders-management.component.scss'
 })
-export class OrdersManagementComponent implements OnChanges {
+export class OrdersManagementComponent implements OnInit {
+  ngOnInit(): void {
+    // this.webSocketService.subscribeToOrders((order) => {
+    //   if (order.is_draft === 'true') {
+    //     this.orders().push(order);
+    //   }
+    // });
+    this.buildAllOrdersRequest();
+   }
 
   readonly calendar = inject(NgbCalendar);
   readonly formatter = inject(NgbDateParserFormatter);
@@ -42,7 +51,6 @@ export class OrdersManagementComponent implements OnChanges {
   private destroy = inject(DestroyRef);
   totalPages = signal<number>(2);
   totalElements = signal<number>(2);
-  trigger = input.required<boolean>();
   searchValueByName = signal<string>('');
   searchValueByOrderId = signal<string>('');
   orders = signal<Order[]>([]);
@@ -78,17 +86,6 @@ export class OrdersManagementComponent implements OnChanges {
     'Ακυρωμένες': 'Canceled'
   };
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // this.webSocketService.subscribeToOrders((order) => {
-    //   if (order.is_draft === 'true') {
-    //     this.orders().push(order);
-    //   }
-    // });
-    console.log(this.trigger());
-    if (this.trigger()) {
-      this.buildAllOrdersRequest();
-    }
-  }
   refreshOrders() {
     this.buildAllOrdersRequest();
   }
