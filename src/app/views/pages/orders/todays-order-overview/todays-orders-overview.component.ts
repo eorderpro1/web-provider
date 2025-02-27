@@ -3,7 +3,7 @@ import { NgbDropdownModule, NgbModal, NgbPaginationModule, NgbTypeaheadModule } 
 import { OrderSupabaseService } from '../../../../core/services/orders-supabase.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { SupabaseService } from '../../../../core/services/supabase.service';
 import { Order } from '../../../../core/model/order';
 import { SortableHeaderComponent } from '../sortable-header/sortable-header.component';

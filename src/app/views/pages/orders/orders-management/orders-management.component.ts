@@ -1,9 +1,9 @@
 import { 
-  Component, inject, OnChanges, SimpleChanges, TemplateRef, signal, input,
+  Component, inject, TemplateRef, signal, 
   DestroyRef,
   OnInit
 } from '@angular/core';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal, NgbDropdownModule, NgbDatepickerModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
