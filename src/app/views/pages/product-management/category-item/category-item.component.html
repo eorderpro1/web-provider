@@ -1,0 +1,7 @@
+<li class="category-card nav-item" 
+    [routerLink]="['/products/products-table']" 
+    routerLinkActive="active" 
+    [queryParams]="{ category: category().id }"> 
+  <img [src]="category().image" [alt]="category().category" class="category-image" />
+  <div class="category-name">{{ category().category }}</div>
+</li>

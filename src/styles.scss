@@ -23,5 +23,9 @@
 // NobleUI styles for LTR layout
 @import "./styles/styles.scss";
 
-// NobleUI styles for RTL layout. Replace the above style with this CSS file to enable RTL styles
-// @import "./styles/rtl-css/styles.rtl.css";
+.image-button-auto-resize{
+    width: auto;
+    height: auto;
+    max-width: 20%; 
+    max-height: 20%; 
+}

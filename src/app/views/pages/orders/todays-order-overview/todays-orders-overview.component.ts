@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { SupabaseService } from '../../../../core/services/supabase.service';
 import { Order } from '../../../../core/model/order';
-import { SortableHeaderComponent } from '../sortable-header/sortable-header.component';
+import { SortableHeaderComponent } from '../../sortable-header/sortable-header.component';
 import { ReceivedNewOrderComponent } from "../received-new-order/received-new-order.component";
 import { OrderItem } from '../../../../core/model/orderItems';
 import { UtilsService } from '../../../../core/services/utils.service';

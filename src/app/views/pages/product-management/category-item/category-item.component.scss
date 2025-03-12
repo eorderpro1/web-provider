@@ -1,0 +1,29 @@
+ 
+  .category-card {
+    text-align: center;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer; 
+  }
+  
+  .category-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .category-image {
+    width: 30%;  
+    max-width: 90px;  
+    aspect-ratio: 1 / 1;  
+    object-fit: cover;
+    border-radius: 50%; 
+    margin-bottom: 10px;
+  }
+  
+  .category-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+  }

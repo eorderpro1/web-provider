@@ -1,0 +1,17 @@
+.table-responsive {
+  flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .table thead th {
+    top: 0;
+    background: white; /* Ensures it doesn’t blend with the background */
+  }
+  .table {
+    width: 100%;
+    min-width: 800px; /* Ensures proper width */
+  }
+
+  .product-image{
+    max-width:50%!important;
+  }
