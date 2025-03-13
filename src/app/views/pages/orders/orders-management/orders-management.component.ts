@@ -34,11 +34,6 @@ import { SortableHeaderComponent } from '../../sortable-header/sortable-header.c
 })
 export class OrdersManagementComponent implements OnInit {
   ngOnInit(): void {
-    // this.webSocketService.subscribeToOrders((order) => {
-    //   if (order.is_draft === 'true') {
-    //     this.orders().push(order);
-    //   }
-    // });
     this.buildAllOrdersRequest();
    }
 

@@ -1,67 +1,118 @@
 <div class="p-3 border-bottom d-flex flex-column h-100">
-    <div class="row align-items-center flex-grow-1">
-      <div class="col-lg-12 d-flex flex-column h-100">
-        <div class="d-flex align-items-end flex-grow-1 mb-0 mb-lg-0">
-          <div class="table-responsive flex-grow-1">
-            <table class="table table-hover">
-              <thead>
-                <tr style="font-size: 10px;">
-                  <th app-sortable-header [field]="'cp_id'" [sort]="sort" [label]="'ID'"
-                    (sortChange)="sortData('product_id')"></th>
-                  <th app-sortable-header [field]="'cp_id'" [sort]="sort" [label]="'product'"
-                    (sortChange)="sortData('name')"></th>
-                  <th app-sortable-header [field]="'quantity'" [sort]="sort" [label]="'Quantity'"
-                    (sortChange)="sortData('quantity')"></th>
-                  <th app-sortable-header [field]="'selling_price'" [sort]="sort"
-                    [label]="'Selling Price'" (sortChange)="sortData('price')"></th>
-                  <th app-sortable-header [field]="'cost_price'" [sort]="sort" [label]="'Cost Price'"
-                    (sortChange)="sortData('cost_price')"></th>
-                  <th app-sortable-header [field]="'discount'" [sort]="sort" [label]="'Discount'"
-                    (sortChange)="sortData('discount')"></th>
-                  <th app-sortable-header [field]="'status'" [sort]="sort" [label]="'Product For Sale'"
-                    (sortChange)="sortData('status')"></th>
-                  <th app-sortable-header [field]="'sales_count'" [sort]="sort" [label]="'Sales Count'"
-                    (sortChange)="sortData('sales_count')"></th>
-                  <th app-sortable-header [field]="'supplier_name'" [sort]="sort"
-                    [label]="'Supplier Name'" (sortChange)="sortData('provider')"></th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (product of products; track product.product_id)
-                {
-                <tr>
-                  <td>{{product.product_id}}</td>
-                  <td>
-                    <div style="text-align: center;">
-                      <img [src]="product.image" class="image-button-auto-resize product-image" />
-                      <div>{{ product.name }}</div>
-                    </div>
-                  </td>
-                  <td>{{product.quantity}}</td>
-                  <td>{{product.price}}</td>
-                  <td>{{product.cost_price}}</td>
-                  <td>{{product.discount}}</td>
-                  <td>{{product.status}}</td>
-                  <td>{{product.sales_count}}</td>
-                  <td>{{product.provider}}</td>
-                </tr>
-                }
-              </tbody>
-            </table>
-          </div>
+  <div class="row align-items-center flex-grow-1">
+    <div class="col-lg-12 d-flex flex-column h-100">
+      <div class="d-flex align-items-end flex-grow-1 mb-0 mb-lg-0">
+        <div class="table-responsive flex-grow-1">
+          <table class="table table-hover">
+            <thead>
+              <tr style="font-size: 10px;">
+                <th app-sortable-header [field]="'cp_id'" [sort]="sort" [label]="'ID'"
+                  (sortChange)="sortData('product_id')"></th>
+                <th app-sortable-header [field]="'cp_id'" [sort]="sort" [label]="'product'"
+                  (sortChange)="sortData('name')"></th>
+                <th app-sortable-header [field]="'quantity'" [sort]="sort" [label]="'Quantity'"
+                  (sortChange)="sortData('quantity')"></th>
+                <th app-sortable-header [field]="'selling_price'" [sort]="sort" [label]="'Selling Price'"
+                  (sortChange)="sortData('price')"></th>
+                <th app-sortable-header [field]="'cost_price'" [sort]="sort" [label]="'Cost Price'"
+                  (sortChange)="sortData('cost_price')"></th>
+                <th app-sortable-header [field]="'discount'" [sort]="sort" [label]="'Discount'"
+                  (sortChange)="sortData('discount')"></th>
+                <th app-sortable-header [field]="'status'" [sort]="sort" [label]="'Product For Sale'"
+                  (sortChange)="sortData('status')"></th>
+                <th app-sortable-header [field]="'sales_count'" [sort]="sort" [label]="'Sales Count'"
+                  (sortChange)="sortData('sales_count')"></th>
+                <th app-sortable-header [field]="'supplier_name'" [sort]="sort" [label]="'Supplier Name'"
+                  (sortChange)="sortData('provider')"></th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (product of products; track product.product_id)
+              {
+              <tr id="product-{{product.product_id}}">
+                <td>{{product.product_id}}</td>
+                <td>
+                  <div style="text-align: center;">
+                    <img [src]="product.image" class="image-button-auto-resize product-image" />
+                    <div>{{ product.name }}</div>
+                  </div>
+                </td>
+                <td>
+                  <input *ngIf="editingProductId === product.product_id" class="input-editable" type="number"
+                    [(ngModel)]="product.quantity">
+                  <span *ngIf="editingProductId !== product.product_id">{{ product.quantity }}</span>
+                </td>
+                <td>
+                  <span *ngIf="editingProductId !== product.product_id">{{ product.price }}</span>
+                  <button *ngIf="editingProductId === product.product_id" type="button" class="btn btn-warning"
+                  (click)="openScrollableModal(scrollableModal)">
+                  <i class="feather icon-external-link"></i>
+                </button>
+                </td>
+                <td>{{product.cost_price | number:'1.3-3'}}</td>
+                <td>
+                  <span *ngIf="editingProductId !== product.product_id">{{ product.discount }}%</span>
+                  <button *ngIf="editingProductId === product.product_id" type="button" class="btn btn-warning"
+                  (click)="openScrollableModal(scrollableModal)">
+                  <i class="feather icon-external-link"></i>
+                </button>
+                </td>
+                <td>
+                  <input *ngIf="editingProductId === product.product_id"
+                   type="checkbox" class="form-check-input" id="checkChecked"  [(ngModel)]="product.status">
+                <span *ngIf="editingProductId !== product.product_id">{{ product.status }}</span>
+                </td>
+                <td>
+                  <input *ngIf="editingProductId === product.product_id" class="input-editable" type="number"
+                    [(ngModel)]="product.sales_count">
+                  <span *ngIf="editingProductId !== product.product_id">{{ product.sales_count }}</span>
+                </td>
+                <td>
+                  <input *ngIf="editingProductId === product.product_id" class="input-editable" type="text"
+                    [(ngModel)]="product.provider">
+                  <span *ngIf="editingProductId !== product.product_id">{{ product.provider }}</span>
+                </td>
+                <td>
+                  <button *ngIf="editingProductId !== product.product_id" type="button" class="btn btn-warning"
+                    (click)="startEdit(product.product_id)">
+                    <i class="feather icon-edit"></i>
+                  </button>
+
+                  <button *ngIf="editingProductId === product.product_id" type="button" class="btn btn-success"
+                    (click)="saveEdit()">
+                    <i class="feather icon-check"></i>
+                  </button>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-   
   </div>
-   <div class="d-flex justify-content-between p-2">
-        <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
-          (pageChange)="updateProducts()"></ngb-pagination>
 
-        <select class="form-select" style="width: auto" [(ngModel)]="limit"
-          (ngModelChange)="updateProducts()">
-          <option selected [ngValue]="20">20 items per page</option>
-          <option [ngValue]="30">30 items per page</option>
-          <option [ngValue]="60">60 items per page</option>
-        </select>
-      </div>
+</div>
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
+    (pageChange)="updateProducts()"></ngb-pagination>
+  <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="updateProducts()">
+    <option selected [ngValue]="20">20 items per page</option>
+    <option [ngValue]="30">30 items per page</option>
+    <option [ngValue]="60">60 items per page</option>
+  </select>
+</div>
+
+<ng-template #scrollableModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="newOrderModal"></h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
+  </div>
+</ng-template>

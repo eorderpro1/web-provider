@@ -1,17 +1,26 @@
 .table-responsive {
   flex-grow: 1;
-    overflow-y: auto;
-  }
-  
-  .table thead th {
-    top: 0;
-    background: white; /* Ensures it doesn’t blend with the background */
-  }
-  .table {
-    width: 100%;
-    min-width: 800px; /* Ensures proper width */
-  }
+  overflow-y: auto;
+}
 
-  .product-image{
-    max-width:50%!important;
-  }
+.table thead th {
+  top: 0;
+  background: white;
+}
+
+.table {
+  width: 100%;
+  min-width: 800px;
+  text-align: center;
+}
+
+.product-image {
+  max-width: 50% !important;
+}
+
+.input-editable {
+  width: 130%;
+  min-width: 90%;
+  border: none;
+  text-align: center;
+}

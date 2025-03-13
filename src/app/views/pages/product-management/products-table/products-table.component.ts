@@ -1,21 +1,20 @@
-import { Component, DestroyRef, inject, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
+import { Component, DestroyRef, inject, OnChanges, OnInit, signal, SimpleChanges, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SupplierCategory } from '../../../../core/model/suppliers-category';
 import { SortableHeaderComponent } from '../../sortable-header/sortable-header.component';
 import { ProductsService } from '../../../../core/services/products.service';
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Order } from '../../../../core/model/order';
 
 @Component({
   selector: 'app-products-table',
   standalone: true,
-  imports: [SortableHeaderComponent, NgbPaginationModule,FormsModule],
+  imports: [SortableHeaderComponent, NgbPaginationModule, FormsModule, CommonModule],
   templateUrl: './products-table.component.html',
   styleUrl: './products-table.component.scss'
 })
 export class ProductsTableComponent implements OnInit {
-
   categoryId: string | null = null;
   sort: any = { field: '', order: '' };
   private route = inject(ActivatedRoute);
@@ -26,6 +25,9 @@ export class ProductsTableComponent implements OnInit {
   totalPages = signal<number>(2);
   totalElements = signal<number>(2);
   private destroy = inject(DestroyRef);
+  editingProductId: number | null = null;
+  private readonly modalService = inject(NgbModal);
+
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.categoryId = params['category'] || null;
@@ -35,7 +37,7 @@ export class ProductsTableComponent implements OnInit {
 
   updateProducts() {
     let data = { supplierId: '23', categoryId: this.categoryId!, page: this.page, limit: this.limit };
-    let sub= this.productService.getProductsBySupplier(this.sort, data).subscribe((data) => {
+    let sub = this.productService.getProductsBySupplier(this.sort, data).subscribe((data) => {
       this.products = data.content;
       this.totalElements.set(data.totalElements);
       this.totalPages.set(Math.ceil(this.totalElements() / this.limit));
@@ -54,4 +56,17 @@ export class ProductsTableComponent implements OnInit {
     }
     this.updateProducts();
   }
+  startEdit(productId: any) {
+    this.editingProductId = productId
+  }
+  saveEdit() {
+    this.editingProductId = null; 
+  }
+    openScrollableModal(content: TemplateRef<any>) {
+      this.modalService.open(content, { scrollable: true, size: 'lg' }).result.then((result) => {
+        console.log("Modal closed" + result);
+      }).catch((res) => { });
+    }
+  
 }
+
