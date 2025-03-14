@@ -46,22 +46,22 @@
                 <td>
                   <span *ngIf="editingProductId !== product.product_id">{{ product.price }}</span>
                   <button *ngIf="editingProductId === product.product_id" type="button" class="btn btn-warning"
-                  (click)="openScrollableModal(scrollableModal)">
-                  <i class="feather icon-external-link"></i>
-                </button>
+                    (click)="openScrollableModal(scrollableModal)">
+                    <i class="feather icon-external-link"></i>
+                  </button>
                 </td>
                 <td>{{product.cost_price | number:'1.3-3'}}</td>
                 <td>
                   <span *ngIf="editingProductId !== product.product_id">{{ product.discount }}%</span>
                   <button *ngIf="editingProductId === product.product_id" type="button" class="btn btn-warning"
-                  (click)="openScrollableModal(scrollableModal)">
-                  <i class="feather icon-external-link"></i>
-                </button>
+                    (click)="openScrollableModal(scrollableModal)">
+                    <i class="feather icon-external-link"></i>
+                  </button>
                 </td>
                 <td>
-                  <input *ngIf="editingProductId === product.product_id"
-                   type="checkbox" class="form-check-input" id="checkChecked"  [(ngModel)]="product.status">
-                <span *ngIf="editingProductId !== product.product_id">{{ product.status }}</span>
+                  <input *ngIf="editingProductId === product.product_id" type="checkbox" class="form-check-input"
+                    id="checkChecked" [(ngModel)]="product.status">
+                  <span *ngIf="editingProductId !== product.product_id">{{ product.status }}</span>
                 </td>
                 <td>
                   <input *ngIf="editingProductId === product.product_id" class="input-editable" type="number"
@@ -110,7 +110,10 @@
     <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-
+    <div>
+      {{editingProductId}}
+    </div>
+    <app-product-modal [productId]="editingProductId!.toString()" [supplier]="'23'"></app-product-modal>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>

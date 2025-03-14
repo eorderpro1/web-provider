@@ -1,0 +1,16 @@
+<table>
+    <tr>
+      <th>Postal Code</th>
+      <th>Price ($)</th>
+      <th>Discount (%)</th>
+      <th>Actions</th>
+    </tr>
+    @for (product of products; track product.product_id) {
+        <tr >
+            <td>{{ product.postal_code }}</td>
+            <td><input type="number" [(ngModel)]="product.price"></td>
+            <td><input type="number" [(ngModel)]="product.discount"></td>
+            <td><button (click)="savePrice()">💾 Save</button></td>
+          </tr>
+    }
+  </table>

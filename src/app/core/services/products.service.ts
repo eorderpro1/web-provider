@@ -5,6 +5,8 @@ import { Observable, map } from 'rxjs';
 import { SupplierCategory } from '../model/suppliers-category';
 import { SuppliersProduct } from '../model/suppliers-products';
 import { PaginatedSuppliersProduct } from '../model/paginated-suppliers-product';
+import { PaginatedSupplierProductShop } from '../model/supplier-product-shop';
+import { PaginatedSupplierProductPostalCode } from '../model/supplier-product-postal-code';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,48 @@ export class ProductsService {
     );
   }
 
+
+
+  getSuppliersProductsPerShop(sort: any, data: { supplierId: string, productId: string, page: number, limit: number }): Observable<PaginatedSupplierProductShop> {
+    let params = this.generateParams(sort, data);
+    params = params.set('product_id', 'eq.' + data.productId)
+    return this.supabaseService.getRequest('suppliers_products_per_shop', this.generateParams(sort, data)).pipe(
+      map((response: HttpResponse<any[]>) => {
+        const contentRange = response.headers.get('Content-Range');
+        const totalElements = contentRange
+            ? parseInt(contentRange.split('/')[1], 10)
+            : 0;
+            return new PaginatedSupplierProductShop({
+              content: response.body || [],
+              totalElements: totalElements
+            });
+      })
+    );
+  }
+
+
+  getSuppliersProductsPerPostalCode(sort: any, data: { supplierId: string, productId: string, page: number, limit: number }): Observable<PaginatedSupplierProductPostalCode> {
+    let params = this.generateParams(sort, data);
+    params = params.set('product_id', 'eq.' + data.productId)
+    return this.supabaseService.getRequest('suppliers_products_per_postal_code', this.generateParams(sort, data)).pipe(
+      map((response: HttpResponse<any[]>) => {
+        const contentRange = response.headers.get('Content-Range');
+        const totalElements = contentRange
+            ? parseInt(contentRange.split('/')[1], 10)
+            : 0;
+            return new PaginatedSupplierProductPostalCode({
+              content: response.body || [],
+              totalElements: totalElements
+            });
+      })
+    );
+  }
+
+
   getProductsBySupplier(sort: any, data: { supplierId: string, categoryId: string, page: number, limit: number }): Observable<PaginatedSuppliersProduct> {
-    return this.supabaseService.getRequest('products_per_supplier', this.generateParams(sort, data)).pipe(
+    let params = this.generateParams(sort, data);
+    params = params.set('category_id', 'eq.' + data.categoryId)
+    return this.supabaseService.getRequest('products_per_supplier',params ).pipe(
       map((response: HttpResponse<any[]>) => {
         const contentRange = response.headers.get('Content-Range');
         const totalElements = contentRange
@@ -34,12 +76,11 @@ export class ProductsService {
     );
   }
 
-  generateParams(sort: any, data: { supplierId: string, categoryId: string, page: number, limit: number }) {
+  generateParams(sort: any, data: { supplierId: string, page: number, limit: number }) {
     let params = new HttpParams()
       .set('offset', (data.page - 1) * data.limit)
       .set('limit', data.limit ==0?10:data.limit)
-      .set('supplier_id', 'eq.' + data.supplierId)
-      .set('category_id', 'eq.' + data.categoryId);
+      .set('supplier_id', 'eq.' + data.supplierId);
     if (sort.field) params = params.set('order', sort.field + "." + sort.order);
     return params;
   }

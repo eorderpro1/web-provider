@@ -5,12 +5,12 @@ import { ProductsService } from '../../../../core/services/products.service';
 import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Order } from '../../../../core/model/order';
+import { ProductModalComponent } from "./product-modal/product-modal.component";
 
 @Component({
   selector: 'app-products-table',
   standalone: true,
-  imports: [SortableHeaderComponent, NgbPaginationModule, FormsModule, CommonModule],
+  imports: [SortableHeaderComponent, NgbPaginationModule, FormsModule, CommonModule, ProductModalComponent],
   templateUrl: './products-table.component.html',
   styleUrl: './products-table.component.scss'
 })
