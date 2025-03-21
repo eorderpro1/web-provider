@@ -4,7 +4,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-category-item',
   standalone: true,
-  imports: [   RouterOutlet, 
+  imports: [ 
     RouterLink,
     RouterLinkActive],
   templateUrl: './category-item.component.html',

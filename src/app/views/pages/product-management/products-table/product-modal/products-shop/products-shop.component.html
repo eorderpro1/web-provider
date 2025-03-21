@@ -1,16 +1,40 @@
-<table>
-    <tr>
-      <th>Postal Code</th>
-      <th>Price ($)</th>
-      <th>Discount (%)</th>
-      <th>Actions</th>
-    </tr>
-    @for (product of products; track product.product_id) {
-        <tr >
-            <td>{{product.shopname}}</td>
-            <td><input type="number" [(ngModel)]="product.price"></td>
-            <td><input type="number" [(ngModel)]="product.discount"></td>
-            <td><button (click)="savePrice()">💾 Save</button></td>
-          </tr>
-    }
+<div class="table-responsive flex-grow-1">
+  <div class="col-auto">
+    <input type="text" #searchPostalCodeInput class="form-control form-control-sm"
+      placeholder="Αναζήτησε το μαγαζί που επιθυμεις" (keydown.enter)="searchByShopName(searchPostalCodeInput.value)"  />
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th app-sortable-header [field]="'shopname'" [sort]="sort" [label]="'Shop Name'"
+        (sortChange)="sortData('shopname')">
+        <th app-sortable-header [field]="'price'" [sort]="sort" [label]="'Price (€)'"
+        (sortChange)="sortData('price')">
+        <th app-sortable-header [field]="'discount'" [sort]="sort" [label]="'Discount (%)'"
+        (sortChange)="sortData('discount')">
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track product.product_id) {
+      <tr>
+        <td>{{product.shopname}}</td>
+        <td><input type="number" [(ngModel)]="product.price" step="0.001"></td>
+        <td><input type="number" [(ngModel)]="product.discount"></td>
+        <td><button class="btn btn-primary" (click)="savePrice()">💾 Save</button></td>
+      </tr>
+      }
+    </tbody>
   </table>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
+      (pageChange)="fetchShopDetailed('')">
+    </ngb-pagination>
+
+    <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="fetchShopDetailed('')">
+      <option selected [ngValue]="10">10 items per page</option>
+      <option [ngValue]="25">25 items per page</option>
+      <option [ngValue]="50">50 items per page</option>
+    </select>
+  </div>
+  </div>

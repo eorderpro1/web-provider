@@ -4,3 +4,11 @@ export interface SupplierCategory {
     category: string;
     image: string;
   }
+
+  export class PaginatedSupplierCategory {
+    content: SupplierCategory[] = [];
+    totalElements: number = 0;
+    constructor(data: Partial<PaginatedSupplierCategory>) {
+      Object.assign(this, data);
+    }
+  }

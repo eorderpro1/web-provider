@@ -1,20 +1,24 @@
 <div>
-    <div class="tabs">
-        <button [class.active]="activeTab === 'postal'" (click)="activeTab = 'postal'">📍 Postal Codes</button>
-        <button [class.active]="activeTab === 'customer'" (click)="activeTab = 'customer'">👤 Customers</button>
-      </div>
-      @if(activeTab === 'postal')
-      {    <div >
-        <app-products-postal-code [productId]="productId()" [supplier]="supplier()"></app-products-postal-code>
-      
-      </div>
+  <div class="tabs">
+    <button [class.active]="activeTab === 'postal'" (click)="activeTab = 'postal'">📍 Postal Codes</button>
+    <button [class.active]="activeTab === 'customer'" (click)="activeTab = 'customer'">👤 Customers</button>
+  </div>
+  @if(activeTab === 'postal')
+  { <div>
+    <app-products-postal-code [productId]="productId()" [supplier]="supplier()"></app-products-postal-code>
 
-      }
-      @if(activeTab === 'customer')
-      {    <div >
-        <app-products-shop [productId]="productId()" [supplier]="supplier()"></app-products-shop>
-      
-      </div>
+  </div>
 
-      }
+  }
+  @else if(activeTab === 'customer')
+  { <div>
+    <app-products-shop [productId]="productId()" [supplier]="supplier()"></app-products-shop>
+
+  </div>
+
+  }
+  @else {
+    <p>Παρακαλώ επιλέξτε μια κατηγορια</p>
+  }
+  
 </div>

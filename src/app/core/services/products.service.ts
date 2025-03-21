@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { SupplierCategory } from '../model/suppliers-category';
+import { PaginatedSupplierCategory, SupplierCategory } from '../model/suppliers-category';
 import { SuppliersProduct } from '../model/suppliers-products';
 import { PaginatedSuppliersProduct } from '../model/paginated-suppliers-product';
 import { PaginatedSupplierProductShop } from '../model/supplier-product-shop';
@@ -15,18 +15,29 @@ export class ProductsService {
 
   constructor() { }
   private supabaseService = inject(SupabaseService);
-  getCategoriesBySupplier(supplierId: string): Observable<SupplierCategory[]> {
-    return this.supabaseService.getRequest('get_suppliers_category', new HttpParams().set('supplier_id', 'eq.' + supplierId)).pipe(
-      map((response: HttpResponse<SupplierCategory[]>) => response.body || [])
+  getCategoriesBySupplier(data: { supplierId: string, category: string, page: number, limit: number }): Observable<PaginatedSupplierCategory> {
+    let params = this.generateParams({},data).set('category','like.*'+data.category+'*');
+    return this.supabaseService.getRequest('get_suppliers_category', params ).pipe(
+      map((response: HttpResponse<any[]>) => {
+        const contentRange = response.headers.get('Content-Range');
+        const totalElements = contentRange
+            ? parseInt(contentRange.split('/')[1], 10)
+            : 0;
+            return new PaginatedSupplierCategory({
+              content: response.body || [],
+              totalElements: totalElements
+            });
+      })
     );
   }
 
 
 
-  getSuppliersProductsPerShop(sort: any, data: { supplierId: string, productId: string, page: number, limit: number }): Observable<PaginatedSupplierProductShop> {
+  getSuppliersProductsPerShop(sort: any, data: { shop: string,supplierId: string, productId: string, page: number, limit: number }): Observable<PaginatedSupplierProductShop> {
     let params = this.generateParams(sort, data);
     params = params.set('product_id', 'eq.' + data.productId)
-    return this.supabaseService.getRequest('suppliers_products_per_shop', this.generateParams(sort, data)).pipe(
+    params = params.set('shopname','like.*'+data.shop+'*')
+    return this.supabaseService.getRequest('suppliers_products_per_shop', params).pipe(
       map((response: HttpResponse<any[]>) => {
         const contentRange = response.headers.get('Content-Range');
         const totalElements = contentRange
@@ -41,10 +52,11 @@ export class ProductsService {
   }
 
 
-  getSuppliersProductsPerPostalCode(sort: any, data: { supplierId: string, productId: string, page: number, limit: number }): Observable<PaginatedSupplierProductPostalCode> {
+  getSuppliersProductsPerPostalCode(sort: any, data: { postalC:string, supplierId: string, productId: string, page: number, limit: number }): Observable<PaginatedSupplierProductPostalCode> {
     let params = this.generateParams(sort, data);
-    params = params.set('product_id', 'eq.' + data.productId)
-    return this.supabaseService.getRequest('suppliers_products_per_postal_code', this.generateParams(sort, data)).pipe(
+    params = params.set('product_id', 'eq.' + data.productId);
+    params=params.set('postal_code','like.*'+data.postalC+'*')
+    return this.supabaseService.getRequest('suppliers_products_per_postal_code', params).pipe(
       map((response: HttpResponse<any[]>) => {
         const contentRange = response.headers.get('Content-Range');
         const totalElements = contentRange
@@ -72,7 +84,7 @@ export class ProductsService {
               content: response.body || [],
               totalElements: totalElements
             });
-      })
+       })
     );
   }
 

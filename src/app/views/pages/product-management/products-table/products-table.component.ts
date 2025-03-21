@@ -26,6 +26,7 @@ export class ProductsTableComponent implements OnInit {
   totalElements = signal<number>(2);
   private destroy = inject(DestroyRef);
   editingProductId: number | null = null;
+  sellingPrice: number | null = null;
   private readonly modalService = inject(NgbModal);
 
   ngOnInit(): void {
@@ -56,17 +57,19 @@ export class ProductsTableComponent implements OnInit {
     }
     this.updateProducts();
   }
-  startEdit(productId: any) {
+  startEdit(productId: any, price: any) {
     this.editingProductId = productId
+    this.sellingPrice = price;
+    console.log("price "+price)
   }
   saveEdit() {
-    this.editingProductId = null; 
+    this.editingProductId = null;
   }
-    openScrollableModal(content: TemplateRef<any>) {
-      this.modalService.open(content, { scrollable: true, size: 'lg' }).result.then((result) => {
-        console.log("Modal closed" + result);
-      }).catch((res) => { });
-    }
-  
+  openScrollableModal(content: TemplateRef<any>) {
+    this.modalService.open(content, { scrollable: true, size: 'lg' }).result.then((result) => {
+      console.log("Modal closed" + result);
+    }).catch((res) => { });
+  }
+
 }
 
