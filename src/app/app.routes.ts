@@ -3,22 +3,39 @@ import { BaseComponent } from './views/layout/base/base.component';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  { path: 'auth', loadChildren: () => import('./views/pages/auth/auth.routes')},
+  { path: 'auth', loadChildren: () => import('./views/pages/auth/auth.routes') },
   {
     path: '',
     component: BaseComponent,
     canActivateChild: [authGuard],
     children: [
       { path: '', redirectTo: 'orders', pathMatch: 'full' },
-      { path: 'orders',
+      {
+        path: 'orders',
         loadChildren: () => import('./views/pages/orders/orders.routes')
       },
-      { path: 'statistics',
+      {
+        path: 'statistics',
         loadChildren: () => import('./views/pages/statistics/statistics.routes')
       },
-      { path: 'products',
+      {
+        path: 'products',
         loadChildren: () => import('./views/pages/product-management/product-management.routes')
       },
+
+      {
+        path: 'campaigns',
+        loadChildren: () => import('./views/pages/campaigns/campaigns.routes')
+      },
+      {
+        path: 'chat',
+        loadComponent: () => import('./views/pages/chat/chat.component').then(c => c.ChatComponent)
+      },
+      
+    {
+        path: 'calendar',
+        loadComponent: () => import('./views/pages/calendar/calendar.component').then(c => c.CalendarComponent)
+    },
       {
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.routes')

@@ -1,18 +1,23 @@
 div {
-    border-radius: 6px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-  button {
-    background-color: #f8f9fa; /* Default button background */
-    border: 2px solid transparent;
-    padding: 10px;
-    transition: all 0.3s ease;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
+.order-button {
+  border: 2px solid transparent;
+  padding: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer; 
+  text-align: center;
 
-button.active {
-    background-color: #007bff; 
-    border-color: #0056b3;
-    color: white;
-    font-weight: bold;
+
+}
+.order-button:hover {
+  transform: scale(1.05);
+}
+.order-button.active {
+  background-color: #007bff; 
+  border-color: #0056b3;
+  color: white;
+  font-weight: bold;
 }

@@ -38,6 +38,26 @@ export const MENU: MenuItem[] = [
     link: '/products'
   },
   {
+    label: 'Campaigns',
+    icon: 'video',
+    link: '/campaigns'
+  },
+  {
+    label: 'Chat',
+    icon: 'message-square',
+    link: '/chat'
+  },
+  {
+    label: 'Calendar',
+    icon: 'calendar',
+    link: '/calendar'
+  },
+  {
+    label: 'Customers',
+    icon: 'users',
+    link: '/customers'
+  },
+  {
     label: 'Dashboard',
     icon: 'home',
     link: '/dashboard'
