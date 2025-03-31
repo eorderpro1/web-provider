@@ -27,15 +27,15 @@ export const routes: Routes = [
         path: 'campaigns',
         loadChildren: () => import('./views/pages/campaigns/campaigns.routes')
       },
+
       {
-        path: 'chat',
-        loadComponent: () => import('./views/pages/chat/chat.component').then(c => c.ChatComponent)
-      },
-      
-    {
         path: 'calendar',
         loadComponent: () => import('./views/pages/calendar/calendar.component').then(c => c.CalendarComponent)
-    },
+      },
+      {
+        path: 'customers',
+        loadComponent: () => import('./views/pages/customers/customers.component').then(c => c.CustomersComponent)
+      },
       {
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.routes')

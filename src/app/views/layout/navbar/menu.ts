@@ -43,11 +43,6 @@ export const MENU: MenuItem[] = [
     link: '/campaigns'
   },
   {
-    label: 'Chat',
-    icon: 'message-square',
-    link: '/chat'
-  },
-  {
     label: 'Calendar',
     icon: 'calendar',
     link: '/calendar'
