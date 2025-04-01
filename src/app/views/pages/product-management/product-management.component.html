@@ -24,7 +24,7 @@
                   placeholder="Αναζήτησε κατηγορια" (keydown.enter)="searchByCategory(searchPostalCodeInput.value)"  />
               </div>
               <ul class="nav flex-column category-container">
-                @for (category of categories; track category.id) {
+                @for (category of categories; track category.category_id) {
                   <app-category-item [category]="category"></app-category-item>
                 }
               </ul>
