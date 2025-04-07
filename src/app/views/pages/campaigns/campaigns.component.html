@@ -1,25 +1,79 @@
 <div class="row">
-    <div class="stretch-card">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title"> Campaigns </h4>
-            </div>            
-            <div class="card-body">
-                <div ngbAccordion [closeOthers]="false">
-                    <div ngbAccordionItem [collapsed]="true">
-                      <h2 ngbAccordionHeader>
-                        <button ngbAccordionButton>Simple</button>
-                      </h2>
-                      <div ngbAccordionCollapse>
-                        <div ngbAccordionBody>
-                          <ng-template>
-                            
-                          </ng-template>
-                        </div>
-                      </div>
-                    </div>
-                
+  <div class="stretch-card">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> Campaigns </h4>
+      </div>
+      <div class="card-body">
+        <div ngbAccordion [closeOthers]="false">
+          <div ngbAccordionItem [collapsed]="true">
+            <h2 ngbAccordionHeader>
+              <button ngbAccordionButton>Pay Per Click (Low Cost)</button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody>
+                <ng-template>
+                  @if(isPpcEnabled){<span>Budget: 5€/ μέρα | CPC: 0.10€</span>}
+                  <p>Περιλαμβάνει διαφημίσεις σε συγκεκριμένες θέσεις (e.g., top search results in category filters and
+                    "Recommended Suppliers" μέχρι να εξαντληθεί το ημερήσιο budget).
+                    Μικρή συμμετοχή για τον πελάτη με ευελιξία. Tο κόστος προσαρμόζεται στις ανάγκες του πελάτη.
+                    Μικρότερη δυνατή συμμετοχή: €5 τη μέρα μέχρι να εξαντληθεί.
+                    Cost per click (CPC): €0.10.</p>
+                  @if(isPpcEnabled){
+                  <p>Στατιστικά: 1000 clicks, 50 παραγγελίες, 2.5€ ξοδεύτηκαν</p>
+                  }
+                  <app-campaign-footer [isEnabled]="isPpcEnabled"></app-campaign-footer>
+<app-campaign-settings></app-campaign-settings>
+                </ng-template>
+              </div>
             </div>
+          </div>
         </div>
+        <div ngbAccordion [closeOthers]="false">
+          <div ngbAccordionItem [collapsed]="true">
+            <h2 ngbAccordionHeader>
+              <button ngbAccordionButton>Premium Placement</button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody>
+                <ng-template>
+                  Designed for larger businesses aiming for top-tier visibility.
+                  Περιλαμβάνει οφέλη όπως τοποθεσία του καταστήματος στις περιοχές "Discover" και σταθερή θέση για ένα
+                  μήνα σε κατηγορίες όπως (e.g., top search results in category filters and "Recommended" placements).
+                  Cost: €400–€500 μηνιαία, εξαρτάται από τη δυναμική της περιοχής.
+                  <app-campaign-footer [isEnabled]="isPremiumPlacementEnabled"></app-campaign-footer>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ngbAccordion [closeOthers]="false">
+          <div ngbAccordionItem [collapsed]="true">
+            <h2 ngbAccordionHeader>
+              <button ngbAccordionButton>Performance-Based Advertising</button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody>
+                <ng-template>
+                  <div class="form-check form-switch mb-2">
+                    <input type="checkbox" class="form-check-input" id="formSwitch1">
+                    <label class="form-check-label" for="formSwitch1">Ενεργοποίησε το</label>
+                  </div>
+                  Percentage-based commission per sale.
+                  Ideal for all supplier types, regardless of business size.
+                  Ειδικά banners και διαφημίσεις σε "ΕΚΠΤΩΤΙΚΣ" κατηγορίες, με στόχο το μαρκετινκ ή τη διαχείριση του
+                  στοκ.
+                  Απεριόριστα offers ανά προμηθευτή.
+                  3% προμήθεια επί τη πώληση,μόνο εάν η πώληση έγινε μέσα από τη διαφήμιση..
+                  Advantage: Minimizes risk for the supplier.
+                  <app-campaign-footer [isEnabled]="isPerformanceBasedAdvertisingEnabled"></app-campaign-footer>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
