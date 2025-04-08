@@ -1,5 +1,5 @@
 <form>
-    @for( ad of ads; track ad.id) 
+    @for( ad of ads; track ad; let i = index) 
     {
         <div class="card mb-4 p-3 border">
             <h5 class="mb-3">Διαφήμιση #{{ i + 1 }}</h5>
