@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MultiAddComponent } from './multi-add/multi-add.component';
 
 @Component({
   selector: 'app-campaign-settings',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MultiAddComponent],
   templateUrl: './campaign-settings.component.html',
   styleUrl: './campaign-settings.component.scss'
 })

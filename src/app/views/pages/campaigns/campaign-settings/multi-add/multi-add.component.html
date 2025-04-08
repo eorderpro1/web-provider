@@ -1,0 +1,79 @@
+<form>
+    @for( ad of ads; track ad.id) 
+    {
+        <div class="card mb-4 p-3 border">
+            <h5 class="mb-3">Διαφήμιση #{{ i + 1 }}</h5>
+        
+            <div class="mb-3">
+              <label>Κατηγορία</label>
+              <select class="form-select" [(ngModel)]="ad.category" name="category-{{i}}">
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+              </select>
+            </div>
+        
+            <div class="form-check form-switch mb-3">
+              <input type="checkbox" class="form-check-input" id="toggleAll-{{i}}" [(ngModel)]="ad.useAllProducts" name="useAll-{{i}}">
+              <label class="form-check-label" for="toggleAll-{{i}}">
+                Διαφήμιση για όλα τα προϊόντα της κατηγορίας
+              </label>
+            </div>
+        
+            <div *ngIf="!ad.useAllProducts" class="mb-3">
+              <label>Επέλεξε προϊόντα</label>
+              <select multiple class="form-select" [(ngModel)]="ad.selectedProducts" name="products-{{i}}">
+                <option *ngFor="let product of getFilteredProducts(ad.category)" [value]="product.id">
+                  {{ product.name }}
+                </option>
+              </select>
+            </div>
+        
+            <div class="mb-3">
+              <label>Εικόνα διαφήμισης</label>
+              <input type="file" class="form-control" (change)="handleImageUpload($event, ad)">
+              <img *ngIf="ad.image" [src]="ad.image" alt="preview" class="img-thumbnail mt-2" style="max-height: 150px;">
+            </div>
+        
+            <div class="mb-3">
+              <label>Κείμενο διαφήμισης</label>
+              <textarea class="form-control" [(ngModel)]="ad.adText" name="text-{{i}}" maxlength="150"></textarea>
+            </div>
+        
+            <div class="mb-3">
+              <label>Call To Action (CTA)</label>
+              <input type="text" class="form-control" [(ngModel)]="ad.callToAction" name="cta-{{i}}">
+            </div>
+        
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label>Έναρξη</label>
+                <input type="date" class="form-control" [(ngModel)]="ad.startDate" name="start-{{i}}">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Λήξη</label>
+                <input type="date" class="form-control" [(ngModel)]="ad.endDate" name="end-{{i}}">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Κόστος / ημέρα</label>
+                <input type="number" class="form-control" [(ngModel)]="ad.costPerDay" name="cost-{{i}}">
+              </div>
+            </div>
+        
+            <div class="text-end">
+              <button *ngIf="ads.length > 1" type="button" class="btn btn-outline-danger btn-sm" (click)="removeAdBlock(i)">
+                Αφαίρεση διαφήμισης
+              </button>
+            </div>
+          </div>
+    }
+   
+  
+    <div class="mb-4">
+      <button type="button" class="btn btn-outline-primary" (click)="addAdBlock()">
+        + Προσθήκη Διαφήμισης
+      </button>
+    </div>
+  
+    <div>
+      <button type="button" class="btn btn-success" (click)="submitAllAds()">Δημιουργία Όλων</button>
+    </div>
+  </form>
