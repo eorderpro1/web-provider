@@ -13,17 +13,18 @@
             <div ngbAccordionCollapse>
               <div ngbAccordionBody>
                 <ng-template>
-                  @if(isPpcEnabled){<span>Budget: 5€/ μέρα | CPC: 0.10€</span>}
                   <p>Περιλαμβάνει διαφημίσεις σε συγκεκριμένες θέσεις (e.g., top search results in category filters and
                     "Recommended Suppliers" μέχρι να εξαντληθεί το ημερήσιο budget).
                     Μικρή συμμετοχή για τον πελάτη με ευελιξία. Tο κόστος προσαρμόζεται στις ανάγκες του πελάτη.
                     Μικρότερη δυνατή συμμετοχή: €5 τη μέρα μέχρι να εξαντληθεί.
                     Cost per click (CPC): €0.10.</p>
-                  @if(isPpcEnabled){
-                  <p>Στατιστικά: 1000 clicks, 50 παραγγελίες, 2.5€ ξοδεύτηκαν</p>
+                  <app-campaign-buttons [isEnabled]="isPpcEnabled()" (enabled)="isPpcEnabled.set($event)">
+                  </app-campaign-buttons>
+                  @if(isPpcEnabled()){
+                  <p style="  font-weight: 900;;">Στατιστικά: 1000 clicks, 50 παραγγελίες, 2.5€ ξοδεύτηκαν</p>
+                  <app-campaign-settings></app-campaign-settings>
                   }
-                  <app-campaign-footer [isEnabled]="isPpcEnabled"></app-campaign-footer>
-<app-campaign-settings></app-campaign-settings>
+
                 </ng-template>
               </div>
             </div>
@@ -41,7 +42,13 @@
                   Περιλαμβάνει οφέλη όπως τοποθεσία του καταστήματος στις περιοχές "Discover" και σταθερή θέση για ένα
                   μήνα σε κατηγορίες όπως (e.g., top search results in category filters and "Recommended" placements).
                   Cost: €400–€500 μηνιαία, εξαρτάται από τη δυναμική της περιοχής.
-                  <app-campaign-footer [isEnabled]="isPremiumPlacementEnabled"></app-campaign-footer>
+                  <app-campaign-buttons [isEnabled]="isPremiumPlacementEnabled()"
+                    (enabled)="isPremiumPlacementEnabled.set($event)">
+                  </app-campaign-buttons>
+                  @if(isPremiumPlacementEnabled()){
+                  <p style="  font-weight: 900;;">Στατιστικά: 1000 clicks, 50 παραγγελίες, 2.5€ ξοδεύτηκαν</p>
+                  <app-campaign-settings></app-campaign-settings>
+                  }
                 </ng-template>
               </div>
             </div>
@@ -55,18 +62,20 @@
             <div ngbAccordionCollapse>
               <div ngbAccordionBody>
                 <ng-template>
-                  <div class="form-check form-switch mb-2">
-                    <input type="checkbox" class="form-check-input" id="formSwitch1">
-                    <label class="form-check-label" for="formSwitch1">Ενεργοποίησε το</label>
-                  </div>
                   Percentage-based commission per sale.
                   Ideal for all supplier types, regardless of business size.
-                  Ειδικά banners και διαφημίσεις σε "ΕΚΠΤΩΤΙΚΣ" κατηγορίες, με στόχο το μαρκετινκ ή τη διαχείριση του
+                  Ειδικά banners και διαφημίσεις σε "ΕΚΠΤΩΤΙΚEΣ" κατηγορίες, με στόχο το μαρκετινκ ή τη διαχείριση του
                   στοκ.
                   Απεριόριστα offers ανά προμηθευτή.
-                  3% προμήθεια επί τη πώληση,μόνο εάν η πώληση έγινε μέσα από τη διαφήμιση..
+                  3% προμήθεια επί τη πώληση,μόνο εάν η πώληση έγινε μέσα από τη διαφήμιση.
                   Advantage: Minimizes risk for the supplier.
-                  <app-campaign-footer [isEnabled]="isPerformanceBasedAdvertisingEnabled"></app-campaign-footer>
+                  <app-campaign-buttons [isEnabled]="isPerformanceBasedAdvertisingEnabled()"
+                    (enabled)="isPerformanceBasedAdvertisingEnabled.set($event)">
+                  </app-campaign-buttons>
+                  @if(isPerformanceBasedAdvertisingEnabled()){
+                  <p style="  font-weight: 900;;">Στατιστικά: 1000 clicks, 50 παραγγελίες, 2.5€ ξοδεύτηκαν</p>
+                  <app-campaign-settings></app-campaign-settings>
+                  }
                 </ng-template>
               </div>
             </div>

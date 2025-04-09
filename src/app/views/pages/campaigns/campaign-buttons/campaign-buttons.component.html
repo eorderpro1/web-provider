@@ -1,0 +1,32 @@
+<div class="row gy-3">
+  <div class="col-md-4">
+    <div class="d-flex align-items-center gap-2">
+      <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" id="formSwitch1" [checked]="isEnabled()"
+          (change)="onToggleChange($event)" />
+
+      </div>
+      <label class="form-check-label mb-0" for="formSwitch1">
+        @if (!isEnabled) {
+        <span>Ενεργοποίησε το</span>
+        }
+        @else {
+        <span>Απενεργοποίησε το</span>
+        }
+
+
+      </label>
+    </div>
+  </div>
+
+
+
+  <!-- Statistics button -->
+  <div class="col-md-4">
+    <div class="d-flex align-items-center h-100">
+      <button type="button" class="btn btn-primary btn-icon-text">
+        <i class="feather icon-bar-chart"></i> Στατιστικά
+      </button>
+    </div>
+  </div>
+</div>
