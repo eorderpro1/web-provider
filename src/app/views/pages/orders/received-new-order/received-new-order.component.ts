@@ -38,11 +38,6 @@ export class ReceivedNewOrderComponent implements OnInit {
   deliveryDate: Date;
   totalAmount: string;
   ngOnInit(): void {
-    // this.webSocketService.subscribeToOrders((order) => {
-    //   if (order.is_draft === 'true') {
-    //     this.orders().push(order);
-    //   }
-    // });
     this.fetchOrders('', '');
   }
   refreshOrders() {

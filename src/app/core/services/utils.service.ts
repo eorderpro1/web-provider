@@ -22,12 +22,12 @@ export class UtilsService {
     }
   
     const today = new Date();
-    const todayDay = today.getDay(); // Get current day (0 = Sunday, ..., 6 = Saturday)
+    const todayDay = today.getDay(); 
     const targetDay = daysOfWeek[dayOfWeek];
   
     let daysUntilTarget = targetDay - todayDay;
     if (daysUntilTarget <= 0) {
-      daysUntilTarget += 7; // Ensure it gets the next occurrence of the day
+      daysUntilTarget += 7;
     }
   
     const nextTargetDate = new Date();
