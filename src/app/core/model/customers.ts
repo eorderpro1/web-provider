@@ -1,12 +1,17 @@
 export interface Customer {
-    id: number;
-    name: string;
-    address: string;
-    afm: string;
-    telephone: string;
-    image: string;
-    postal_code: string;
-    supplier_id: number;
+  shop_id: number;
+  name: string;
+  address: string;
+  afm: string;
+  telephone: string;
+  image: string;
+  postal_code: string;
+  order_id: number;
+  latest_order_created_at: string; // ISO date string
+  latest_order_total_cost: number;
+  supplier_id: number;
+  total_orders: number;
+  total_cost: number;
   }
 
   

@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, Inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeModeService } from '../../../core/services/theme-mode.service';
@@ -7,6 +7,8 @@ import { DOCUMENT, NgClass, NgFor, NgIf } from '@angular/common';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import { FeatherIconDirective } from '../../../core/feather-icon/feather-icon.directive';
+import { Supplier } from '../../../core/model/supplier';
+import { SuppliersService } from '../../../core/services/suppliers.service';
 
 @Component({
   selector: 'app-navbar',
@@ -27,7 +29,8 @@ export class NavbarComponent implements OnInit {
   menuItems: MenuItem[] = []
 
   currentlyOpenedNavItem: HTMLElement | undefined;
-
+  supplierService = inject(SuppliersService);
+  supplier: Supplier | null = null;
   constructor(
     private router: Router,
     private themeModeService: ThemeModeService
@@ -38,6 +41,7 @@ export class NavbarComponent implements OnInit {
       this.currentTheme = theme;
       this.showActiveTheme(this.currentTheme);
     });
+    this.getSuppliersData();
 
     this.menuItems = MENU;
 
@@ -54,7 +58,20 @@ export class NavbarComponent implements OnInit {
       });
     // }
   }
+ 
 
+  getSuppliersData() {
+    this.supplierService.getSupplierDataById('23').subscribe((data) => {
+      if (data.length > 0) {
+        this.supplier = data[0];
+        if (this.supplier.photo === null) {
+          this.supplier.photo = 'images/faces/face1.jpg';
+        }
+      } else {
+        this.supplier = null;
+      }
+    });
+  }
   showActiveTheme(theme: string) {
     const themeSwitcher = document.querySelector('#theme-switcher') as HTMLInputElement;
     const box = document.querySelector('.box') as HTMLElement;

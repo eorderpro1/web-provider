@@ -7,21 +7,49 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Shop Name</th>
+                                <th scope="col" style="text-align: center;">Shop Name</th>
                                 <th scope="col">Διευθυνση</th>
                                 <th scope="col">Τελευταία Παραγγελία</th>
                                 <th scope="col">Σύνολο παραγγελιών</th>
                                 <th scope="col">Σύνολικο ποσο</th>
+                                <th scope="col">Κατάσταση</th>
+                                <th scope="col">Tags</th>
+
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr >
+
+                            @for (customer of customers(); track customer.shop_id)
+                            {<tr (click)="openScrollableModal(scrollableModal, customer)">
+                                <td style="font-size: 10px;">{{ customer.shop_id }}</td>
+                                <td>
+                                    <div style="text-align: center;">
+                                        <img [src]="customer.image" class="image-button-auto-resize" />
+                                        <div>{{ customer.name }}</div>
+                                    </div>
+                                </td>
+                                <td>{{ customer.address }} {{customer.postal_code}}</td>
+
+                                <td>{{ customer.order_id }}</td>
+                                <td>{{ customer.total_orders }}</td>
+                                <td>{{customer.total_cost}}</td>
                             </tr>
+                            }
                         </tbody>
-                    </table>    
-                    </div>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<ng-template #scrollableModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="newOrderModal">Πελάτης {{selectedCustomer.name}}</h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+   <app-modal-customer [selectedCustomer]="selectedCustomer"></app-modal-customer>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
+    </div>
+</ng-template>

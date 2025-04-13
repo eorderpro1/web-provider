@@ -1,0 +1,5 @@
+<div class="upload-area">
+    <img [src]="imageSrc()" alt="Preview" />
+    <div class="upload-overlay">Click or Drop</div>
+    <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+  </div>

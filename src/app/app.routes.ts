@@ -37,6 +37,10 @@ export const routes: Routes = [
         loadComponent: () => import('./views/pages/customers/customers.component').then(c => c.CustomersComponent)
       },
       {
+        path: 'profile',
+        loadComponent: () => import('./views/pages/profile/profile.component').then(c => c.ProfileComponent)
+      },
+      {
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.routes')
       },

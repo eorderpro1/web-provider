@@ -1,0 +1,69 @@
+<div class="modal-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between p-2">
+                <span><i class="feather icon-map-pin"></i>{{selectedCustomer().address}}
+                    {{selectedCustomer().postal_code}}</span>
+                <span class="status-active">Active (παραγγέλνει συχνά)</span>
+                <span class="status-dormant">
+                    Dormant
+                </span>
+                <span class="status-lost">
+                    Lost
+                </span>
+            </div>
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5>Tags</h5>
+        </div>
+        <div class="card-body">
+
+            <button type="button" class="btn btn-primary">VIP</button>
+            <button type="button" class="btn btn-secondary">Πληρώνει αργά</button>
+            <button type="button" class="btn btn-secondary">Εβδομαδιαίος Αγοραστής</button>
+            <button type="button" class="btn btn-secondary">Περιστασιακός</button>
+            <button type="button" class="btn btn-secondary">Σε προσφορές</button>
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5>Στατιστικά</h5>
+        </div>
+        <div class="card-body">
+            <div class="customer-stats">
+                <div class="stat-card">
+                  <div class="stat-title">Total Orders</div>
+                  <div class="stat-value">{{selectedCustomer().total_orders}}</div>
+                </div>
+              
+                <div class="stat-card">
+                  <div class="stat-title">Total Spent</div>
+                  <div class="stat-value">{{selectedCustomer().total_cost}}</div>
+                </div>
+              
+                <div class="stat-card">
+                  <div class="stat-title">Avg. Basket Size</div>
+                  <div class="stat-value">€195.24</div>
+                </div>
+              
+                <div class="stat-card">
+                  <div class="stat-title">First / Last Order</div>
+                  <div class="stat-value">{{selectedCustomer().latest_order_created_at}}</div>
+                </div>
+              </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5>Notes</h5>
+        </div>
+        <div class="card-body">
+            <p>Previous notes</p>
+            <textarea class="form-control" rows="3" placeholder="Add a note..."></textarea>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+.status-active {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 999px;
+    display: inline-block;
+  }
+
+  .status-dormant {
+    background-color: #fef3c7;
+    color: #92400e;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 999px;
+    display: inline-block;
+  }
+  .status-lost {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 999px;
+    display: inline-block;
+  }
+  .tag-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 999px;
+    color: white;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  
+  .customer-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  
+  .stat-card {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 200px;
+    flex: 1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: 0.2s ease;
+  }
+  
+  .stat-card:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .stat-title {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .stat-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #111827;
+  }

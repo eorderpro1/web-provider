@@ -1,0 +1,41 @@
+.upload-area {
+    width: 60%;
+    height: 50%;
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .upload-area:hover {
+    border-color: #666;
+  }
+  
+  .upload-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .upload-area input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+  }
+  
+  .upload-overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 0.9rem;
+  }

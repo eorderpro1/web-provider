@@ -1,11 +1,14 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal, TemplateRef } from '@angular/core';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/model/customers';
+import { Order } from '../../../core/model/order';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalCustomerComponent } from "./modal-customer/modal-customer.component";
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [],
+  imports: [ModalCustomerComponent],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss'
 })
@@ -13,6 +16,9 @@ export class CustomersComponent implements OnInit {
   constructor() { }
   customerService = inject(CustomersService);
   customers = signal<Customer[]>([]);
+  selectedCustomer: Customer;
+    private readonly modalService = inject(NgbModal);
+  
   private destroy = inject(DestroyRef);
     filters: any = { status: '', shop: '', orderDate: '' };
     sort: any = { field: '', order: '' };
@@ -33,5 +39,11 @@ this.fetchAllCustmersOfTheSupplier();  }
     this.destroy.onDestroy(() => sub.unsubscribe());
   }
 
-
+  openScrollableModal(content: TemplateRef<any>, customer: Customer) {
+    this.selectedCustomer = customer;
+   
+    this.modalService.open(content, { scrollable: true, size: 'lg' }).result.then((result) => {
+      console.log("Modal closed" + result);
+    }).catch((res) => { });
+  }
 }
