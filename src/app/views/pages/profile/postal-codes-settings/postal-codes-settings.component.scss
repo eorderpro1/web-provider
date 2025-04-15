@@ -1,0 +1,51 @@
+.postal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .postal-tags span {
+    background-color: #f3f4f6;
+    border-radius: 999px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .postal-tags span.active {
+    background-color: #3b82f6;
+    color: white;
+  }
+  schedule-section {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  
+  .slot {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 6px;
+    background: #d1fae5;
+    padding: 6px 10px;
+    border-radius: 999px;
+  }
+  
+  .add-section {
+    margin-top: 20px;
+  }
+  
+  .add-section input,
+  .add-section select {
+    margin-right: 10px;
+    padding: 6px;
+  }
+  input[type="time"] {
+    padding: 6px 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }

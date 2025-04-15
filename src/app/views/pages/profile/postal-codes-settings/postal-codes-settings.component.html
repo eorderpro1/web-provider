@@ -1,0 +1,51 @@
+<div class="card-body">
+    <div class="row">
+        <div class="postal-tags">
+            @for(code of postalCodes; track code)
+            {
+            <span (click)="selectPostalCode(code)" [class.active]="code === selectedPostalCode">
+                📍 {{ code }}
+            </span>
+            }
+
+        </div>
+        <hr />
+        <div class="schedule-section">
+            <h3>Schedule for Postal Code: {{ selectedPostalCode }}</h3>
+            @for(day of daysOfWeek; track day)
+            {
+            <div class="d-flex justify-content-between flex-wrap p-2">
+                @if(deliverySchedule[selectedPostalCode][day])
+                { <div>
+                    <strong>{{ day }}:</strong>
+                    @for(slot of deliverySchedule[selectedPostalCode][day]; track slot; let i = $index;)
+                    {
+                    <span class="slot">
+                        {{ slot }}
+                        <button (click)="removeTimeSlot(day, i)">🗑️</button>
+                    </span>
+                    }
+
+                </div>
+                }
+
+            </div>
+            }
+
+
+            <!-- Add new time slot -->
+            <div class="add-section">
+                <label>Add new time slot</label>
+                <select [(ngModel)]="newDay">
+                    @for(day of daysOfWeek; track day) {
+                    <option [value]="day">{{ day }}</option>
+
+                    }
+                </select>
+                <input type="text" [(ngModel)]="newSlot" placeholder="e.g. 10:00–13:00">
+                <button (click)="addDay(newDay); addTimeSlot(newDay, newSlot)">➕ Add</button>
+            </div>
+        </div>
+
+    </div>
+</div>
