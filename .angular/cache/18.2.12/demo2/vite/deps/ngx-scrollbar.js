@@ -2,6 +2,11 @@ import {
   toSignal
 } from "./chunk-5SQ4NRT5.js";
 import {
+  Directionality,
+  Platform,
+  coerceElement
+} from "./chunk-NZVXO6EG.js";
+import {
   DOCUMENT,
   isPlatformBrowser
 } from "./chunk-TMK4ESDX.js";
@@ -13,14 +18,12 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  Inject,
   Injectable,
   InjectionToken,
   Injector,
   Input,
   NgModule,
   NgZone,
-  Optional,
   Output,
   PLATFORM_ID,
   Renderer2,
@@ -55,7 +58,6 @@ import {
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetInheritedFactory,
-  ɵɵinject,
   ɵɵloadQuery,
   ɵɵnamespaceSVG,
   ɵɵnextContext,
@@ -91,255 +93,6 @@ import {
   __spreadProps,
   __spreadValues
 } from "./chunk-S35DAJRX.js";
-
-// node_modules/@angular/cdk/fesm2022/platform.mjs
-var hasV8BreakIterator;
-try {
-  hasV8BreakIterator = typeof Intl !== "undefined" && Intl.v8BreakIterator;
-} catch {
-  hasV8BreakIterator = false;
-}
-var Platform = class _Platform {
-  constructor(_platformId) {
-    this._platformId = _platformId;
-    this.isBrowser = this._platformId ? isPlatformBrowser(this._platformId) : typeof document === "object" && !!document;
-    this.EDGE = this.isBrowser && /(edge)/i.test(navigator.userAgent);
-    this.TRIDENT = this.isBrowser && /(msie|trident)/i.test(navigator.userAgent);
-    this.BLINK = this.isBrowser && !!(window.chrome || hasV8BreakIterator) && typeof CSS !== "undefined" && !this.EDGE && !this.TRIDENT;
-    this.WEBKIT = this.isBrowser && /AppleWebKit/i.test(navigator.userAgent) && !this.BLINK && !this.EDGE && !this.TRIDENT;
-    this.IOS = this.isBrowser && /iPad|iPhone|iPod/.test(navigator.userAgent) && !("MSStream" in window);
-    this.FIREFOX = this.isBrowser && /(firefox|minefield)/i.test(navigator.userAgent);
-    this.ANDROID = this.isBrowser && /android/i.test(navigator.userAgent) && !this.TRIDENT;
-    this.SAFARI = this.isBrowser && /safari/i.test(navigator.userAgent) && this.WEBKIT;
-  }
-  static {
-    this.ɵfac = function Platform_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _Platform)(ɵɵinject(PLATFORM_ID));
-    };
-  }
-  static {
-    this.ɵprov = ɵɵdefineInjectable({
-      token: _Platform,
-      factory: _Platform.ɵfac,
-      providedIn: "root"
-    });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Platform, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [{
-    type: Object,
-    decorators: [{
-      type: Inject,
-      args: [PLATFORM_ID]
-    }]
-  }], null);
-})();
-var PlatformModule = class _PlatformModule {
-  static {
-    this.ɵfac = function PlatformModule_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _PlatformModule)();
-    };
-  }
-  static {
-    this.ɵmod = ɵɵdefineNgModule({
-      type: _PlatformModule
-    });
-  }
-  static {
-    this.ɵinj = ɵɵdefineInjector({});
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PlatformModule, [{
-    type: NgModule,
-    args: [{}]
-  }], null, null);
-})();
-var RtlScrollAxisType;
-(function(RtlScrollAxisType2) {
-  RtlScrollAxisType2[RtlScrollAxisType2["NORMAL"] = 0] = "NORMAL";
-  RtlScrollAxisType2[RtlScrollAxisType2["NEGATED"] = 1] = "NEGATED";
-  RtlScrollAxisType2[RtlScrollAxisType2["INVERTED"] = 2] = "INVERTED";
-})(RtlScrollAxisType || (RtlScrollAxisType = {}));
-
-// node_modules/@angular/cdk/fesm2022/bidi.mjs
-var DIR_DOCUMENT = new InjectionToken("cdk-dir-doc", {
-  providedIn: "root",
-  factory: DIR_DOCUMENT_FACTORY
-});
-function DIR_DOCUMENT_FACTORY() {
-  return inject(DOCUMENT);
-}
-var RTL_LOCALE_PATTERN = /^(ar|ckb|dv|he|iw|fa|nqo|ps|sd|ug|ur|yi|.*[-_](Adlm|Arab|Hebr|Nkoo|Rohg|Thaa))(?!.*[-_](Latn|Cyrl)($|-|_))($|-|_)/i;
-function _resolveDirectionality(rawValue) {
-  const value = rawValue?.toLowerCase() || "";
-  if (value === "auto" && typeof navigator !== "undefined" && navigator?.language) {
-    return RTL_LOCALE_PATTERN.test(navigator.language) ? "rtl" : "ltr";
-  }
-  return value === "rtl" ? "rtl" : "ltr";
-}
-var Directionality = class _Directionality {
-  constructor(_document) {
-    this.value = "ltr";
-    this.change = new EventEmitter();
-    if (_document) {
-      const bodyDir = _document.body ? _document.body.dir : null;
-      const htmlDir = _document.documentElement ? _document.documentElement.dir : null;
-      this.value = _resolveDirectionality(bodyDir || htmlDir || "ltr");
-    }
-  }
-  ngOnDestroy() {
-    this.change.complete();
-  }
-  static {
-    this.ɵfac = function Directionality_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _Directionality)(ɵɵinject(DIR_DOCUMENT, 8));
-    };
-  }
-  static {
-    this.ɵprov = ɵɵdefineInjectable({
-      token: _Directionality,
-      factory: _Directionality.ɵfac,
-      providedIn: "root"
-    });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Directionality, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [{
-    type: void 0,
-    decorators: [{
-      type: Optional
-    }, {
-      type: Inject,
-      args: [DIR_DOCUMENT]
-    }]
-  }], null);
-})();
-var Dir = class _Dir {
-  constructor() {
-    this._dir = "ltr";
-    this._isInitialized = false;
-    this.change = new EventEmitter();
-  }
-  /** @docs-private */
-  get dir() {
-    return this._dir;
-  }
-  set dir(value) {
-    const previousValue = this._dir;
-    this._dir = _resolveDirectionality(value);
-    this._rawDir = value;
-    if (previousValue !== this._dir && this._isInitialized) {
-      this.change.emit(this._dir);
-    }
-  }
-  /** Current layout direction of the element. */
-  get value() {
-    return this.dir;
-  }
-  /** Initialize once default value has been set. */
-  ngAfterContentInit() {
-    this._isInitialized = true;
-  }
-  ngOnDestroy() {
-    this.change.complete();
-  }
-  static {
-    this.ɵfac = function Dir_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _Dir)();
-    };
-  }
-  static {
-    this.ɵdir = ɵɵdefineDirective({
-      type: _Dir,
-      selectors: [["", "dir", ""]],
-      hostVars: 1,
-      hostBindings: function Dir_HostBindings(rf, ctx) {
-        if (rf & 2) {
-          ɵɵattribute("dir", ctx._rawDir);
-        }
-      },
-      inputs: {
-        dir: "dir"
-      },
-      outputs: {
-        change: "dirChange"
-      },
-      exportAs: ["dir"],
-      standalone: true,
-      features: [ɵɵProvidersFeature([{
-        provide: Directionality,
-        useExisting: _Dir
-      }])]
-    });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Dir, [{
-    type: Directive,
-    args: [{
-      selector: "[dir]",
-      providers: [{
-        provide: Directionality,
-        useExisting: Dir
-      }],
-      host: {
-        "[attr.dir]": "_rawDir"
-      },
-      exportAs: "dir",
-      standalone: true
-    }]
-  }], null, {
-    change: [{
-      type: Output,
-      args: ["dirChange"]
-    }],
-    dir: [{
-      type: Input
-    }]
-  });
-})();
-var BidiModule = class _BidiModule {
-  static {
-    this.ɵfac = function BidiModule_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _BidiModule)();
-    };
-  }
-  static {
-    this.ɵmod = ɵɵdefineNgModule({
-      type: _BidiModule,
-      imports: [Dir],
-      exports: [Dir]
-    });
-  }
-  static {
-    this.ɵinj = ɵɵdefineInjector({});
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BidiModule, [{
-    type: NgModule,
-    args: [{
-      imports: [Dir],
-      exports: [Dir]
-    }]
-  }], null, null);
-})();
-
-// node_modules/@angular/cdk/fesm2022/coercion.mjs
-function coerceElement(elementOrRef) {
-  return elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
-}
 
 // node_modules/ngx-scrollbar/fesm2022/ngx-scrollbar-smooth-scroll.mjs
 var NEWTON_ITERATIONS = 4;

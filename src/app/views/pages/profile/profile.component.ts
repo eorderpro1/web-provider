@@ -4,11 +4,12 @@ import { Supplier } from '../../../core/model/supplier';
 import { ImageUploaderComponent } from "./image-uploader/image-uploader.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PostalCodesSettingsComponent } from "./postal-codes-settings/postal-codes-settings.component";
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ImageUploaderComponent,FormsModule],
+  imports: [ImageUploaderComponent, FormsModule, PostalCodesSettingsComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })

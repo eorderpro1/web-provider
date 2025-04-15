@@ -1,12 +1,4 @@
 import {
-  animate,
-  keyframes,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-2HVSXTEZ.js";
-import {
   COMPOSITION_BUFFER_MODE,
   DefaultValueAccessor,
   FormControl,
@@ -21,6 +13,14 @@ import {
   ReactiveFormsModule,
   ɵNgNoValidate
 } from "./chunk-DKJPUZKJ.js";
+import {
+  animate,
+  keyframes,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-2HVSXTEZ.js";
 import {
   AsyncPipe,
   CommonModule,
