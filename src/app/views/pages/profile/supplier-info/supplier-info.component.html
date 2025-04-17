@@ -1,0 +1,120 @@
+<div class="card-body">
+    <div class="d-flex justify-content-between flex-wrap">
+        <div class="row">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        @if(!startEditProfile){
+                        <img src="{{supplier()?.photo}}" alt="user" class="img-lg rounded-circle">}
+                        @else {
+                        <app-image-uploader [imageSrc]="supplier()!.photo"></app-image-uploader>
+
+                        }
+                    </div>
+                    <!-- First Column -->
+                    <div class="col-md-3">
+                        <div class="mb-4">
+                            <strong>Name:</strong>
+                            @if(!startEditProfile){
+                            <p class="mb-0">{{ supplier()?.name }}</p>
+
+                            }
+                            @else{
+                            <input type="text" class="form-control" [(ngModel)]="supplier()!.name"
+                                placeholder="Name">
+
+                            }
+
+                        </div>
+                        <div class="mb-4">
+                            <strong>Email:</strong>
+                            @if(!startEditProfile){
+                            <p class="mb-0">{{ supplier()?.email }}</p>
+
+                            }
+                            @else{
+                            <input type="text" class="form-control" [(ngModel)]="supplier()!.email"
+                                placeholder="Email">
+
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Second Column -->
+                    <div class="col-md-3">
+                        <div class="mb-4">
+                            <strong>Address:</strong>
+                            @if(!startEditProfile){
+                            <p class="mb-0">{{ supplier()?.address }}</p>
+
+                            }
+                            @else{
+                            <input type="text" class="form-control" [(ngModel)]="supplier()!.address"
+                                placeholder="Address">
+
+                            }
+                        </div>
+                        <div class="mb-4">
+                            <strong>AFM:</strong>
+                            @if(!startEditProfile){
+                            <p class="mb-0">{{ supplier()?.afm }}</p>
+
+                            }
+                            @else{
+                            <input type="text" class="form-control" [(ngModel)]="supplier()!.afm"
+                                placeholder="AFM">
+
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="mb-4">
+                            <strong>Telephone:</strong>
+                            @if(!startEditProfile){
+                            <p class="mb-0">{{ supplier()?.telephone }}</p>
+
+                            }
+                            @else{
+                            <input type="text" class="form-control" [(ngModel)]="supplier()!.telephone"
+                                placeholder="telephone">
+
+                            }
+                        </div>
+                        <div class="mb-4">
+                            <strong>Minimum Order (€):</strong>
+                            @if(!startEditProfile){
+                            <p class="mb-0">{{ supplier()?.minimum_order_euros }}</p>
+
+                            }
+                            @else{
+                            <input type="text" class="form-control"
+                                [(ngModel)]="supplier()!.minimum_order_euros"
+                                placeholder="Ελαχιστοο Ποσο Παραγγελιας">
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if(!startEditProfile){
+            <div class="col-md-12">
+                <button type="button" (click)="editProfile()" class="btn btn-primary">Edit Profile</button>
+            </div> }
+            @else {
+            <div class="col-md-12">
+                <button type="button" (click)="saveProfileChanges()" class="btn btn-success">Save
+                    Profile</button>
+
+                <button type="button" (click)="discardChanges()" class="btn btn-danger">Discard
+                    Changes</button>
+            </div>
+            }
+
+
+        </div>
+    </div>
+</div>

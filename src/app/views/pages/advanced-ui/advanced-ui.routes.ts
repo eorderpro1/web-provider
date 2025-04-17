@@ -7,10 +7,6 @@ export default [
     loadComponent: () => import('./cropper/cropper.component').then(c => c.CropperComponent)
   },
   {
-    path: 'owl-carousel',
-    loadComponent: () => import('./owl-carousel/owl-carousel.component').then(c => c.OwlCarouselComponent)
-  },
-  {
     path: 'sortablejs',
     loadComponent: () => import('./sortablejs/sortablejs.component').then(c => c.SortablejsComponent)
   },

@@ -1,15 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SuppliersService } from '../../../core/services/suppliers.service';
 import { Supplier } from '../../../core/model/supplier';
-import { ImageUploaderComponent } from "./image-uploader/image-uploader.component";
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PostalCodesSettingsComponent } from "./postal-codes-settings/postal-codes-settings.component";
+import { SupplierInfoComponent } from "./supplier-info/supplier-info.component";
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ImageUploaderComponent, FormsModule, PostalCodesSettingsComponent],
+  imports: [FormsModule, PostalCodesSettingsComponent, SupplierInfoComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -21,7 +20,6 @@ export class ProfileComponent implements OnInit {
   }
   supplierService = inject(SuppliersService);
   supplier: Supplier | null = null;
-  startEditProfile: boolean = false;
 
   getSuppliersData() {
     this.supplierService.getSupplierDataById('23').subscribe((data) => {
@@ -35,13 +33,5 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-  editProfile() {
-    this.startEditProfile = true;
-  }
-  discardChanges() {
-    this.startEditProfile = false;
-    }
-    saveProfileChanges() {
-      this.startEditProfile = false;
-    }
+
 }

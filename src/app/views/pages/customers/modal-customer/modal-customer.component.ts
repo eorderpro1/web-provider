@@ -9,6 +9,20 @@ import { Customer } from '../../../../core/model/customers';
   styleUrl: './modal-customer.component.scss'
 })
 export class ModalCustomerComponent {
+
   selectedCustomer =input.required<Customer>()
+  selectedTag: string = 'VIP';
+
+  toggleTag(tag: string) {
+    this.selectedTag = tag;
+
+  }
+  isSelected(tagName: string) {
+    if (this.selectedTag === tagName) {
+      return true;
+    }
+    return false;
+  }
+  
 
 }
