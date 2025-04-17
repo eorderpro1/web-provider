@@ -2,12 +2,7 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./src/styles/styles.scss ***!
   \*********************************************************************************************************************************************/
 @charset "UTF-8";
-/*
-* NobleUI - Angular Admin Dashboard Template v3.0 (https://nobleui.com/)
-* Copyright © 2024 NobleUI
-* Licensed under ThemeForest License
-*/
-/*
+
   TEMPLATE VARIABLES
 */
 :root,
@@ -16774,20 +16769,20 @@ body {
   margin-bottom: 0;
 }
 
-.nobleui-logo {
+.eorderPro-logo {
   font-weight: 700;
   font-size: 25px;
   color: #000865;
 }
-.nobleui-logo span {
+.eorderPro-logo span {
   color: #6571ff;
   font-weight: 300;
 }
-.nobleui-logo:hover {
+.eorderPro-logo:hover {
   color: #000865;
 }
 
-[data-bs-theme=dark] .nobleui-logo {
+[data-bs-theme=dark] .eorderPro-logo {
   color: #e9ecef;
 }
 
