@@ -12,38 +12,65 @@
         <hr />
         <div class="schedule-section">
             <h3>Schedule for Postal Code: {{ selectedPostalCode }}</h3>
-            @for(day of daysOfWeek; track day)
-            {
-            <div class="d-flex justify-content-between flex-wrap p-2">
-                @if(deliverySchedule[selectedPostalCode][day])
-                { <div>
-                    <strong>{{ day }}:</strong>
-                    @for(slot of deliverySchedule[selectedPostalCode][day]; track slot; let i = $index;)
+            @if (isLoading) {
+                <div class="spinner-wrapper">
+                  <div class="spinner">Loading...</div>
+                </div>
+              } @else {
+                @for(day of daysOfWeek; track day)
+                {
+                <div class="d-flex justify-content-between flex-wrap p-2">
+                    @if(deliverySchedule())
                     {
-                    <span class="slot">
-                        {{ slot }}
-                        <button (click)="removeTimeSlot(day, i)">🗑️</button>
-                    </span>
+                        @if(deliverySchedule()[selectedPostalCode][day])
+                        { <div>
+                            <strong>{{ day }}:</strong>
+                            @for(slot of deliverySchedule()[selectedPostalCode][day]; track slot; let i = $index;)
+                            {
+                            <span class="slot">
+                                {{ slot }}
+                                <button  (click)="removeTimeSlot(day, i)">🗑️</button>
+                            </span>
+                            }
+        
+                        </div>
+                        }
                     }
-
+                  
+    
                 </div>
                 }
-
-            </div>
-            }
+              }
+        
 
 
             <!-- Add new time slot -->
             <div class="add-section">
                 <label>Add new time slot</label>
                 <select [(ngModel)]="newDay">
+                    <option value="" disabled>Select a day</option>
+
                     @for(day of daysOfWeek; track day) {
                     <option [value]="day">{{ day }}</option>
 
                     }
                 </select>
-                <input type="text" [(ngModel)]="newSlot" placeholder="e.g. 10:00–13:00">
-                <button (click)="addDay(newDay); addTimeSlot(newDay, newSlot)">➕ Add</button>
+                <select [(ngModel)]="selectedStartSlot">
+                    <option value="" disabled>Select a  start time</option>
+                    @for(slot of startSlotIntervals; track slot) {
+                    <option [value]="slot">{{ slot }}</option>
+                    }
+                  </select>
+                  <select [(ngModel)]="selectedEndSlot">
+                    <option value="" disabled>Select a  end time</option>
+                    @for(slot of endSlotIntervals; track slot) {
+                    <option [value]="slot">{{ slot }}</option>
+                    }
+                  </select>
+               
+                  <button type="button" class="btn btn-success btn-icon-text" (click)="addDay(newDay); addTimeSlot(newDay, selectedStartSlot,selectedEndSlot)">
+                    <i class="feather icon-plus-circle"></i> Προσθήκη
+                  </button>
             </div>
         </div>
 

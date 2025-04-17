@@ -17,19 +17,19 @@ export class CustomersComponent implements OnInit {
   customerService = inject(CustomersService);
   customers = signal<Customer[]>([]);
   selectedCustomer: Customer;
-    private readonly modalService = inject(NgbModal);
-  
+  private readonly modalService = inject(NgbModal);
+
   private destroy = inject(DestroyRef);
-    filters: any = { status: '', shop: '', orderDate: '' };
-    sort: any = { field: '', order: '' };
-    page: number = 1;
-    limit: number = 10;
-    totalPages = signal<number>(2)
-    totalElements = signal<number>(2)
+  sort: any = { field: '', order: '' };
+  page: number = 1;
+  limit: number = 10;
+  totalPages = signal<number>(2)
+  totalElements = signal<number>(2)
   ngOnInit(): void {
-this.fetchAllCustmersOfTheSupplier();  }
+    this.fetchAllCustmersOfTheSupplier();
+  }
   fetchAllCustmersOfTheSupplier() {
-    let params = { supplierId: '23', page: this.page, limit: this.limit};
+    let params = { supplierId: '23', page: this.page, limit: this.limit };
 
     const sub = this.customerService.getCustomersBySupplier(params).subscribe((data) => {
       this.customers.set(data.content);
@@ -41,7 +41,7 @@ this.fetchAllCustmersOfTheSupplier();  }
 
   openScrollableModal(content: TemplateRef<any>, customer: Customer) {
     this.selectedCustomer = customer;
-   
+
     this.modalService.open(content, { scrollable: true, size: 'lg' }).result.then((result) => {
       console.log("Modal closed" + result);
     }).catch((res) => { });

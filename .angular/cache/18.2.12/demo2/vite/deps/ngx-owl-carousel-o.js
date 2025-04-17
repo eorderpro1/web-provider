@@ -1,17 +1,17 @@
 import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router
-} from "./chunk-VKSCJBJW.js";
-import "./chunk-6R7O7DGL.js";
-import "./chunk-3V2SCBHI.js";
-import {
   animate,
   state,
   style,
   transition,
   trigger
 } from "./chunk-2HVSXTEZ.js";
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router
+} from "./chunk-VKSCJBJW.js";
+import "./chunk-6R7O7DGL.js";
+import "./chunk-3V2SCBHI.js";
 import {
   CommonModule,
   LocationStrategy,
