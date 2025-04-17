@@ -36,12 +36,12 @@
         </div>
     
 
-<ng-template #scrollableModal let-modal>
+<ng-template #scrollableModal #xlModal let-modal>
     <div class="modal-header">
         <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
         <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" >
         <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems"
             [deliveryDate]="this.deliveryDate"></app-order-modal>
     </div>

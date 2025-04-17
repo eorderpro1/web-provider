@@ -1,11 +1,3 @@
-/*
-* NobleUI - Angular Admin Dashboard Template v3.0 (https://nobleui.com/)
-* Copyright © 2024 NobleUI
-* Licensed under ThemeForest License
-*/
-
-// Theme style for demo2 (Horizontal Menu Layout)
-
 // Bootstrap functions
 @import "bootstrap/scss/functions";
 
@@ -76,7 +68,6 @@
 @import "./helpers";
 @import "./typography";
 @import "./spinner";
-@import "./demo";
 
 // Layout
 @import "./horizontal-wrapper";
@@ -84,42 +75,12 @@
 @import "./layouts";
 
 // components
-@import "./components/alert";
-@import "./components/badges";
-@import "./components/breadcrumbs";
-@import "./components/buttons";
-@import "./components/close";
-@import "./components/cards";
-@import "./components/datepicker";
-@import "./components/dropdown";
-@import "./components/forms";
-@import "./components/icons";
-@import "./components/nav";
-@import "./components/pagination";
-@import "./components/rating";
 @import "./components/tables";
 
 // Pages
-@import "./components/dashboard";
-@import "./components/timeline";
 @import "./components/auth";
-@import "./components/chat";
-@import "./components/email";
 
 
 // Plugin overrides
-@import "./plugin-overrides/angular-archwizard";
-@import "./plugin-overrides/apex-charts";
-@import "./plugin-overrides/dropzone";
 @import "./plugin-overrides/full-calendar";
-@import "./plugin-overrides/ng-select";
-@import "./plugin-overrides/ngx-chips";
-@import "./plugin-overrides/ngx-color-picker";
-@import "./plugin-overrides/ngx-datatable";
-@import "./plugin-overrides/ngx-quill";
-@import "./plugin-overrides/ngx-scrollbar";
 @import "./plugin-overrides/sweet-alert";
-
-
-// Custom scss
-@import "./custom";

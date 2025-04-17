@@ -43,11 +43,6 @@ export const MENU: MenuItem[] = [
     link: '/campaigns'
   },
   {
-    label: 'Calendar',
-    icon: 'calendar',
-    link: '/calendar'
-  },
-  {
     label: 'Customers',
     icon: 'users',
     link: '/customers'
@@ -202,62 +197,12 @@ export const MENU: MenuItem[] = [
         ]
       }
     ]
-  },  
-  {
-    label: 'Icons',
-    icon: 'smile',
-    subMenus: [
-      {
-        subMenuItems: [
-          {
-            label: 'Feather icons',
-            link: '/icons/feather-icons',
-          },
-        ]
-      }
-    ]
   },
   {
     label: 'Special pages',
     icon: 'book',
     isMegaMenu: true,
     subMenus: [
-      {
-        subMenuItems: [
-          {
-            label: 'Special pages',
-            isTitle: true
-          },
-          {
-            label: 'Blank page',
-            link: '/general/blank-page',
-          },
-          {
-            label: 'Faq',
-            link: '/general/faq',
-          },
-          {
-            label: 'Invoice',
-            link: '/general/invoice',
-          },
-        ]
-      },
-      {
-        subMenuItems: [
-          {
-            label: 'Profile',
-            link: '/general/profile',
-          },
-          {
-            label: 'Pricing',
-            link: '/general/pricing',
-          },
-          {
-            label: 'Timeline',
-            link: '/general/timeline',
-          }
-        ]
-      },
       {
         subMenuItems: [
           {

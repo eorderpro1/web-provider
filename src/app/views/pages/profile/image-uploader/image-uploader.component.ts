@@ -13,7 +13,7 @@ export class ImageUploaderComponent {
   constructor() {
     effect(() => {
       this.localImageSrc.set(this.imageSrc());
-    });
+    },{ allowSignalWrites: true });
   }
 
   onFileSelected(event: Event) {

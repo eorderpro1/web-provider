@@ -47,14 +47,6 @@ export const routes: Routes = [
       {
         path: 'advanced-ui',
         loadChildren: () => import('./views/pages/advanced-ui/advanced-ui.routes')
-      },
-      {
-        path: 'icons',
-        loadChildren: () => import('./views/pages/icons/icons.routes')
-      },
-      {
-        path: 'general',
-        loadChildren: () => import('./views/pages/general/general.routes')
       }
     ]
   },

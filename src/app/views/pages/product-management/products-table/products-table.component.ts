@@ -6,11 +6,12 @@ import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from "./product-modal/product-modal.component";
+import { ImageUploaderComponent } from "../../profile/image-uploader/image-uploader.component";
 
 @Component({
   selector: 'app-products-table',
   standalone: true,
-  imports: [SortableHeaderComponent, NgbPaginationModule, FormsModule, CommonModule, ProductModalComponent],
+  imports: [SortableHeaderComponent, NgbPaginationModule, FormsModule, CommonModule, ProductModalComponent, ImageUploaderComponent],
   templateUrl: './products-table.component.html',
   styleUrl: './products-table.component.scss'
 })
