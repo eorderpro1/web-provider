@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ImageUploaderComponent } from '../image-uploader/image-uploader.component';
+import { ImageUploaderComponent } from '../../common-components/image-uploader/image-uploader.component';
 import { FormsModule } from '@angular/forms';
 import { Supplier } from '../../../../core/model/supplier';
 

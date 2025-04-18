@@ -6,7 +6,7 @@ import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from "./product-modal/product-modal.component";
-import { ImageUploaderComponent } from "../../profile/image-uploader/image-uploader.component";
+import { ImageUploaderComponent } from "../../common-components/image-uploader/image-uploader.component";
 
 @Component({
   selector: 'app-products-table',
