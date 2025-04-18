@@ -1,5 +1,4 @@
 import { Component, DestroyRef, inject, OnInit, signal, TemplateRef } from '@angular/core';
-import { SupabaseWebsocketService } from '../../../../core/services/supabase-websocket.service';
 import { Order } from '../../../../core/model/order';
 import { OrderSupabaseService } from '../../../../core/services/orders-supabase.service';
 import { HttpParams } from '@angular/common/http';
@@ -15,13 +14,12 @@ import { OrderModalComponent } from "../order-modal/order-modal.component";
   selector: 'app-received-new-order',
   standalone: true,
   imports: [CommonModule, OrderModalComponent, NgbPaginationModule, FormsModule],
-  providers: [SupabaseWebsocketService, BrowserModule],
+  providers: [ BrowserModule],
   templateUrl: './received-new-order.component.html',
   styleUrl: './received-new-order.component.scss'
 })
 export class ReceivedNewOrderComponent implements OnInit {
 
-  private webSocketService = inject(SupabaseWebsocketService);
   orders = signal<Order[]>([]);
   private modalService = inject(NgbModal);
   orderService = inject(OrderSupabaseService);
@@ -47,7 +45,6 @@ export class ReceivedNewOrderComponent implements OnInit {
     // Remove the order from the current list
     this.orders.set(this.orders().filter((o) => o.id !== order.id));
     // Send the order acceptance to the backend
-    this.webSocketService.acceptOrder(order.id);
   }
   fetchOrders(filterByShopName: string, filterByOrderId: string) {
     let params = { filterByShopName, filterByOrderId, page: this.page, limit: this.limit, supplier_id: 23, is_draft: 'true', todays: true };
