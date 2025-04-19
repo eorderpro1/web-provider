@@ -42,9 +42,7 @@ export class ReceivedNewOrderComponent implements OnInit {
     this.fetchOrders('', '');
   }
   acceptOrder(order: any): void {
-    // Remove the order from the current list
     this.orders.set(this.orders().filter((o) => o.id !== order.id));
-    // Send the order acceptance to the backend
   }
   fetchOrders(filterByShopName: string, filterByOrderId: string) {
     let params = { filterByShopName, filterByOrderId, page: this.page, limit: this.limit, supplier_id: 23, is_draft: 'true', todays: true };
