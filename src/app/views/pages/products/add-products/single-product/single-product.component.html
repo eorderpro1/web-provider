@@ -1,0 +1,49 @@
+
+<hr/>
+<div class="d-flex justify-content-between flex-wrap">
+    <div class="row">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <app-image-uploader></app-image-uploader>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-4">
+                        <strong>ERP id:</strong>
+                        <input type="text" class="form-control mb-0" placeholder="ERP id" />
+                    </div>
+                    <div class="mb-4">
+                        <strong>Όνομα προιοντος:</strong>
+                        <input type="text" class="form-control mb-0" placeholder="Όνομα προιοντος" />
+                    </div>
+                    <div class="mb-4">
+                        <strong>Τιμή προιόντος:</strong>
+                        <input type="text" class="form-control mb-0" placeholder="Τιμή προιόντος" />
+                    </div>
+                    <div class="mb-4">
+                        <strong>Προμηθευτής</strong>
+                        <input type="text" class="form-control mb-0" placeholder="Προμηθευτής" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-4">
+                        <strong>Κατηγορία προιόντος:</strong>
+                        <ng-select [items]="categories" bindLabel="name" placeholder="Επιλέξτε κατηγορία"
+                            [(ngModel)]="selectedCategory">
+                        </ng-select>
+                    </div>
+                    <div class="mb-4">
+                        <strong>Ποσοτητα:</strong>
+                        <input type="number" class="form-control mb-0" placeholder="Ποσοτητα προιοντος" />
+                    </div>
+                    <div class="mb-4">
+                        <strong>Μονάδα Μετρησης:</strong>
+                        <ng-select [items]="measurementTypes" bindLabel="name" placeholder="Επιλέξτε μονάδα μετρησης"
+                        [(ngModel)]="selectedMeasurementType">
+                    </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

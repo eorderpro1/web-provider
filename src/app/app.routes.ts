@@ -20,7 +20,7 @@ export const routes: Routes = [
       },
       {
         path: 'products',
-        loadChildren: () => import('./views/pages/product-management/product-management.routes')
+        loadChildren: () => import('./views/pages/products/products.routes')
       },
 
       {

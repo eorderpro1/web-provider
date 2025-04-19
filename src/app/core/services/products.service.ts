@@ -3,10 +3,10 @@ import { SupabaseService } from './supabase.service';
 import { HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { PaginatedSupplierCategory, SupplierCategory } from '../model/suppliers-category';
-import { SuppliersProduct } from '../model/suppliers-products';
 import { PaginatedSuppliersProduct } from '../model/paginated-suppliers-product';
 import { PaginatedSupplierProductShop } from '../model/supplier-product-shop';
 import { PaginatedSupplierProductPostalCode } from '../model/supplier-product-postal-code';
+import { Category } from '../model/category';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,7 @@ export class ProductsService {
       })
     );
   }
+
 
 
 
@@ -96,6 +97,10 @@ export class ProductsService {
     if (sort.field) params = params.set('order', sort.field + "." + sort.order);
     return params;
   }
-
+  getAllCategories(): Observable<Category[]> {
+    return this.supabaseService.getRequest('categories', new HttpParams()).pipe(
+      map((response: HttpResponse<Category[]>) => response.body || [])
+    );
+  }
 
 }

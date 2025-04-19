@@ -8,7 +8,7 @@ import { Component, effect, HostListener, input, signal } from '@angular/core';
   styleUrl: './image-uploader.component.scss'
 })
 export class ImageUploaderComponent {
-  imageSrc = input<string>('https://via.placeholder.com/200');
+  imageSrc = input<string>('/images/placeholder.png');
   localImageSrc = signal<string | null>(null);
   constructor() {
     effect(() => {
