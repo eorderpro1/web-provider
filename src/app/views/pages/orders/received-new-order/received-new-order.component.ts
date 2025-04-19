@@ -35,6 +35,7 @@ export class ReceivedNewOrderComponent implements OnInit {
   totalElements = signal<number>(2)
   deliveryDate: Date;
   totalAmount: string;
+  
   ngOnInit(): void {
     this.fetchOrders('', '');
   }
