@@ -1,0 +1,25 @@
+<div class="row fullscreen">
+    <div class="col-12 stretch-card">
+      <div class="card fullscreen">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <app-card-choice-order 
+                [title]="'Products Overview'" 
+                [routerLinkValue]="'/products/overview'">
+              </app-card-choice-order>
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <app-card-choice-order 
+                [title]="'Προσθήκη Προϊόντος'" 
+                [routerLinkValue]="'/products/add'">
+              </app-card-choice-order>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <router-outlet></router-outlet>
+  </div>
