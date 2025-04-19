@@ -47,157 +47,157 @@ export const MENU: MenuItem[] = [
     icon: 'users',
     link: '/customers'
   },
-  {
-    label: 'UI Kit',
-    icon: 'feather',
-    isMegaMenu: true,
-    subMenus: [
-      {
-        subMenuItems: [
-          {
-            label: 'Basic',
-            isTitle: true,
-          },
-          {
-            label: 'Accordion',
-            link: '/ui-components/accordion',
-          },
-          {
-            label: 'Alerts',
-            link: '/ui-components/alerts',
-          },
-          {
-            label: 'Badges',
-            link: '/ui-components/badges',
-          },
-          {
-            label: 'Breadcrumbs',
-            link: '/ui-components/breadcrumbs',
-          },
-          {
-            label: 'Buttons',
-            link: '/ui-components/buttons',
-          },
-          {
-            label: 'Button group',
-            link: '/ui-components/button-group',
-          },
-          {
-            label: 'Cards',
-            link: '/ui-components/cards',
-          },
-          {
-            label: 'Carousel',
-            link: '/ui-components/carousel',
-          },
-          {
-            label: 'Collapse',
-            link: '/ui-components/collapse',
-          },
-        ]
-      },
-      {
-        subMenuItems: [
-          {
-            label: 'Datepicker',
-            link: '/ui-components/datepicker',
-          },
-          {
-            label: 'Dropdowns',
-            link: '/ui-components/dropdowns',
-          },
-          {
-            label: 'List group',
-            link: '/ui-components/list-group',
-          },
-          {
-            label: 'Media object',
-            link: '/ui-components/media-object',
-          },
-          {
-            label: 'Modal',
-            link: '/ui-components/modal',
-          },
-          {
-            label: 'Navs',
-            link: '/ui-components/navs',
-          },
-          {
-            label: 'Offcanvas',
-            link: '/ui-components/offcanvas',
-          },
-          {
-            label: 'Pagination',
-            link: '/ui-components/pagination',
-          },
-          {
-            label: 'Popovers',
-            link: '/ui-components/popovers',
-          },
-          {
-            label: 'Progress',
-            link: '/ui-components/progress',
-          },
-        ]
-      },
-      {
-        subMenuItems: [
-          {
-            label: 'Rating',
-            link: '/ui-components/rating',
-          },
-          {
-            label: 'Scrollbar',
-            link: '/ui-components/scrollbar',
-          },
-          {
-            label: 'Spinners',
-            link: '/ui-components/spinners',
-          },
-          {
-            label: 'Table',
-            link: '/ui-components/table',
-          },
-          {
-            label: 'Timepicker',
-            link: '/ui-components/timepicker',
-          },
-          {
-            label: 'Tooltips',
-            link: '/ui-components/tooltips',
-          },
-          {
-            label: 'Typeadhed',
-            link: '/ui-components/typeahead',
-          },
-        ]
-      },
-      {
-        subMenuItems: [
-          {
-            label: 'Advanced UI',
-            isTitle: true
-          },
-          {
-            label: 'Cropper',
-            link: '/advanced-ui/cropper',
-          },
-          {
-            label: 'Owl carousel',
-            link: '/advanced-ui/owl-carousel',
-          },
-          {
-            label: 'SortableJs',
-            link: '/advanced-ui/sortablejs',
-          },
-          {
-            label: 'Sweet alert',
-            link: '/advanced-ui/sweet-alert',
-          },
-        ]
-      }
-    ]
-  },
+  // {
+  //   label: 'UI Kit',
+  //   icon: 'feather',
+  //   isMegaMenu: true,
+  //   subMenus: [
+  //     {
+  //       subMenuItems: [
+  //         {
+  //           label: 'Basic',
+  //           isTitle: true,
+  //         },
+  //         {
+  //           label: 'Accordion',
+  //           link: '/ui-components/accordion',
+  //         },
+  //         {
+  //           label: 'Alerts',
+  //           link: '/ui-components/alerts',
+  //         },
+  //         {
+  //           label: 'Badges',
+  //           link: '/ui-components/badges',
+  //         },
+  //         {
+  //           label: 'Breadcrumbs',
+  //           link: '/ui-components/breadcrumbs',
+  //         },
+  //         {
+  //           label: 'Buttons',
+  //           link: '/ui-components/buttons',
+  //         },
+  //         {
+  //           label: 'Button group',
+  //           link: '/ui-components/button-group',
+  //         },
+  //         {
+  //           label: 'Cards',
+  //           link: '/ui-components/cards',
+  //         },
+  //         {
+  //           label: 'Carousel',
+  //           link: '/ui-components/carousel',
+  //         },
+  //         {
+  //           label: 'Collapse',
+  //           link: '/ui-components/collapse',
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       subMenuItems: [
+  //         {
+  //           label: 'Datepicker',
+  //           link: '/ui-components/datepicker',
+  //         },
+  //         {
+  //           label: 'Dropdowns',
+  //           link: '/ui-components/dropdowns',
+  //         },
+  //         {
+  //           label: 'List group',
+  //           link: '/ui-components/list-group',
+  //         },
+  //         {
+  //           label: 'Media object',
+  //           link: '/ui-components/media-object',
+  //         },
+  //         {
+  //           label: 'Modal',
+  //           link: '/ui-components/modal',
+  //         },
+  //         {
+  //           label: 'Navs',
+  //           link: '/ui-components/navs',
+  //         },
+  //         {
+  //           label: 'Offcanvas',
+  //           link: '/ui-components/offcanvas',
+  //         },
+  //         {
+  //           label: 'Pagination',
+  //           link: '/ui-components/pagination',
+  //         },
+  //         {
+  //           label: 'Popovers',
+  //           link: '/ui-components/popovers',
+  //         },
+  //         {
+  //           label: 'Progress',
+  //           link: '/ui-components/progress',
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       subMenuItems: [
+  //         {
+  //           label: 'Rating',
+  //           link: '/ui-components/rating',
+  //         },
+  //         {
+  //           label: 'Scrollbar',
+  //           link: '/ui-components/scrollbar',
+  //         },
+  //         {
+  //           label: 'Spinners',
+  //           link: '/ui-components/spinners',
+  //         },
+  //         {
+  //           label: 'Table',
+  //           link: '/ui-components/table',
+  //         },
+  //         {
+  //           label: 'Timepicker',
+  //           link: '/ui-components/timepicker',
+  //         },
+  //         {
+  //           label: 'Tooltips',
+  //           link: '/ui-components/tooltips',
+  //         },
+  //         {
+  //           label: 'Typeadhed',
+  //           link: '/ui-components/typeahead',
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       subMenuItems: [
+  //         {
+  //           label: 'Advanced UI',
+  //           isTitle: true
+  //         },
+  //         {
+  //           label: 'Cropper',
+  //           link: '/advanced-ui/cropper',
+  //         },
+  //         {
+  //           label: 'Owl carousel',
+  //           link: '/advanced-ui/owl-carousel',
+  //         },
+  //         {
+  //           label: 'SortableJs',
+  //           link: '/advanced-ui/sortablejs',
+  //         },
+  //         {
+  //           label: 'Sweet alert',
+  //           link: '/advanced-ui/sweet-alert',
+  //         },
+  //       ]
+  //     }
+  //   ]
+  // },
   {
     label: 'Special pages',
     icon: 'book',
