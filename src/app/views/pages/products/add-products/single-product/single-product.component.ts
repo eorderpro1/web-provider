@@ -13,6 +13,9 @@ import { Category } from '../../../../../core/model/category';
   styleUrl: './single-product.component.scss'
 })
 export class SingleProductComponent implements OnInit {
+addProduct() {
+throw new Error('Method not implemented.');
+}
 
 categories: string[] = [];
 selectedCategory: string = '';

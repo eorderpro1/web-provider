@@ -1,5 +1,4 @@
-
-<hr/>
+<hr />
 <div class="d-flex justify-content-between flex-wrap">
     <div class="row">
 
@@ -40,10 +39,14 @@
                     <div class="mb-4">
                         <strong>Μονάδα Μετρησης:</strong>
                         <ng-select [items]="measurementTypes" bindLabel="name" placeholder="Επιλέξτε μονάδα μετρησης"
-                        [(ngModel)]="selectedMeasurementType">
-                    </ng-select>
+                            [(ngModel)]="selectedMeasurementType">
+                        </ng-select>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-success" (click)="addProduct()">Προσθήκη προϊόντος</button>
+                </div>
+            </div>
         </div>
-    </div>
