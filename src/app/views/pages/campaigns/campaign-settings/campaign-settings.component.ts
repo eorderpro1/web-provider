@@ -61,7 +61,7 @@ export class CampaignSettingsComponent {
   
     submitAllAds() {
       console.log('Submitted Ads:', this.ads);
-      // Connect to backend API here if needed
+      // Connect to backend API here 
     }
     
 }

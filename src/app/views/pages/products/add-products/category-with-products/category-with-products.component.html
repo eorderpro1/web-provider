@@ -1,1 +1,89 @@
-<p>category-with-products works!</p>
+<div class="row">
+    <h5 class="mb-0">Προσθήκη κατηγορίας με προιοντα</h5>
+    <p class="card-text">Εδώ μπορείτε να προσθέσετε προιοντα στην κατηγορια που επιλεξατε.</p>
+    <hr />
+
+    <h5 class="text-center">Επιλέξτε κατηγορια</h5>
+    <ng-select [items]="categories" bindLabel="name" placeholder="Επιλέξτε κατηγορία" [(ngModel)]="selectedCategory">
+    </ng-select>
+
+</div>
+<hr />
+<div class="row">
+
+    @for ( product of products; track product.id; ){
+<hr/>
+<h5 class="mb-3">Προιον #{{ product.id + 1 }}</h5>
+
+    <div class="d-flex justify-content-between flex-wrap">
+        <div class="row">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <app-image-uploader></app-image-uploader>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-4">
+                            <strong>ERP id:</strong>
+                            <input type="text" class="form-control mb-0" placeholder="ERP id" />
+                        </div>
+                        <div class="mb-4">
+                            <strong>Όνομα προιοντος:</strong>
+                            <input type="text" class="form-control mb-0" placeholder="Όνομα προιοντος" />
+                        </div>
+                        <div class="mb-4">
+                            <strong>Τιμή προιόντος:</strong>
+                            <input type="text" class="form-control mb-0" placeholder="Τιμή προιόντος" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="mb-4">
+                            <strong>Προμηθευτής</strong>
+                            <input type="text" class="form-control mb-0" placeholder="Προμηθευτής" />
+                        </div>
+                        <div class="mb-4">
+                            <strong>Ποσοτητα:</strong>
+                            <input type="number" class="form-control mb-0" placeholder="Ποσοτητα προιοντος" />
+                        </div>
+                        <div class="mb-4">
+                            <strong>Μονάδα Μετρησης:</strong>
+                            <ng-select [items]="measurementTypes" bindLabel="name"
+                                placeholder="Επιλέξτε μονάδα μετρησης" [(ngModel)]="selectedMeasurementType">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+          <!-- Αφαίρεση -->
+          <div class="text-end">
+            @if (products.length > 1) {
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                (click)="removeProductBlock(product.id)"
+              >
+                Αφαίρεση προιοντος
+              </button>
+            }
+          </div>
+    }
+      <!-- Προσθήκη -->
+      <div class="mb-4">
+        <button type="button" class="btn btn-outline-primary" (click)="addProductBlock()">
+          + Προσθήκη προιόντος
+        </button>
+      </div>
+    
+      <!-- Υποβολή -->
+
+      <div class="row">
+        <div class="d-grid gap-2">
+            <button type="button" class="btn btn-success" (click)="submitCategoryWithProducts()">  Δημιουργία Κατηγορίας</button>
+        </div>
+    </div>
+    </div>
