@@ -19,7 +19,7 @@ export class SuppliersService {
     );
   }
 
-  getSupplierSchedule(data: { supplierId: string, page: number, limit: number }): Observable<PaginatedDeliveryTimeSlot> {
+  getSupplierSchedule(data: { supplierId: string, page: number, limit: number, postalCode: string }): Observable<PaginatedDeliveryTimeSlot> {
     let params = this.generateParams({}, data);
     return this.supabaseService.getRequest('supplier_schedule_postalcode', params).pipe(
       map((response: HttpResponse<any[]>) => {
@@ -34,11 +34,13 @@ export class SuppliersService {
       })
     );
   }
-  generateParams(sort: any, data: { supplierId: string, page: number, limit: number }) {
+  generateParams(sort: any, data: { supplierId: string, page: number, limit: number, postalCode: string }) {
     let params = new HttpParams()
       .set('offset', (data.page - 1) * data.limit)
       .set('limit', data.limit == 0 ? 10 : data.limit)
-      .set('supplier_id', 'eq.' + data.supplierId);
+      .set('supplier_id', 'eq.' + data.supplierId)
+      .set('postal_code', 'like.*' + data.postalCode+'*')
+      ;
     if (sort.field) params = params.set('order', sort.field + "." + sort.order);
     return params;
   }

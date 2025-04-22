@@ -1,7 +1,17 @@
 <div class="card-body">
+    <div class="d-flex justify-content-center">
+        <div class="col-auto">
+            <input type="text" class="form-control form-control-sm" placeholder="Ψαξτε το ΤΚ"
+                (keyup)="searchByTK($event)" />
+        </div>
+
+    </div>
+
     <div class="row">
         <div class="postal-tags">
-            @for(code of postalCodes; track code)
+
+
+            @for(code of postalCodes(); track code)
             {
             <span (click)="selectPostalCode(code)" [class.active]="code === selectedPostalCode">
                 📍 {{ code }}
@@ -10,45 +20,52 @@
 
         </div>
         <hr />
+        @if(selectedPostalCode)
+        {
         <div class="schedule-section">
-            <h3>Schedule for Postal Code: {{ selectedPostalCode }}</h3>
+            <h3>Πρόγραμμα για τον ΤΚ: {{ selectedPostalCode }}</h3>
+            <div class="mt-2 text-muted small">
+                <p>Παρακάτω είναι το πρόγραμμα παράδοσεις των προιόντων για το ΤΚ {{selectedPostalCode}}. Μπορείτε να το τροποποίησετε όπως επιθυμείτε</p>
+            </div>
             @if (isLoading) {
-                <div class="spinner-wrapper">
-                  <div class="spinner">Loading...</div>
-                </div>
-              } @else {
-                @for(day of daysOfWeek; track day)
+            <div class="spinner-wrapper">
+                <div class="spinner">Loading...</div>
+            </div>
+            }
+            @else
+            {
+            @for(day of daysOfWeek; track day)
+            {
+            <div class="d-flex justify-content-between flex-wrap p-2">
+                @if(deliverySchedule())
                 {
-                <div class="d-flex justify-content-between flex-wrap p-2">
-                    @if(deliverySchedule())
+                @if(deliverySchedule()[selectedPostalCode][day])
+                { <div>
+                    <strong>{{ day }}:</strong>
+                    @for(slot of deliverySchedule()[selectedPostalCode][day]; track slot; let i = $index;)
                     {
-                        @if(deliverySchedule()[selectedPostalCode][day])
-                        { <div>
-                            <strong>{{ day }}:</strong>
-                            @for(slot of deliverySchedule()[selectedPostalCode][day]; track slot; let i = $index;)
-                            {
-                            <span class="slot">
-                                {{ slot }}
-                                <button  (click)="removeTimeSlot(day, i)">🗑️</button>
-                            </span>
-                            }
-        
-                        </div>
-                        }
+                    <span class="slot">
+                        {{ slot }}
+                        <button (click)="removeTimeSlot(day, i)">🗑️</button>
+                    </span>
                     }
-                  
-    
+
                 </div>
                 }
-              }
-        
+                }
+
+
+            </div>
+            }
+            }
+
 
 
             <!-- Add new time slot -->
             <div class="add-section">
-                <label>Add new time slot</label>
+                <label>Προσθήκη νέας μερας και ωρας παράδοσης</label>
                 <select [(ngModel)]="newDay">
-                    <option value="" disabled>Select a day</option>
+                    <option value="" disabled>Επιλέξτε μερα</option>
 
                     @for(day of daysOfWeek; track day) {
                     <option [value]="day">{{ day }}</option>
@@ -56,23 +73,26 @@
                     }
                 </select>
                 <select [(ngModel)]="selectedStartSlot">
-                    <option value="" disabled>Select a  start time</option>
+                    <option value="" disabled>Ώρα έναρξης</option>
                     @for(slot of startSlotIntervals; track slot) {
                     <option [value]="slot">{{ slot }}</option>
                     }
-                  </select>
-                  <select [(ngModel)]="selectedEndSlot">
-                    <option value="" disabled>Select a  end time</option>
+                </select>
+                <select [(ngModel)]="selectedEndSlot">
+                    <option value="" disabled>Ωρα λήξης</option>
                     @for(slot of endSlotIntervals; track slot) {
                     <option [value]="slot">{{ slot }}</option>
                     }
-                  </select>
-               
-                  <button type="button" class="btn btn-success btn-icon-text" (click)="addDay(newDay); addTimeSlot(newDay, selectedStartSlot,selectedEndSlot)">
+                </select>
+
+                <button type="button" class="btn btn-success btn-icon-text"
+                    (click)="addDay(newDay); addTimeSlot(newDay, selectedStartSlot,selectedEndSlot)">
                     <i class="feather icon-plus-circle"></i> Προσθήκη
-                  </button>
+                </button>
             </div>
         </div>
+        }
+
 
     </div>
 </div>
