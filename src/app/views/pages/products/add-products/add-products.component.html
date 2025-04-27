@@ -1,38 +1,31 @@
 <div class="row fullscreen">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
 
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <app-card-choice-order 
-                          [title]="'Προσθήκη Ενός Προϊόντος'" 
-                          [routerLinkValue]="'/products/add/single-product'">
-                        </app-card-choice-order>
-                      </div>
-            
-                      <div class="col-md-3 mb-3">
-                        <app-card-choice-order 
-                          [title]="'Προσθήκη Ολόκληρης Κατηγορίας'" 
-                          [routerLinkValue]="'/products/add/category-with-products'">
-                        </app-card-choice-order>
-                      </div>
-                      <div class="col-md-3 mb-3">
-                        <app-card-choice-order 
-                          [title]="'Ανεβασμα Αρχείου'" 
-                          [routerLinkValue]="'/products/add/upload-file'">
-                        </app-card-choice-order>
-                      </div>
-            
-                      <div class="col-md-3 mb-3">
-                        <app-card-choice-order 
-                          [title]="'Συγχρονισμός με ERP'" 
-                          [routerLinkValue]="'/products/add/erp-sync'">
-                        </app-card-choice-order>
-                      </div>
-                      <router-outlet></router-outlet>
-                </div>
-            </div>
+        <div class="row">
+          @for( choice of add_menu_cards; track choice.id; ) {
+          <div class="col-md-3 mb-3">
+            <app-card-choice-order [title]="choice.title" [routerLinkValue]="choice.route">
+            </app-card-choice-order>
+
+          </div>
+          }
+          @if(activeCardIndex()!=null)
+          {
+          <div class="mt-2 text-muted small">
+            {{ activeCardIndex().description }}
+          </div>
+          }
         </div>
+      </div>
     </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>

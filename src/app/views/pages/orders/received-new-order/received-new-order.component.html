@@ -1,6 +1,6 @@
     <div  class="card">
         <div class="card-body">
-            <h6 class="card-title"> New Orders </h6>
+            <h6 class="card-title"> Νέες παραγγελίες </h6>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead></thead>
@@ -28,9 +28,9 @@
                 </ngb-pagination>
       
                 <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
-                  <option selected [ngValue]="10">10 items per page</option>
-                  <option [ngValue]="25">25 items per page</option>
-                  <option [ngValue]="50">50 items per page</option>
+                  <option selected [ngValue]="10">10 αντικείμενα ανα σελίδα</option>
+                  <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
+                  <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
                 </select>
               </div>
         </div>

@@ -15,8 +15,9 @@ import Swal from 'sweetalert2';
 })
 export class PostalCodesSettingsComponent implements OnInit {
 
+
   newDay: string = '';
-  postalCodes: string[] = [];
+  postalCodes= signal<string[]> ([]) ;
   selectedPostalCode: string = '';
   selectedStartSlot: string = '';
   selectedEndSlot: string = '';
@@ -55,7 +56,7 @@ export class PostalCodesSettingsComponent implements OnInit {
   daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   ngOnInit(): void {
     this.generateTimeSlots();
-    this.fetchSuppliersSchedule();
+    this.fetchSuppliersSchedule('','23');
   }
   selectPostalCode(code: string) {
     this.selectedPostalCode = code;
@@ -64,17 +65,21 @@ export class PostalCodesSettingsComponent implements OnInit {
     
 
     effect(() => {
+      this.postalCodes().length = 0; // Clear the array before populating it
       this.supplierSchedule().forEach((slot) => {
-        console.log('sloot '+slot.postal_code);
-       
-        if (!this.postalCodes.includes(slot.postal_code)) {
-          this.postalCodes.push(slot.postal_code);
+      
+        if (!this.postalCodes().includes(slot.postal_code)) {
+          this.postalCodes().push(slot.postal_code);
         }
       });
     });
 
   }
+  searchByTK(event: KeyboardEvent) {
+   let searchValue =(event.target as HTMLInputElement).value;
 
+    this.fetchSuppliersSchedule(searchValue,'23');
+    }
   addDay(day: string) {
     const schedule = this.deliverySchedule()[this.selectedPostalCode];
     if (!schedule[day]) {
@@ -133,8 +138,8 @@ export class PostalCodesSettingsComponent implements OnInit {
   formatTime(h: number, m: number): string {
     return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
   }
-  fetchSuppliersSchedule() {
-    let params = { supplierId: '23', page: this.page, limit: this.limit };
+  fetchSuppliersSchedule(pc: string = '', supplierId: string = '') {
+    let params = { supplierId: supplierId, page: this.page, limit: this.limit , postalCode: pc};
     this.isLoading = true;
 
     const sub = this.supplierService.getSupplierSchedule(params).subscribe((data) => {

@@ -4,6 +4,7 @@ import { Customer } from '../../../core/model/customers';
 import { Order } from '../../../core/model/order';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalCustomerComponent } from "./modal-customer/modal-customer.component";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-customers',
@@ -25,17 +26,24 @@ export class CustomersComponent implements OnInit {
   limit: number = 10;
   totalPages = signal<number>(2)
   totalElements = signal<number>(2)
+  isLoading: boolean = false;
+
   ngOnInit(): void {
     this.fetchAllCustmersOfTheSupplier();
   }
   fetchAllCustmersOfTheSupplier() {
     let params = { supplierId: '23', page: this.page, limit: this.limit };
 
-    const sub = this.customerService.getCustomersBySupplier(params).subscribe((data) => {
+    const sub = this.customerService.getCustomersBySupplier(params)
+
+    .subscribe((data) => {
       this.customers.set(data.content);
       this.totalElements.set(data.totalElements);
       this.totalPages.set(Math.ceil(this.totalElements() / this.limit));
-    });
+      this.isLoading = true;
+
+    }
+  );
     this.destroy.onDestroy(() => sub.unsubscribe());
   }
 

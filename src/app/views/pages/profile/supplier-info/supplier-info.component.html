@@ -15,7 +15,7 @@
                     <!-- First Column -->
                     <div class="col-md-3">
                         <div class="mb-4">
-                            <strong>Name:</strong>
+                            <strong>Όνομα:</strong>
                             @if(!startEditProfile){
                             <p class="mb-0">{{ supplier()?.name }}</p>
 
@@ -44,7 +44,7 @@
                     <!-- Second Column -->
                     <div class="col-md-3">
                         <div class="mb-4">
-                            <strong>Address:</strong>
+                            <strong>Διευθυνση:</strong>
                             @if(!startEditProfile){
                             <p class="mb-0">{{ supplier()?.address }}</p>
 
@@ -56,7 +56,7 @@
                             }
                         </div>
                         <div class="mb-4">
-                            <strong>AFM:</strong>
+                            <strong>ΑΦΜ:</strong>
                             @if(!startEditProfile){
                             <p class="mb-0">{{ supplier()?.afm }}</p>
 
@@ -71,7 +71,7 @@
                     <div class="col-md-3">
 
                         <div class="mb-4">
-                            <strong>Telephone:</strong>
+                            <strong>Τηλέφωνο:</strong>
                             @if(!startEditProfile){
                             <p class="mb-0">{{ supplier()?.telephone }}</p>
 
@@ -83,7 +83,7 @@
                             }
                         </div>
                         <div class="mb-4">
-                            <strong>Minimum Order (€):</strong>
+                            <strong>Ελάχιστο Οριο Παραγγελίας (€):</strong>
                             @if(!startEditProfile){
                             <p class="mb-0">{{ supplier()?.minimum_order_euros }}</p>
 
@@ -102,15 +102,15 @@
         <div class="row">
             @if(!startEditProfile){
             <div class="col-md-12">
-                <button type="button" (click)="editProfile()" class="btn btn-primary">Edit Profile</button>
+                <button type="button" (click)="editProfile()" class="btn btn-primary">Επεξεργασία Προφίλ</button>
             </div> }
             @else {
             <div class="col-md-12">
-                <button type="button" (click)="saveProfileChanges()" class="btn btn-success">Save
-                    Profile</button>
+                <button type="button" (click)="saveProfileChanges()" class="btn btn-success">Αποθήκευση
+                    </button>
 
-                <button type="button" (click)="discardChanges()" class="btn btn-danger">Discard
-                    Changes</button>
+                <button type="button" (click)="discardChanges()" class="btn btn-danger">Ακυρωση Αλλαγών</button>
+                   
             </div>
             }
 
