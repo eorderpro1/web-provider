@@ -4,11 +4,12 @@ import { SuppliersService } from '../../../../core/services/suppliers.service';
 import { DeliveryTimeSlot, PaginatedDeliveryTimeSlot } from '../../../../core/model/supplier_schedule';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-postal-codes-settings',
   standalone: true,
-  imports: [FormsModule,
+  imports: [FormsModule, NgbPagination,
     SweetAlert2Module],
   templateUrl: './postal-codes-settings.component.html',
   styleUrl: './postal-codes-settings.component.scss'
@@ -26,7 +27,7 @@ export class PostalCodesSettingsComponent implements OnInit {
   supplierService = inject(SuppliersService);
   sort: any = { field: '', order: '' };
   page: number = 1;
-  limit: number = 200;
+  limit: number = 10;
   totalPages = signal<number>(2)
   totalElements = signal<number>(2)
   private destroy = inject(DestroyRef);
@@ -65,7 +66,7 @@ export class PostalCodesSettingsComponent implements OnInit {
     
 
     effect(() => {
-      this.postalCodes().length = 0; // Clear the array before populating it
+      this.postalCodes().length = 0; 
       this.supplierSchedule().forEach((slot) => {
       
         if (!this.postalCodes().includes(slot.postal_code)) {

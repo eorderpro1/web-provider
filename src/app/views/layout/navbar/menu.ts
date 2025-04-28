@@ -2,12 +2,12 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
   {
-    label: 'Orders',
+    label: 'Παραγγελίες',
     icon: 'home',
     link: '/orders'
   },
   {
-    label: 'Statistics',
+    label: 'Στατιστικά',
     icon: 'pie-chart',
     subMenus: [
       {
@@ -33,17 +33,17 @@ export const MENU: MenuItem[] = [
     ]
   },
   {
-    label: 'Products',
+    label: 'Προιόντα',
     icon: 'box',
     link: '/products'
   },
   {
-    label: 'Campaigns',
+    label: 'Διαφημίσεις',
     icon: 'video',
     link: '/campaigns'
   },
   {
-    label: 'Customers',
+    label: 'Πελάτες',
     icon: 'users',
     link: '/customers'
   },

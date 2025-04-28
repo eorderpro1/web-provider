@@ -17,6 +17,17 @@
                 📍 {{ code }}
             </span>
             }
+            <div class="d-flex justify-content-between p-2">
+                <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
+                  (pageChange)="fetchSuppliersSchedule()">
+                </ngb-pagination>
+      
+                <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="fetchSuppliersSchedule()">
+                  <option selected [ngValue]="10">10 αντικείμενα ανα σελίδα</option>
+                  <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
+                  <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
+                </select>
+              </div>
 
         </div>
         <hr />
