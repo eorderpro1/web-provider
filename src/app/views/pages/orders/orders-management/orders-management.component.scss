@@ -1,6 +1,11 @@
 
-th{
+th {
   text-align: center;
+  vertical-align: middle; /* new */
+}
+
+td {
+  vertical-align: middle; /* new */
 }
 .select{
   font-size: 12px;
@@ -28,4 +33,9 @@ th{
 .btn.select {
   min-width: 150px; /* Adjust based on longest text */
   text-align: center;
+}
+td img {
+  max-height: 50px;
+  display: block;
+  margin: 0 auto;
 }
