@@ -11,23 +11,26 @@
         <div class="postal-tags">
 
 
-            @for(code of postalCodes(); track code)
+            @for(code of displayedPostalCodes; track code)
             {
             <span (click)="selectPostalCode(code)" [class.active]="code === selectedPostalCode">
                 📍 {{ code }}
             </span>
             }
-            <div class="d-flex justify-content-between p-2">
-                <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
-                  (pageChange)="fetchSuppliersSchedule()">
-                </ngb-pagination>
-      
-                <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="fetchSuppliersSchedule()">
-                  <option selected [ngValue]="10">10 αντικείμενα ανα σελίδα</option>
-                  <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
-                  <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
-                </select>
-              </div>
+           
+
+        </div>
+        <div class="row">
+            <div class="d-flex">
+                <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limitPostal"
+                (pageChange)="onPostalPageChange($event)">
+              </ngb-pagination>
+              
+              <select class="form-select" style="width: auto" [(ngModel)]="limitPostal" (ngModelChange)="onPostalLimitChange()">
+                <option [ngValue]="10">10 αντικείμενα ανα σελίδα</option>
+                <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
+                <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
+              </select>
 
         </div>
         <hr />
