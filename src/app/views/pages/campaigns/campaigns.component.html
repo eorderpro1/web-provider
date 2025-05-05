@@ -18,12 +18,15 @@
                     Μικρή συμμετοχή για τον πελάτη με ευελιξία. Tο κόστος προσαρμόζεται στις ανάγκες του πελάτη.
                     Μικρότερη δυνατή συμμετοχή: €5 τη μέρα μέχρι να εξαντληθεί.
                     Cost per click (CPC): €0.10.</p>
-                  <app-campaign-buttons [isEnabled]="isPpcEnabled()" (enabled)="isPpcEnabled.set($event)">
-                  </app-campaign-buttons>
-                  @if(isPpcEnabled()){
-                  <p style="  font-weight: 900;;">Στατιστικά: 1000 clicks, 50 παραγγελίες, 2.5€ ξοδεύτηκαν</p>
-                  <app-campaign-settings></app-campaign-settings>
-                  }
+                    <div class="row">
+                      <app-campaign-buttons [isEnabled]="isPpcEnabled()" (enabled)="isPpcEnabled.set($event)">
+                      </app-campaign-buttons>
+                      @if(isPpcEnabled()){
+                      <p style="  font-weight: 900;;">Στατιστικά: 1000 clicks, 50 παραγγελίες, 2.5€ ξοδεύτηκαν</p>
+                      <app-campaign-settings></app-campaign-settings>
+                      }
+                    </div>
+                 
 
                 </ng-template>
               </div>

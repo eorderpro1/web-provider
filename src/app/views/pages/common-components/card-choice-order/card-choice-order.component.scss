@@ -1,5 +1,4 @@
 .order-button {
-  background-color: #f3f4f6;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
   transition: all 0.2s ease;
@@ -10,14 +9,13 @@
 }
 
 .order-button:hover {
-  background-color: #e0e7ff;
+  background-color: #98affb;
   transform: translateY(-2px);
 }
 
 .order-button.active {
   background-color: #3b82f6;
   border-color: #2563eb;
-  color: white;
   font-weight: 600;
 }
 img{

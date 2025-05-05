@@ -11,11 +11,11 @@ import { FormsModule } from '@angular/forms';
 export class CampaignButtonsComponent {
   cost: number = 0;
 
-  isEnabled = input.required<boolean>(); // this stays a signal
+  isEnabled = input.required<boolean>(); 
   enabled = output<boolean>();
 
   onToggleChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.enabled.emit(input.checked); // Emit the new boolean value
+    this.enabled.emit(input.checked); 
   }
 }
