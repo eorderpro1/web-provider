@@ -4,7 +4,9 @@
 .modal-lg, .modal-xl {
     --bs-modal-width: 90%!important;
 }
-
+tr{
+    cursor: pointer;
+}
 @media (min-width: 992px) {
     .modal-lg, .modal-xl {
         --bs-modal-width: 90% !important;

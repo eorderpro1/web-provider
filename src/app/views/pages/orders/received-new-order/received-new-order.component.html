@@ -7,14 +7,19 @@
                     <tbody>
                         @for (order of orders(); track order.order_id)
                         {
-                        <tr>
-                            <td><img [src]='order.shop_image' alt="yoooo" width="40" height="40"
+                        <tr (click)="openScrollableModal(scrollableModal, order)">
+                            <td><img [src]='order.shop_image' alt='order.shop_name' width="40" height="40"
                                     style="border-radius: 50%;" /></td>
                                     <td>{{order.shop_name}}</td>
-                            <td><button type="button" class="btn btn-icon-text btn-danger"
+                            <td><button type="button" class="btn btn-success btn-icon"
                                     style="border-radius: 8px;font-weight: bold;"
-                                    (click)="openScrollableModal(scrollableModal, order)">
-                                    Αποδοχή
+                                    >
+                                    <i class="feather icon-check"></i>
+                                </button></td>
+                                <td><button type="button" class="btn btn-icon btn-danger"
+                                    style="border-radius: 8px;font-weight: bold;"
+                                    >
+                                    <i class="feather icon-x-circle"></i>
                                 </button></td>
                         </tr>
                         }
@@ -46,7 +51,11 @@
             [deliveryDate]="this.deliveryDate"></app-order-modal>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
-        <button type="button" class="btn btn-primary" (click)="modal.close('by: accept')">Αποδοχή</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('by: close button')">
+            <i class="feather icon-x-circle"></i> Απόρριψη
+        </button>
+        <button type="button" class="btn btn-success" (click)="modal.close('by: accept')">
+            <i class="feather icon-check"></i>
+            Αποδοχή</button>
     </div>
 </ng-template>
