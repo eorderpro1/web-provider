@@ -18,7 +18,7 @@ export class PostalCodesSettingsComponent implements OnInit {
 
 
   newDay: string = '';
-  postalCodes= signal<string[]> ([]) ;
+  postalCodes = signal<string[]>([]);
   selectedPostalCode: string = '';
   selectedStartSlot: string = '';
   selectedEndSlot: string = '';
@@ -26,14 +26,16 @@ export class PostalCodesSettingsComponent implements OnInit {
   endSlotIntervals: string[] = [];
   supplierService = inject(SuppliersService);
   sort: any = { field: '', order: '' };
-  page: number = 1;
-  limit: number = 10;
-  totalPages = signal<number>(2)
-  totalElements = signal<number>(2)
+  allPostalCodes: string[] = [];          // unique postal codes
+  displayedPostalCodes: string[] = [];    // paginated codes
+  page = 1;
+  limitPostal = 10;
+  totalElementsCount = 0;
   private destroy = inject(DestroyRef);
   supplierSchedule = signal<DeliveryTimeSlot[]>([]);
   isLoading: boolean = false;
 
+  daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   deliverySchedule = computed(() => {
     const scheduleMap: { [postalCode: string]: { [day: string]: string[] } } = {};
 
@@ -48,39 +50,57 @@ export class PostalCodesSettingsComponent implements OnInit {
         scheduleMap[postal_code][day_of_week] = [];
       }
 
-      scheduleMap[postal_code][day_of_week].push(`${start_time.slice(0,5)}–${end_time.slice(0,5)}`);
+      scheduleMap[postal_code][day_of_week].push(`${start_time.slice(0, 5)}–${end_time.slice(0, 5)}`);
     });
 
     return scheduleMap;
   });
 
-  daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   ngOnInit(): void {
     this.generateTimeSlots();
-    this.fetchSuppliersSchedule('','23');
+    this.fetchSuppliersSchedule('', '23');
   }
   selectPostalCode(code: string) {
     this.selectedPostalCode = code;
   }
   constructor() {
-    
-
     effect(() => {
-      this.postalCodes().length = 0; 
+      this.postalCodes().length = 0;
       this.supplierSchedule().forEach((slot) => {
-      
         if (!this.postalCodes().includes(slot.postal_code)) {
           this.postalCodes().push(slot.postal_code);
         }
-      });
-    });
+      })
+      this.applyPostalCodePagination();
+    }, { allowSignalWrites: true });
 
   }
-  searchByTK(event: KeyboardEvent) {
-   let searchValue =(event.target as HTMLInputElement).value;
+  applyPostalCodePagination() {
+    const start = (this.page - 1) * this.limitPostal;
+    const end = start + this.limitPostal;
+    this.displayedPostalCodes = this.allPostalCodes.slice(start, end);
+  }
+  
+  onPostalPageChange(newPage: number) {
+    this.page = newPage;
+    this.applyPostalCodePagination();
+  }
+  
+  onPostalLimitChange() {
+    this.page = 1;
+    this.applyPostalCodePagination();
+  }
+  
+  totalElements() {
+    return this.totalElementsCount;
+  }
+  
 
-    this.fetchSuppliersSchedule(searchValue,'23');
-    }
+  searchByTK(event: KeyboardEvent) {
+    let searchValue = (event.target as HTMLInputElement).value;
+
+    this.fetchSuppliersSchedule(searchValue, '23');
+  }
   addDay(day: string) {
     const schedule = this.deliverySchedule()[this.selectedPostalCode];
     if (!schedule[day]) {
@@ -140,16 +160,19 @@ export class PostalCodesSettingsComponent implements OnInit {
     return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
   }
   fetchSuppliersSchedule(pc: string = '', supplierId: string = '') {
-    let params = { supplierId: supplierId, page: this.page, limit: this.limit , postalCode: pc};
+    let params = { supplierId: supplierId, postalCode: pc };
     this.isLoading = true;
 
     const sub = this.supplierService.getSupplierSchedule(params).subscribe((data) => {
+      const rawData = data;
 
-      this.supplierSchedule.set(data.content);
-      this.totalElements.set(data.totalElements);
-      this.totalPages.set(Math.ceil(this.totalElements() / this.limit));
-      this.isLoading = false;
-
+      const uniqueCodes = Array.from(new Set(rawData.map(item => item.postal_code)));
+  
+      this.allPostalCodes = uniqueCodes;
+      this.supplierSchedule.set(rawData);
+      this.totalElementsCount = uniqueCodes.length;
+      this.applyPostalCodePagination();   
+         this.isLoading = false;
     });
 
 

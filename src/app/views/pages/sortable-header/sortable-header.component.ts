@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output, signal } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 
 @Component({
   selector: '[app-sortable-header]',
@@ -13,7 +13,17 @@ export class SortableHeaderComponent {
   sort =input<{ field: string, order: string }>({ field: '', order: '' });
   label =input<string>('');
   sortChange =output<string>();
-
+  formattedLabel = computed(() => {
+    const value = this.label();
+    const parts = value.split(' ');
+  
+    const isLargeScreen = window.innerWidth <= 1200;
+    if (isLargeScreen && parts.length === 2) {
+      return parts.join('<br>');
+    }
+  
+    return value;
+  });
 
 
   isSorted(): boolean {
@@ -30,7 +40,7 @@ export class SortableHeaderComponent {
 
   onSort(): void {
     const newOrder = this.isAscending() ? 'desc' : 'asc';
-    this.sortChange.emit(this.field() + ',' + newOrder); // Emit field and order
+    this.sortChange.emit(this.field() + ',' + newOrder); 
   }
 
 }

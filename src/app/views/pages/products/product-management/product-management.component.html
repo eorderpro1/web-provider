@@ -11,11 +11,11 @@
                 <i class="feather icon-chevron-down"></i>
               </button>
               <div class="order-first">
-                <h4>Όλα τα προιόντα</h4>
+                <p class="product-title">Όλα τα προιόντα</p>
               </div>
             </div>
             <div class="d-grid my-3">
-              <h5>Κατηγορίες</h5>
+              <p class="product-categories">Κατηγορίες</p>
             </div>
             <hr />
             <div class="email-aside-nav" id="asideNav" [ngbCollapse]="isAsideNavCollapsed">
@@ -34,9 +34,9 @@
                 </ngb-pagination>
             
                 <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="fetchCategoriesBySuplierId('')">
-                  <option selected [ngValue]="10">10 αντικείμενα ανα σελίδα</option>
-                  <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
-                  <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
+                  <option selected [ngValue]="10">10 αντικείμενα</option>
+                  <option [ngValue]="25">25 αντικείμενα</option>
+                  <option [ngValue]="50">50 αντικείμενα</option>
                 </select>
               </div>
             </div>

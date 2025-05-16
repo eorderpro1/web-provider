@@ -6,7 +6,7 @@
         <div class="row">
           @for( choice of add_menu_cards; track choice.id; ) {
           <div class="col-md-3 mb-3">
-            <app-card-choice-order [title]="choice.title" [routerLinkValue]="choice.route">
+            <app-card-choice-order [title]="choice.title" [routerLinkValue]="choice.route" (click)="setActiveCard(choice)">
             </app-card-choice-order>
 
           </div>

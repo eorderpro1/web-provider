@@ -8,12 +8,12 @@
                 <span><i class="feather icon-map-pin"></i>{{selectedCustomer().address}}
                     {{selectedCustomer().postal_code}}</span>
                 <span class="status active">Active <span class="description">(παραγγέλνει συχνά)</span></span>
-                <span class="status dormant">
+                <!-- <span class="status dormant">
                     Dormant <span class="description">(δεν παραγγέλνει συχνά)</span>
                 </span>
                 <span class="status lost">
                     Lost <span class="description">(έχει σταματήσει να παραγγέλνει)</span>
-                </span>
+                </span> -->
             </div>
 
         </div>
@@ -24,11 +24,11 @@
         </div>
         <div class="card-body">
             <div class="tags">
-                <span [class.active]="isSelected('VIP')" (click)="toggleTag('VIP')"><i style="color: gold;" class="feather icon-star"></i>VIP</span>
-                <span [class.active]="isSelected('Πληρώνει αργά')" (click)="toggleTag('Πληρώνει αργά')"><i class="feather icon-clock"></i>Πληρώνει αργά</span>
-                <span [class.active]="isSelected('Εβδομαδιαίος Αγοραστής')" (click)="toggleTag('Εβδομαδιαίος Αγοραστής')"><i class="feather icon-award"></i>Εβδομαδιαίος Αγοραστής</span>
-                <span [class.active]="isSelected('Περιστασιακός')" (click)="toggleTag('Περιστασιακός')"><i class="feather icon-watch"></i>Περιστασιακός</span>
-                <span [class.active]="isSelected('Σε προσφορές')" (click)="toggleTag('Σε προσφορές')"><i class="feather icon-coffee"></i>Σε προσφορές</span>
+                <span class="tag-icon" [class.active]="isSelected('VIP')" (click)="toggleTag('VIP')"><i style="color: gold;" class="feather icon-star"></i>VIP</span>
+                <span class="tag-icon" [class.active]="isSelected('Πληρώνει αργά')" (click)="toggleTag('Πληρώνει αργά')"><i class="feather icon-clock"></i>Πληρώνει αργά</span>
+                <span class="tag-icon" [class.active]="isSelected('Εβδομαδιαίος Αγοραστής')" (click)="toggleTag('Εβδομαδιαίος Αγοραστής')"><i class="feather icon-award"></i>Εβδομαδιαίος Αγοραστής</span>
+                <span class="tag-icon" [class.active]="isSelected('Περιστασιακός')" (click)="toggleTag('Περιστασιακός')"><i class="feather icon-watch"></i>Περιστασιακός</span>
+                <span class="tag-icon" [class.active]="isSelected('Σε προσφορές')" (click)="toggleTag('Σε προσφορές')"><i class="feather icon-coffee"></i>Σε προσφορές</span>
             </div>
        
         </div>

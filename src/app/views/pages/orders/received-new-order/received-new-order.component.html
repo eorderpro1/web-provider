@@ -1,52 +1,79 @@
-    <div  class="card">
-        <div class="card-body">
-            <h6 class="card-title"> Νέες παραγγελίες </h6>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead></thead>
-                    <tbody>
-                        @for (order of orders(); track order.order_id)
-                        {
-                        <tr>
-                            <td><img [src]='order.shop_image' alt="yoooo" width="40" height="40"
-                                    style="border-radius: 50%;" /></td>
-                                    <td>{{order.shop_name}}</td>
-                            <td><button type="button" class="btn btn-icon-text btn-danger"
-                                    style="border-radius: 8px;font-weight: bold;"
-                                    (click)="openScrollableModal(scrollableModal, order)">
-                                    Αποδοχή
-                                </button></td>
-                        </tr>
-                        }
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title"> Νέες παραγγελίες </h6>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead></thead>
+                <tbody>
+                    @for (order of orders(); track order.order_id)
+                    {
+                    <!-- Row for screens > 1400px -->
+                    <tr class="row-desktop" (click)="openScrollableModal(scrollableModal, order)">
+                        <td><img class="received-img" [src]="order.shop_image" alt="{{ order.shop_name }}" /></td>
+                        <td class="received-text">{{ order.shop_name }}</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-icon received-button">
+                                <i class="feather icon-check"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-icon btn-danger received-button">
+                                <i class="feather icon-x-circle"></i>
+                            </button>
+                        </td>
+                    </tr>
 
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex justify-content-between align-items-center p-2 flex-wrap">
-                <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
-                  (pageChange)="refreshOrders()">
-                </ngb-pagination>
-      
-                <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
-                  <option selected [ngValue]="10">10 αντικείμενα ανα σελίδα</option>
-                  <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
-                  <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
-                </select>
-              </div>
+                    <!-- Row for screens <= 1400px -->
+                    <tr class="row-mobile" (click)="openScrollableModal(scrollableModal, order)">
+                        <td class="received-mobile-wrapper" colspan="4">
+                          <div class="received-left">
+                            <img class="received-img" [src]="order.shop_image" alt="{{ order.shop_name }}" />
+                            <div class="received-text">{{ order.shop_name }}</div>
+                          </div>
+                          <div class="received-right">
+                            <button type="button" class="btn btn-success btn-icon received-button">
+                              <i class="feather icon-check"></i>
+                            </button>
+                            <button type="button" class="btn btn-icon btn-danger received-button">
+                              <i class="feather icon-x-circle"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    }
+
+                </tbody>
+            </table>
         </div>
-    
+        <div class="d-flex justify-content-between align-items-center p-2 flex-wrap">
+            <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
+                (pageChange)="refreshOrders()">
+            </ngb-pagination>
 
-<ng-template #scrollableModal #xlModal let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
-        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+            <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
+                <option selected [ngValue]="10">10 αντικείμενα ανα σελίδα</option>
+                <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
+                <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
+            </select>
+        </div>
     </div>
-    <div class="modal-body" >
-        <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems"
-            [deliveryDate]="this.deliveryDate"></app-order-modal>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
-        <button type="button" class="btn btn-primary" (click)="modal.close('by: accept')">Αποδοχή</button>
-    </div>
-</ng-template>
+
+
+    <ng-template #scrollableModal #xlModal let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title" id="newOrderModal">Αποδοχή Παραγγελίας {{selectedOrder.order_id}}</h5>
+            <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <app-order-modal [selectedOrder]="this.selectedOrder" [orderItems]="this.orderItems"
+                [deliveryDate]="this.deliveryDate"></app-order-modal>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.close('by: close button')">
+                <i class="feather icon-x-circle"></i> Απόρριψη
+            </button>
+            <button type="button" class="btn btn-success" (click)="modal.close('by: accept')">
+                <i class="feather icon-check"></i>
+                Αποδοχή</button>
+        </div>
+    </ng-template>

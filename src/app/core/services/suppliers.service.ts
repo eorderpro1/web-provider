@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { SupabaseService } from './supabase.service';
 import { Supplier } from '../model/supplier';
-import { PaginatedDeliveryTimeSlot } from '../model/supplier_schedule';
+import { DeliveryTimeSlot, PaginatedDeliveryTimeSlot } from '../model/supplier_schedule';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class SuppliersService {
     );
   }
 
-  getSupplierSchedule(data: { supplierId: string, page: number, limit: number, postalCode: string }): Observable<PaginatedDeliveryTimeSlot> {
+  getSupplierSchedulePagination(data: { supplierId: string, page: number, limit: number, postalCode: string }): Observable<PaginatedDeliveryTimeSlot> {
     let params = this.generateParams({}, data);
     return this.supabaseService.getRequest('supplier_schedule_postalcode', params).pipe(
       map((response: HttpResponse<any[]>) => {
@@ -32,6 +32,13 @@ export class SuppliersService {
           totalElements: totalElements
         });
       })
+    );
+  }
+  getSupplierSchedule(data: { supplierId: string, postalCode: string }): Observable<DeliveryTimeSlot[]> {
+    let params = new HttpParams().set('supplier_id', 'eq.' + data.supplierId)
+      .set('postal_code', 'like.*' + data.postalCode+'*');
+    return this.supabaseService.getRequest('supplier_schedule_postalcode', params).pipe(
+      map((response: HttpResponse<DeliveryTimeSlot[]>) => response.body || [])
     );
   }
   generateParams(sort: any, data: { supplierId: string, page: number, limit: number, postalCode: string }) {

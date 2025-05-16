@@ -4,3 +4,29 @@
     gap: 10px;
     padding: 10%;
   }
+  .product-title{
+    font-size: 15px;
+    font-weight: bold;
+  }
+.product-categories{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .product-categories .category{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .product-categories .category input{
+    width: 20px;
+    height: 20px;
+  }
+  .product-categories .category label{
+    font-size: 14px;
+  }
+  .product-categories .category span{
+    font-size: 12px;
+    color: #888;
+  }
