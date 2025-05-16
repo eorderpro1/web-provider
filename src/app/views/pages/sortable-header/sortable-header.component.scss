@@ -1,10 +1,11 @@
 th{
     text-align: center;
-}
+    }
 th.sortable {
   cursor: pointer; 
   position: relative; 
 }
+
 
 th.sortable:hover {
   background-color: #f0f0f0; 
@@ -27,4 +28,17 @@ th.sortable .arrow.down {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid black; 
+}
+
+
+
+@media screen and (max-width: 1400px)
+{
+  th{
+    .header{
+      font-size: 0.85em !important;
+      text-align:justify
+  
+    }
+  }
 }

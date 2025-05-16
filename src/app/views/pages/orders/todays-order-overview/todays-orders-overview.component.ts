@@ -11,6 +11,7 @@ import { ReceivedNewOrderComponent } from "../received-new-order/received-new-or
 import { OrderItem } from '../../../../core/model/orderItems';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { OrderModalComponent } from "../order-modal/order-modal.component";
+import { BreakLinesPipe } from '../../../../core/model/break-lines.pipe';
 
 @Component({
   selector: 'app-todays-orders-overview',
@@ -22,7 +23,9 @@ import { OrderModalComponent } from "../order-modal/order-modal.component";
     NgbTypeaheadModule, NgbPaginationModule,
     SortableHeaderComponent,
     ReceivedNewOrderComponent,
-    OrderModalComponent
+    OrderModalComponent,
+    BreakLinesPipe
+    
 ],
   providers: [OrderSupabaseService, HttpClient, SupabaseService],
   templateUrl: './todays-orders-overview.component.html',

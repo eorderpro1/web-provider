@@ -3,8 +3,8 @@
     [class.sortable]="true" 
     [ngClass]="{ 'asc': isAscending(), 'desc': isDescending() }">
     
-    <!-- Display the label -->
-    {{ label() }}
+
+    <div class="header" [innerHTML]="formattedLabel()"></div>
 
     <!-- Sorting indicators -->
     <span *ngIf="isSorted()">

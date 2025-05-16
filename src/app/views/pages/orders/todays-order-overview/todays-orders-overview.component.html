@@ -1,7 +1,7 @@
 
 
 <div class="row g-0">
-  <div class="col-lg-7 col-xl-8 stretch-card d-flex flex-wrap">
+  <div class="col-lg-8 col-xl-8 stretch-card d-flex flex-wrap">
     <div class="card flex-grow-1">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
@@ -35,7 +35,7 @@
                 <th app-sortable-header [field]="'order_id'" [sort]="sort" [label]="'Order ID'"
                   (sortChange)="sortData('order_id')">
                 </th>
-                <th style="padding-left: 7%;" app-sortable-header [field]="'shop_name'" [sort]="sort"
+                <th app-sortable-header [field]="'shop_name'" [sort]="sort"
                   [label]="'Shop Name'" (sortChange)="sortData('shop_name')">
                 </th>
                 <th app-sortable-header [field]="'order_created_at'" [sort]="sort" [label]="'Order Date'"
@@ -47,7 +47,7 @@
                 <th app-sortable-header [field]="'start_time'" [sort]="sort" [label]="'Timeslot'"
                   (sortChange)="sortData('start_time')">
                 </th>
-                <th app-sortable-header [field]="'is_paid'" [sort]="sort" [label]="'Payment Status'"
+                <th app-sortable-header [field]="'is_paid'" [sort]="sort" [label]="'Payment\n Status'"
                   (sortChange)="sortData('is_paid')">
                 </th>
                 <th app-sortable-header [field]="'total_cost'" [sort]="sort" [label]="'Cost'"
@@ -63,8 +63,7 @@
                 <td>
                   <div style="text-align: center;">
                     <img [src]="order.shop_image" class="image-button-auto-resize" />
-                    <div>{{ order.shop_name }}</div>
-                  </div>
+                    <div [innerHTML]="order.shop_name | breakLines:10"></div>                  </div>
                 </td>
                 <td>{{ order.order_created_at| date }}</td>
                 <td>{{ order.day_of_week }}</td>
@@ -92,7 +91,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-6 col-xl-4">
+  <div class="col-lg-4 col-xl-4">
     <app-received-new-order></app-received-new-order>
   </div>
 
