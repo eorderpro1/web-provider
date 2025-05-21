@@ -15,6 +15,7 @@ import { UtilsService } from '../../../../core/services/utils.service';
 import { SupabaseService } from '../../../../core/services/supabase.service';
 import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { SortableHeaderComponent } from '../../sortable-header/sortable-header.component';
+import { BreakLinesPipe } from "../../../../core/model/break-lines.pipe";
 
 @Component({
   selector: 'app-orders-management',
@@ -26,8 +27,9 @@ import { SortableHeaderComponent } from '../../sortable-header/sortable-header.c
     NgbTypeaheadModule, NgbPaginationModule,
     SortableHeaderComponent,
     OrderModalComponent,
-    NgbDatepickerModule
-  ],
+    NgbDatepickerModule,
+    BreakLinesPipe
+],
   providers: [OrderSupabaseService, HttpClient, SupabaseService],
   templateUrl: './orders-management.component.html',
   styleUrl: './orders-management.component.scss'

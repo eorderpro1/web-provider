@@ -151,7 +151,7 @@
                 <td>
                   <div style="text-align: center;">
                     <img [src]="order.shop_image" class="image-button-auto-resize" />
-                    <div>{{ order.shop_name }}</div>
+                    <div [innerHTML]="order.shop_name | breakLines:10"></div>      
                   </div>
                 </td>
 
