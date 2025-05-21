@@ -45,6 +45,11 @@ table th {
   .table thead th{
     font-size: .85em !important;
   }
+  .image-button-auto-resize{
+
+    max-width: 40% !important; 
+    max-height: 40% !important; 
+  }
 }
 @media screen and (max-width: 1200px)
 {

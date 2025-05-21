@@ -1,7 +1,7 @@
 
 
 <div class="row g-0">
-  <div class="col-lg-8 col-xl-8 stretch-card d-flex flex-wrap">
+  <div class="col-lg-8 col-xl-8 stretch-card d-flex flex-wrap h-100">
     <div class="card flex-grow-1">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
@@ -63,7 +63,8 @@
                 <td>
                   <div style="text-align: center;">
                     <img [src]="order.shop_image" class="image-button-auto-resize" />
-                    <div [innerHTML]="order.shop_name | breakLines:10"></div>                  </div>
+                    <div [innerHTML]="order.shop_name | breakLines:10"></div>      
+                  </div>
                 </td>
                 <td>{{ order.order_created_at| date }}</td>
                 <td>{{ order.day_of_week }}</td>
@@ -73,6 +74,7 @@
                 <td>{{ order.total_cost |currency:'EUR':'symbol'  }}</td>
               </tr>
               }
+
             </tbody>
           </table>
         </div>

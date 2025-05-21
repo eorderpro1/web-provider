@@ -17,8 +17,7 @@ export class SortableHeaderComponent {
     const value = this.label();
     const parts = value.split(' ');
   
-    const isLargeScreen = window.innerWidth <= 1200;
-    if (isLargeScreen && parts.length === 2) {
+    if (parts.length === 2) {
       return parts.join('<br>');
     }
   

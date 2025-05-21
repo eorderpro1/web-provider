@@ -30,7 +30,7 @@ export class ReceivedNewOrderComponent implements OnInit {
   filters: any = { status: '', shop: '', orderDate: '' };
   sort: any = { field: '', order: '' };
   page: number = 1;
-  limit: number = 10;
+  limit: number = 12;
   totalPages = signal<number>(2)
   totalElements = signal<number>(2)
   deliveryDate: Date;

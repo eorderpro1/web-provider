@@ -15,8 +15,6 @@
                             <button type="button" class="btn btn-success btn-icon received-button">
                                 <i class="feather icon-check"></i>
                             </button>
-                        </td>
-                        <td>
                             <button type="button" class="btn btn-icon btn-danger received-button">
                                 <i class="feather icon-x-circle"></i>
                             </button>
@@ -26,36 +24,39 @@
                     <!-- Row for screens <= 1400px -->
                     <tr class="row-mobile" (click)="openScrollableModal(scrollableModal, order)">
                         <td class="received-mobile-wrapper" colspan="4">
-                          <div class="received-left">
-                            <img class="received-img" [src]="order.shop_image" alt="{{ order.shop_name }}" />
-                            <div class="received-text">{{ order.shop_name }}</div>
-                          </div>
-                          <div class="received-right">
-                            <button type="button" class="btn btn-success btn-icon received-button">
-                              <i class="feather icon-check"></i>
-                            </button>
-                            <button type="button" class="btn btn-icon btn-danger received-button">
-                              <i class="feather icon-x-circle"></i>
-                            </button>
-                          </div>
+                            <div class="received-left">
+                                <img class="received-img" [src]="order.shop_image" alt="{{ order.shop_name }}" />
+                                <div class="received-text">{{ order.shop_name }}</div>
+                            </div>
+                            <div class="received-right">
+                                <button type="button" class="btn btn-success btn-icon received-button">
+                                    <i class="feather icon-check"></i>
+                                </button>
+                                <button type="button" class="btn btn-icon btn-danger received-button">
+                                    <i class="feather icon-x-circle"></i>
+                                </button>
+                            </div>
                         </td>
-                      </tr>
+                    </tr>
                     }
 
                 </tbody>
             </table>
         </div>
-        <div class="d-flex justify-content-between align-items-center p-2 flex-wrap">
-            <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
-                (pageChange)="refreshOrders()">
-            </ngb-pagination>
+        <div class="row">
+            <div class="d-flex justify-content-between  p-2">
+                <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"
+                    (pageChange)="refreshOrders()">
+                </ngb-pagination>
 
-            <select class="form-select" style="width: auto" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
-                <option selected [ngValue]="10">10 αντικείμενα ανα σελίδα</option>
-                <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
-                <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
-            </select>
+                <select class="form-select" [(ngModel)]="limit" (ngModelChange)="refreshOrders()">
+                    <option selected [ngValue]="12">12 αντικείμενα ανα σελίδα</option>
+                    <option [ngValue]="25">25 αντικείμενα ανα σελίδα</option>
+                    <option [ngValue]="50">50 αντικείμενα ανα σελίδα</option>
+                </select>
+            </div>
         </div>
+
     </div>
 
 
