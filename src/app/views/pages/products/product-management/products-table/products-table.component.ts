@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject, OnChanges, OnInit, signal, SimpleChanges
 import { ActivatedRoute } from '@angular/router';
 import { SortableHeaderComponent } from '../../../sortable-header/sortable-header.component';
 import { ProductsService } from '../../../../../core/services/products.service';
-import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from "./product-modal/product-modal.component";
@@ -11,7 +11,7 @@ import { ImageUploaderComponent } from "../../../common-components/image-uploade
 @Component({
   selector: 'app-products-table',
   standalone: true,
-  imports: [SortableHeaderComponent, NgbPaginationModule, FormsModule, CommonModule, ProductModalComponent, ImageUploaderComponent],
+  imports: [SortableHeaderComponent,NgbAccordionModule, NgbPaginationModule, FormsModule, CommonModule, ProductModalComponent, ImageUploaderComponent],
   templateUrl: './products-table.component.html',
   styleUrl: './products-table.component.scss'
 })

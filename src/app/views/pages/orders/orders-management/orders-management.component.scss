@@ -1,11 +1,11 @@
 
 th {
   text-align: center;
-  vertical-align: middle; /* new */
+  vertical-align: middle; 
 }
 
 td {
-  vertical-align: middle; /* new */
+  vertical-align: middle; 
 }
 .select{
   font-size: 12px;
@@ -125,7 +125,7 @@ table th {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: .8em;
-    text-align: right;
+    text-align: center;
   }
   
   table td::before {

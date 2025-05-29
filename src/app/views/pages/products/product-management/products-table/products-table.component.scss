@@ -11,7 +11,6 @@ font-size: 10px;}
 
 .table {
   width: auto;
-  min-width: 800px;
   text-align: center;
 }
 
@@ -25,9 +24,118 @@ font-size: 10px;}
   border: none;
   text-align: center;
 }
-@media screen and (max-width: 1400px) {
 
-  .product-image {
-    max-width: 30% !important;
+
+td img {
+  max-height: 50px;
+  display: block;
+  margin: 0 auto;
+}
+tr{
+  cursor: pointer;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 1400px)
+{
+  app-sortable-header{
+    font-size: .85em;
+  }
+  .table{
+    font-size: .85em;
+  }
+  .table thead th{
+    font-size: .85em !important;
+  }
+  .image-button-auto-resize{
+
+    max-width: 40% !important; 
+    max-height: 40% !important; 
+  }
+}
+@media screen and (max-width: 1200px)
+{
+  app-sortable-header{
+    font-size: .75em;
+  }
+  .table{
+    font-size: .75em;
+  }
+  .table thead th{
+    font-size: .75em !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  table {
+    border: 0;
+  }
+ .image-button-auto-resize{
+
+    max-width: 20% !important; 
+    max-height: 20% !important; 
+  }
+  .mobile-view{
+    width: 100% !important;
+  }
+
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: center;
+  }
+  
+  table td::before {
+
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
   }
 }
