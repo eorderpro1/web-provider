@@ -144,10 +144,10 @@
                       [imageSrc]="product.image"></app-image-uploader>
 
                     }
-                    <table style="width:100%">
+                    <table class = "mobile-table">
                       <tr>
                         <th>
-                          ID:
+                          <strong>ID:</strong>
                         </th>
                         <td>
                           {{ product.product_id }}
@@ -158,7 +158,7 @@
                       <tr>
                         <th>
 
-                          <p><strong>Name:</strong>
+                          <strong>Name:</strong>
                         </th>
                         <td>
                           @if(editingProductId === product.product_id){
@@ -174,12 +174,12 @@
                       <tr>
                         <th>
 
-                          <p><strong>Quantity:</strong>
+                          <strong>Quantity:</strong>
                         </th>
                         <td>
                           @if(editingProductId === product.product_id){
 
-                          <p><input type="text" [(ngModel)]="product.quantity"></p>
+                          <p><input type="number" [(ngModel)]="product.quantity"></p>
                           }
                           @else{
                           <p>{{ product.quantity }}</p>
@@ -203,7 +203,15 @@
                       </tr>
                       <tr>
                         <th><strong>Cost Price:</strong></th>
-                        <td>{{product.cost_price | number:'1.3-3'}} €</td>
+                        <td>
+                          @if(editingProductId === product.product_id){
+
+                          <p><input type="number" [(ngModel)]="product.cost_price"> €</p>
+                          }
+                          @else{
+                          <p>{{product.cost_price | number:'1.2-2'}} €</p>
+                          }
+                        </td>
                       </tr>
                       <tr>
                         <th><strong>Discount:</strong></th>
@@ -214,7 +222,7 @@
                           </button>
                           }
                           @else{
-                          <span>{{ product.discount }} %</span>
+                          <p>{{ product.discount }} %</p>
                           }
                         </td>
                       </tr>
@@ -226,7 +234,7 @@
                             [(ngModel)]="product.status">
                           }
                           @else{
-                          <span>{{ product.status }}</span>
+                          <p>{{ product.status }}</p>
                           }
                         </td>
                       </tr>
@@ -234,17 +242,25 @@
                         <th><strong>Sales Count:</strong></th>
                         <td>
                           @if(editingProductId === product.product_id){
-                          <input type="checkbox" class="form-check-input" id="checkChecked"
-                            [(ngModel)]="product.status">
+                          <input type="number" [(ngModel)]="product.sales_count">
                           }
                           @else{
-                          <span>{{ product.status }}</span>
+                          <p>{{ product.sales_count }}</p>
+                          }
+                        </td>
+                      </tr>
+                      <tr>
+                        <th><strong>Supplier:</strong></th>
+                        <td>
+                          @if(editingProductId === product.product_id){
+                          <input type="text" [(ngModel)]="product.provider">
+                          }
+                          @else{
+                          <p>{{ product.provider }}</p>
                           }
                         </td>
                       </tr>
                     </table>
-                    <p><strong>Sales Count:</strong> {{ product.sales_count }}</p>
-                    <p><strong>Supplier:</strong> {{ product.provider }}</p>
 
                     <div class="mt-6">
                       @if (editingProductId !== product.product_id) {

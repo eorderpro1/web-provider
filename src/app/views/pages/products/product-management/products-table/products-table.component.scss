@@ -101,4 +101,13 @@ font-size: 10px;}
   .mobile-view{
     width: 100% !important;
   }
+  .mobile-table{
+    width: 100% !important;
+  }
+  .mobile-table thead th{
+    font-size: .75em !important;
+  }
+  .mobile-table tr{
+    padding: 2% 2% !important;
+  }
 }
