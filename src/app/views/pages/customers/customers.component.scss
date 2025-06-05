@@ -1,0 +1,22 @@
+@media screen and (max-width: 1000px) {
+ 
+ .image-button-auto-resize{
+
+  width: 40px; 
+  height: 40px; 
+  object-fit: cover; 
+  border-radius: 5px;
+  }
+  .mobile-view{
+    width: 100% !important;
+  }
+  .mobile-table{
+    width: 100% !important;
+  }
+  .mobile-table thead th{
+    font-size: .75em !important;
+  }
+  .mobile-table tr{
+    padding: 2% 2% !important;
+  }
+}
