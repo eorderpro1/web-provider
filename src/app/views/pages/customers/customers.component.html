@@ -2,7 +2,7 @@
     <div class="stretch-card">
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive d-none d-lg-block">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -39,6 +39,83 @@
                         </tbody>
                     </table>
                 </div>
+                <!-- Only visible on small screens -->
+                <div class="d-block d-lg-none mobile-view">
+                    <div ngbAccordion [closeOthers]="true">
+                        @for (customer of customers(); track customer.shop_id) {
+                        <div ngbAccordionItem>
+                            <h2 ngbAccordionHeader>
+                                <button ngbAccordionButton class="d-flex align-items-center gap-2">
+                                    <img [src]="customer.image" alt="Customer Image" class="image-button-auto-resize">
+                                    <span>{{ customer.name }}</span>
+                                </button>
+                            </h2>
+                            <div ngbAccordionCollapse>
+                                <div ngbAccordionBody>
+                                    <ng-template>
+
+                                        <table class="mobile-table" (click)="openScrollableModal(scrollableModal, customer)">
+                                            <tr>
+                                                <th>
+                                                    <strong>ID:</strong>
+                                                </th>
+                                                <td>
+                                                    {{ customer.shop_id }}
+
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <th>
+
+                                                    <strong>Name:</strong>
+                                                </th>
+                                                <td>
+                                                    <p>{{ customer.name }}</p>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <th>
+
+                                                    <strong>Address:</strong>
+                                                </th>
+                                                <td>
+
+                                                    <p>{{ customer.address }} {{customer.postal_code}}</p>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th><strong>Τελευταία Παραγγελία:</strong></th>
+                                                <td>
+                                                    <span>{{ customer.order_id }}</span>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <th><strong>Σύνολο παραγγελιών</strong></th>
+                                                <td>
+                                                    <p>{{ customer.total_orders }}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th><strong>Discount:</strong></th>
+                                                <td>
+
+                                                    <p>{{customer.total_cost}}</p>
+
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -48,7 +125,7 @@
         <h5 class="modal-title" id="newOrderModal">Πελάτης {{selectedCustomer.name}}</h5>
         <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
     </div>
-   <app-modal-customer [selectedCustomer]="selectedCustomer"></app-modal-customer>
+    <app-modal-customer [selectedCustomer]="selectedCustomer"></app-modal-customer>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Κλείσιμο</button>
     </div>

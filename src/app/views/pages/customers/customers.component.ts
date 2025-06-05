@@ -2,14 +2,14 @@ import { Component, DestroyRef, inject, OnInit, signal, TemplateRef } from '@ang
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/model/customers';
 import { Order } from '../../../core/model/order';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalCustomerComponent } from "./modal-customer/modal-customer.component";
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [ModalCustomerComponent],
+  imports: [ModalCustomerComponent, NgbAccordionModule],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss'
 })

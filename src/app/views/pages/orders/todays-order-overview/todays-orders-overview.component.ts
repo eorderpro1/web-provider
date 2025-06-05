@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, input, OnChanges, OnInit, signal, SimpleChanges, TemplateRef } from '@angular/core';
-import { NgbDropdownModule, NgbModal, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbDropdownModule, NgbModal, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderSupabaseService } from '../../../../core/services/orders-supabase.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -24,7 +24,8 @@ import { BreakLinesPipe } from '../../../../core/model/break-lines.pipe';
     SortableHeaderComponent,
     ReceivedNewOrderComponent,
     OrderModalComponent,
-    BreakLinesPipe
+    BreakLinesPipe,
+    NgbAccordionModule
     
 ],
   providers: [OrderSupabaseService, HttpClient, SupabaseService],

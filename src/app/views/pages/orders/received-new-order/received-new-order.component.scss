@@ -1,104 +1,116 @@
 .modal-table {
-    font-size: 13px;
+  font-size: 13px;
 }
 
-.modal-lg,
-.modal-xl {
-    --bs-modal-width: 90% !important;
-}
+
 
 tr {
-    cursor: pointer;
+  cursor: pointer;
 }
-.received-button{
-    border-radius: 8px;
-    font-weight: bold;
+
+.received-button {
+  border-radius: 8px;
+  font-weight: bold;
 }
+
 .received-img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto;
+  width: 53px;
+  height: 53px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
 }
 
-@media (min-width: 992px) {
-
-    .modal-lg,
-    .modal-xl {
-        --bs-modal-width: 90% !important;
-    }
-}
 /* Default: Hide mobile row */
 .row-mobile {
+  display: none;
+}
+
+select {
+  width: 50%;
+  height: fit-content;
+  font-size: 0.85rem;
+}
+
+
+
+@media (max-width: 1400px) {
+  .row-desktop {
     display: none;
   }
-  
-  @media (max-width: 1400px) {
-    .row-desktop {
-      display: none;
-    }
-  
-    .row-mobile {
-      display: table-row;
-    }
-  
-    .received-mobile-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-      }
-    
-      .received-left {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 100px; /* Optional: consistent width for visual alignment */
-      }
-    
-      .received-img {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-bottom: 0.5rem;
-        display: block;
-      }
-    
-      .received-text {
-        font-size: 0.9rem;
-        font-weight: 500;
-        word-break: break-word;
-        text-align: center;
-        width: 100%;
-      }
-    
-      .received-right {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: center;
-      }
-    
-      .received-button {
-        width: 40px;
-        height: 40px;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+
+  .pagination {
+    --bs-pagination-font-size: 0.5rem !important;
+
   }
-  @media (max-width: 992px) {
-    .row-desktop {
-      display: table-row;
-    }
-  
-    .row-mobile {
-      display: none;
-    }
+
+  .row-mobile {
+    display: table-row;
   }
+
+  .received-mobile-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .received-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100px;
+  }
+
+  .received-img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .received-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+    word-break: break-word;
+    text-align: center;
+    width: 100%;
+  }
+
+  .received-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .received-button {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1200px) {
+  ul{
+    box-sizing: none !important;
+  }
+ 
+select {
+  width: 40%;
+  height: fit-content;
+  font-size: 0.85rem;
+}
+.received-right {
+  gap: 0;
+}
+
+}

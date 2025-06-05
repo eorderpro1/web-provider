@@ -6,7 +6,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal, NgbDropdownModule, NgbDatepickerModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal, NgbDropdownModule, NgbDatepickerModule, NgbPaginationModule, NgbTypeaheadModule, NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeCssVariableService } from '../../../../core/services/theme-css-variable.service';
 import { Order } from '../../../../core/model/order';
 import { OrderItem } from '../../../../core/model/orderItems';
@@ -15,6 +15,7 @@ import { UtilsService } from '../../../../core/services/utils.service';
 import { SupabaseService } from '../../../../core/services/supabase.service';
 import { OrderModalComponent } from '../order-modal/order-modal.component';
 import { SortableHeaderComponent } from '../../sortable-header/sortable-header.component';
+import { BreakLinesPipe } from "../../../../core/model/break-lines.pipe";
 
 @Component({
   selector: 'app-orders-management',
@@ -26,8 +27,10 @@ import { SortableHeaderComponent } from '../../sortable-header/sortable-header.c
     NgbTypeaheadModule, NgbPaginationModule,
     SortableHeaderComponent,
     OrderModalComponent,
-    NgbDatepickerModule
-  ],
+    NgbDatepickerModule,
+    BreakLinesPipe,
+    NgbAccordionModule
+],
   providers: [OrderSupabaseService, HttpClient, SupabaseService],
   templateUrl: './orders-management.component.html',
   styleUrl: './orders-management.component.scss'

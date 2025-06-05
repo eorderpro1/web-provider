@@ -1,11 +1,11 @@
 
 th {
   text-align: center;
-  vertical-align: middle; /* new */
+  vertical-align: middle; 
 }
 
 td {
-  vertical-align: middle; /* new */
+  vertical-align: middle; 
 }
 .select{
   font-size: 12px;
@@ -34,8 +34,88 @@ td {
   min-width: 150px; /* Adjust based on longest text */
   text-align: center;
 }
+
 td img {
   max-height: 50px;
   display: block;
   margin: 0 auto;
+}
+tr{
+  cursor: pointer;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 1400px)
+{
+  app-sortable-header{
+    font-size: .85em;
+  }
+  .table{
+    font-size: .85em;
+  }
+  .table thead th{
+    font-size: .85em !important;
+  }
+  .image-button-auto-resize{
+
+    max-width: 40% !important; 
+    max-height: 40% !important; 
+  }
+}
+@media screen and (max-width: 1200px)
+{
+  app-sortable-header{
+    font-size: .75em;
+  }
+  .table{
+    font-size: .75em;
+  }
+  .table thead th{
+    font-size: .75em !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+ 
+ .image-button-auto-resize{
+
+  width: 40px; 
+  height: 40px; 
+  object-fit: cover; 
+  border-radius: 5px;
+  }
+  .mobile-view{
+    width: 100% !important;
+  }
+  .mobile-table{
+    width: 100% !important;
+  }
+  .mobile-table thead th{
+    font-size: .75em !important;
+  }
+  .mobile-table tr{
+    padding: 2% 2% !important;
+  }
 }

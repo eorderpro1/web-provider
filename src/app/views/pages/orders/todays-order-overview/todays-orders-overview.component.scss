@@ -45,6 +45,11 @@ table th {
   .table thead th{
     font-size: .85em !important;
   }
+  .image-button-auto-resize{
+
+    max-width: 40% !important; 
+    max-height: 40% !important; 
+  }
 }
 @media screen and (max-width: 1200px)
 {
@@ -58,77 +63,25 @@ table th {
     font-size: .75em !important;
   }
 }
-@media screen and (max-width: 992px)
-{
-  app-sortable-header{
-    font-size: 12px;
+@media screen and (max-width: 1000px) {
+ 
+ .image-button-auto-resize{
+
+  width: 40px; 
+  height: 40px; 
+  object-fit: cover; 
+  border-radius: 5px;
   }
-  .table{
-    font-size:  12px;
+  .mobile-view{
+    width: 100% !important;
   }
-  .table thead th{
-    font-size:  12px !important;
+  .mobile-table{
+    width: 100% !important;
   }
-}
-@media screen and (max-width: 800px) {
-  table {
-    border: 0;
+  .mobile-table thead th{
+    font-size: .75em !important;
   }
-
-
-  
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+  .mobile-table tr{
+    padding: 2% 2% !important;
   }
-  
-  table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: .625em;
-  }
-  
-  table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: .8em;
-    text-align: right;
-  }
-  
-  table td::before {
-
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  table td:last-child {
-    border-bottom: 0;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* general styling */
-body {
-  font-family: "Open Sans", sans-serif;
-  line-height: 1.25;
 }
