@@ -6,7 +6,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal, NgbDropdownModule, NgbDatepickerModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal, NgbDropdownModule, NgbDatepickerModule, NgbPaginationModule, NgbTypeaheadModule, NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeCssVariableService } from '../../../../core/services/theme-css-variable.service';
 import { Order } from '../../../../core/model/order';
 import { OrderItem } from '../../../../core/model/orderItems';
@@ -28,7 +28,8 @@ import { BreakLinesPipe } from "../../../../core/model/break-lines.pipe";
     SortableHeaderComponent,
     OrderModalComponent,
     NgbDatepickerModule,
-    BreakLinesPipe
+    BreakLinesPipe,
+    NgbAccordionModule
 ],
   providers: [OrderSupabaseService, HttpClient, SupabaseService],
   templateUrl: './orders-management.component.html',

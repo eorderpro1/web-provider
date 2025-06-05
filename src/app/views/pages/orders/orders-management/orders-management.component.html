@@ -1,4 +1,3 @@
-
 <div class="row g-0">
   <div class="stretch-card">
     <div class="card flex-grow-1">
@@ -30,29 +29,20 @@
             </div>
             <div class="col-auto">
               <input type="text" #searchByOrderIdInput class="form-control form-control-sm"
-                placeholder="Εύρεση με βάσει το αναγνωριστικό παραγγελίες..." (keydown.enter)="searchByOrderId(searchByOrderIdInput.value)" />
+                placeholder="Εύρεση με βάσει το αναγνωριστικό παραγγελίες..."
+                (keydown.enter)="searchByOrderId(searchByOrderIdInput.value)" />
             </div>
             <div class="col-auto">
               <form class="d-flex range-selection">
                 <div class="form-group hidden">
                   <div class="input-group">
-                    <input name="datepicker"
-                          class="form-control"
-                          ngbDatepicker
-                          #datepicker="ngbDatepicker"
-                          [autoClose]="'outside'"
-                          (dateSelect)="onDateSelection($event)"
-                          [displayMonths]="2"
-                          [dayTemplate]="t"
-                          outsideDays="hidden"
-                          [startDate]="fromDate!">
+                    <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                      [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                      [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!">
                     <ng-template #t let-date let-focused="focused">
-                      <span class="custom-day"
-                            [class.focused]="focused"
-                            [class.range]="isRange(date)"
-                            [class.faded]="isHovered(date) || isInside(date)"
-                            (mouseenter)="hoveredDate = date"
-                            (mouseleave)="hoveredDate = null">
+                      <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
                         {{ date.day }}
                       </span>
                     </ng-template>
@@ -60,11 +50,9 @@
                 </div>
                 <div class="mb-3">
                   <div class="input-group" (click)="datepicker.toggle()">
-                    <input #dpFromDate
-                          class="form-control" placeholder="Ημ/νία από"
-                          name="dpFromDate"
-                          [value]="formatter.format(fromDate)"
-                          (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                    <input #dpFromDate class="form-control" placeholder="Ημ/νία από" name="dpFromDate"
+                      [value]="formatter.format(fromDate)"
+                      (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
                     <button class="input-group-text" type="button">
                       <i class="feather icon-calendar icon-md text-secondary"></i>
                     </button>
@@ -72,11 +60,8 @@
                 </div>
                 <div class="ms-2">
                   <div class="input-group" (click)="datepicker.toggle()">
-                    <input #dpToDate
-                          class="form-control" placeholder="Ημ/νία εώς"
-                          name="dpToDate"
-                          [value]="formatter.format(toDate)"
-                          (input)="toDate = validateInput(toDate, dpToDate.value)">
+                    <input #dpToDate class="form-control" placeholder="Ημ/νία εώς" name="dpToDate"
+                      [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                     <button class="input-group-text" type="button">
                       <i class="feather icon-calendar icon-md text-secondary"></i>
                     </button>
@@ -115,8 +100,8 @@
                 <th app-sortable-header [field]="'order_id'" [sort]="sort" [label]="'Order ID'"
                   (sortChange)="sortData('order_id')">
                 </th>
-                <th  app-sortable-header [field]="'shop_name'" [sort]="sort"
-                  [label]="'Shop Name'" (sortChange)="sortData('shop_name')">
+                <th app-sortable-header [field]="'shop_name'" [sort]="sort" [label]="'Shop Name'"
+                  (sortChange)="sortData('shop_name')">
                 </th>
                 <th app-sortable-header [field]="'status'" [sort]="sort" [label]="'Order Status'"
                   (sortChange)="sortData('status')">
@@ -151,7 +136,7 @@
                 <td>
                   <div style="text-align: center;">
                     <img [src]="order.shop_image" class="image-button-auto-resize" />
-                    <div [innerHTML]="order.shop_name | breakLines:10"></div>      
+                    <div [innerHTML]="order.shop_name | breakLines:10"></div>
                   </div>
                 </td>
 
@@ -169,6 +154,113 @@
               }
             </tbody>
           </table>
+        </div>
+        <!-- Only visible on small screens -->
+        <div class="d-block d-lg-none mobile-view">
+          <div ngbAccordion [closeOthers]="true">
+            @for (order of orders(); track order.order_id){
+            <div ngbAccordionItem>
+              <h2 ngbAccordionHeader>
+                <button ngbAccordionButton class="d-flex align-items-center gap-2">
+                  <img [src]="order.shop_image" alt="Shop Image" class="image-button-auto-resize">
+                  <span>{{ order.shop_name }}</span>
+                </button>
+              </h2>
+              <div ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                  <ng-template>
+
+                    <table class="mobile-table" (click)="openScrollableModal(scrollableModal, order)">
+                      <tr>
+                        <th>
+                          <strong>Order ID:</strong>
+                        </th>
+                        <td>
+                          {{ order.order_id }}
+
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <th>
+
+                          <strong>Shop Name:</strong>
+                        </th>
+                        <td>
+                          <p>{{ order.shop_name }}</p>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <th>
+
+                          <strong>Order Status:</strong>
+                        </th>
+                        <td>
+                          <p>
+                        <td><span [class]="'badge bg-' + getBadgeDeliveredClass(order.status)">{{ order.status }}</span>
+                        </td>
+                        </p>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <th>
+
+                          <strong>Order Date:</strong>
+                        </th>
+                        <td>
+
+                          <p>{{ order.order_created_at }} </p>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <th><strong>Delivery Day:</strong></th>
+                        <td>
+                          <span>{{ order.day_of_week }}</span>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <th><strong>Timeslot</strong></th>
+                        <td>
+                          <p>{{order.start_time.slice(0,5)}}-{{order.end_time.slice(0,5)}}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th><strong>Payment Status</strong></th>
+                        <td>
+                          <span [class]="'badge bg-' + getBadgePaidClass(order.is_paid)">{{ order.is_paid
+                            ?'Paid':'Unpaid'
+                            }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th><strong>Cost</strong></th>
+                        <td>
+                          <p>{{ order.total_cost |currency:'EUR':'symbol' }}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th><strong>Postal Code</strong></th>
+                        <td>
+                          <p>{{ order.postal_code }}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th><strong>Export</strong></th>
+                        <td>
+                          <p><button class="btn btn-primary"><i class="feather icon-download"></i></button></p>
+                        </td>
+                      </tr>
+                    </table>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
         </div>
         <div class="d-flex justify-content-between p-2">
           <ngb-pagination [collectionSize]="totalElements()" [(page)]="page" [pageSize]="limit"

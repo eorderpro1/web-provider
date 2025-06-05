@@ -98,45 +98,24 @@ table th {
 }
 
 @media screen and (max-width: 1000px) {
-  table {
-    border: 0;
-  }
+ 
+ .image-button-auto-resize{
 
-
-  
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+  width: 40px; 
+  height: 40px; 
+  object-fit: cover; 
+  border-radius: 5px;
   }
-  
-  table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: .625em;
+  .mobile-view{
+    width: 100% !important;
   }
-  
-  table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: .8em;
-    text-align: center;
+  .mobile-table{
+    width: 100% !important;
   }
-  
-  table td::before {
-
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
+  .mobile-table thead th{
+    font-size: .75em !important;
   }
-  
-  table td:last-child {
-    border-bottom: 0;
+  .mobile-table tr{
+    padding: 2% 2% !important;
   }
 }

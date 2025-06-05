@@ -2,10 +2,7 @@
   font-size: 13px;
 }
 
-.modal-lg,
-.modal-xl {
-  --bs-modal-width: 90% !important;
-}
+
 
 tr {
   cursor: pointer;
@@ -116,12 +113,4 @@ select {
   gap: 0;
 }
 
-}
-
-@media (min-width: 992px) {
-
-  .modal-lg,
-  .modal-xl {
-    --bs-modal-width: 90% !important;
-  }
 }
