@@ -63,7 +63,7 @@ export class ReceivedNewOrderComponent implements OnInit {
       this.orderItems = data;
     });
     this.destroy.onDestroy(() => sub.unsubscribe());
-    this.modalService.open(content, { size: 'lg'}).result.then((result) => {
+    this.modalService.open(content, { scrollable: true, size: 'lg'}).result.then((result) => {
       console.log("Modal closed" + result);
     }).catch((res) => { });
   }
